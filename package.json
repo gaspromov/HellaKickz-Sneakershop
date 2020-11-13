@@ -35,9 +35,11 @@
   },
   "homepage": "https://github.com/gaspromov/HellaKickz#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
     "express-validator": "^6.6.1",
     "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",

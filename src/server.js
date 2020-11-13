@@ -6,6 +6,8 @@ import morgan from 'morgan'
 import path from 'path'
 import cors from 'cors'
 
+import authRoutes from './routes/auth.js'
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const server = express()
 
@@ -16,6 +18,8 @@ server.use(express.json())
 server.use(compression())
 server.use(helmet())
 server.use(cors())
+
+server.use('/api/v1/auth', authRoutes)
 
 server.get('*', (req, res) => {
   res.setHeader(
