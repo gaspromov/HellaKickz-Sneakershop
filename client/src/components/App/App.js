@@ -8,7 +8,7 @@ const App = () => {
     <Router>
       <AdminHeader />
       <Switch>
-        <Route path="/admin-auth" component={AdminAuth} />
+        <Route path="/admin/auth" component={AdminAuth} />
       </Switch>
     </Router>
   )
