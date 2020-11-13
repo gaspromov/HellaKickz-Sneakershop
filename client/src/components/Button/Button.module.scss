@@ -1,0 +1,18 @@
+.regular {
+  border: 1px solid #ec7f62;
+
+  font-family: 'Candara', sans-serif;
+  font-size: 18px;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #ec7f62;
+    transition: all 0.2s;
+  }
+
+  &:active {
+    background-color: #f9a690;
+    transition: all 0.2s;
+  }
+}

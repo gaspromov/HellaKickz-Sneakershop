@@ -8,3 +8,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+.inputText {
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 15px;
+
+  border: 1px solid #6d6d6d;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+}

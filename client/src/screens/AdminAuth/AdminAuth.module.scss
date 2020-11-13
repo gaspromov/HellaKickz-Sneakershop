@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 7%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  width: 100%;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #ec7f62;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.input {
+  width: 250px;
+}
