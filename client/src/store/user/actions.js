@@ -4,15 +4,16 @@ import {
   USER_FAIL
 } from './types'
 import axios from 'axios'
+import cookie from 'js-cookie'
 
-export const login = (login, password) => async (dispatch) => {
+export const auth = (login, password) => async (dispatch) => {
   dispatch({ type: USER_REQUEST })
 
   try {
     const { data } = await axios.post('/api/v1/auth', { login, password })
 
     dispatch({ type: USER_SUCCESS })
-    localStorage.setItem('accessToken', JSON.stringify(data))
+    cookie.set('accessToken', JSON.stringify(data), { expires: 1 })
   } catch (error) {
     dispatch({
       type: USER_FAIL,

@@ -3,10 +3,11 @@ import {
   USER_SUCCESS,
   USER_FAIL
 } from './types'
+import cookie from 'js-cookie'
 
 const initialUserState = {
   loading: false,
-  isLoggedIn: false,
+  isLoggedIn: !!cookie.getJSON('accessToken') || false,
   error: null
 }
 

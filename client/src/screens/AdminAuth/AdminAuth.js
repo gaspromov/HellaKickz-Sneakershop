@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../store/user/actions'
+import { auth } from '../../store/user/actions'
 import classNames from 'classnames'
 import Button from '../../components/Button/Button'
 
@@ -14,7 +14,7 @@ const AdminAuth = ({ history }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    isLoggedIn && history.push('/')
+    isLoggedIn && history.push('/admin/dashboard')
   }, [isLoggedIn])
 
   const onLoginChange = (e) => {
@@ -27,7 +27,7 @@ const AdminAuth = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(login, password))
+    dispatch(auth(login, password))
   }
 
   return (
