@@ -5,7 +5,7 @@ const schema = new mongoose.Schema(
     slides: {
       type: [String],
       required: true,
-      default: []
+      default: Array(3).fill('')
     },
     hots: {
       type: [
@@ -21,7 +21,7 @@ const schema = new mongoose.Schema(
         }
       ],
       required: true,
-      default: []
+      default: Array(4).fill({ photo: '', link: '' })
     },
     feedbacks: {
       type: [
@@ -45,7 +45,7 @@ const schema = new mongoose.Schema(
         }
       ],
       required: true,
-      default: []
+      default: Array(6).fill({ photo: '', name: '', subs: '', feedback: '' })
     }
   },
   {
