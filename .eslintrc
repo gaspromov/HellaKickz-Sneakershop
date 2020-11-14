@@ -15,6 +15,7 @@
     "prettier/prettier": "error",
     "semi": "off",
     "no-underscore-dangle": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "consistent-return": "off"
   }
 }

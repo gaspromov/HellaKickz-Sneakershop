@@ -1,3 +1,4 @@
+import fileUpload from 'express-fileupload'
 import compression from 'compression'
 import { fileURLToPath } from 'url'
 import express from 'express'
@@ -7,19 +8,34 @@ import path from 'path'
 import cors from 'cors'
 
 import authRoutes from './routes/auth.js'
+import productsRoutes from './routes/products.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const server = express()
 
 server.use(express.static(path.resolve(__dirname, '..', 'public')))
+server.use(express.static(path.resolve(__dirname, '..', 'uploads')))
 server.use(express.urlencoded({ extended: true }))
-server.use(morgan('tiny'))
+server.use(morgan('dev'))
 server.use(express.json())
 server.use(compression())
 server.use(helmet())
 server.use(cors())
+server.use(
+  fileUpload({
+    createParentPath: true,
+    abortOnLimit: true,
+    responseOnLimit: JSON.stringify({
+      message: 'Размер файла слишком большой'
+    }),
+    limits: {
+      fileSize: 10 * 1024 * 1024
+    }
+  })
+)
 
 server.use('/api/v1/auth', authRoutes)
+server.use('/api/v1/products', productsRoutes)
 
 server.get('*', (req, res) => {
   res.setHeader(
