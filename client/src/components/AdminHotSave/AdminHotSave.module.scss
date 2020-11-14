@@ -1,0 +1,93 @@
+.hot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 16px;
+  padding-right: 32px;
+  padding-bottom: 15px;
+  padding-left: 33px;
+  border: 1px solid #000000;
+
+  white-space: nowrap;
+}
+
+.container {
+  max-width: 193px;
+}
+
+.size {
+  margin-right: 10px;
+
+  font-size: 14px;
+  text-align: right;
+}
+
+.title {
+  display: inline-block;
+
+  margin-right: 20px;
+
+  font-size: 24px;
+}
+
+.label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 5px;
+  padding-top: 6px;
+  padding-right: 18px;
+  padding-bottom: 5px;
+  padding-left: 18px;
+  border: 1px solid #000000;
+
+  font-size: 14px;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none;
+}
+
+.pathWrapper {
+  margin-bottom: 10px;
+}
+
+.path {
+  display: inline-block;
+
+  margin-right: 15px;
+
+  color: #6d6d6d;
+}
+
+.deleteIcon {
+  width: 10px;
+  height: 10px;
+
+  background-image: url('../../assets/images/deleteIcon.svg');
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  cursor: pointer;
+}
+
+.input {
+  width: 130px;
+  padding-top: 6px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border: 1px solid #000000;
+}
+
+.saveHotPhotoButton {
+  width: 150px;
+  height: 40px;
+  margin-top: 20px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+}

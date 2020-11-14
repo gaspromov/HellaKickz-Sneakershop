@@ -49,14 +49,7 @@ const AdminAuth = ({ history }) => {
           required
           className={inputClassName}
         />
-        <Button
-          type="submit"
-          style="regular"
-          pt={10}
-          pb={9}
-          width={120}
-          text="Login"
-        />
+        <Button type="submit" style="regular" className={styles.loginButton} text="Login" />
       </form>
     </div>
   )

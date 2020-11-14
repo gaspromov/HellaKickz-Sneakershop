@@ -1,0 +1,37 @@
+.container {
+  font-family: 'SourceSansPro', sans-serif;
+}
+
+.headWrapper {
+  margin-bottom: 20px;
+}
+
+.title {
+  display: inline-block;
+
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.size {
+  font-size: 14px;
+}
+
+.slides {
+  display: flex;
+  justify-content: space-between;
+}
+
+.host {
+  display: grid;
+  grid-template-areas:
+    'a b c'
+    'a d d';
+  column-gap: 44px;
+  row-gap: 18px;
+
+  max-width: 840px;
+}
