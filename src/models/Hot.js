@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const schema = new mongoose.Schema(
   {
-    id: {
+    index: {
       type: Number,
       required: true
     },
