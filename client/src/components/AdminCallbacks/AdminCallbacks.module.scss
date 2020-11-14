@@ -1,0 +1,50 @@
+.tableWrapper {
+  position: relative;
+}
+
+.tableScroll {
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+
+  font-family: 'SourceSansPro';
+  overflow: auto;
+}
+
+.header {
+  padding-bottom: 20px;
+
+  font-size: 24px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.itemInfo {
+  padding-right: 30px;
+  padding-bottom: 10px;
+
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.link {
+  color: #2a51dc;
+  text-decoration: underline;
+}
+
+.editCell {
+  text-align: center;
+}
+
+.deleteCallbackButton {
+  width: 15px;
+  height: 18px;
+
+  background-image: url('../../assets/images/trashIcon.svg');
+  background-repeat: no-repeat;
+  background-size: 15px 18px;
+  cursor: pointer;
+}

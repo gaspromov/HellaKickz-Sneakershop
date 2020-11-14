@@ -1,0 +1,96 @@
+.feedback {
+  font-family: 'SourceSansPro', sans-serif;
+  white-space: nowrap;
+}
+
+.id {
+  font-size: 24px;
+}
+
+.title {
+  display: inline-block;
+
+  width: 55px;
+  margin-right: 10px;
+
+  font-size: 18px;
+}
+
+.label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 5px;
+  padding-top: 6px;
+  padding-right: 18px;
+  padding-bottom: 5px;
+  padding-left: 18px;
+  border: 1px solid #000000;
+
+  font-size: 14px;
+  text-transform: lowercase;
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none;
+}
+
+.pathWrapper {
+  margin-bottom: 10px;
+}
+
+.path {
+  display: inline-block;
+
+  margin-right: 15px;
+
+  color: #6d6d6d;
+}
+
+.deleteIcon {
+  width: 10px;
+  height: 10px;
+
+  background-image: url('../../assets/images/deleteIcon.svg');
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  cursor: pointer;
+}
+
+.nickWrapper {
+  margin-bottom: 10px;
+}
+
+.subsWrapper {
+  margin-bottom: 24px;
+}
+
+.input {
+  width: 150px;
+  padding-top: 6px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  border: 1px solid #000000;
+}
+
+.textarea {
+  width: 300px;
+  height: 60px;
+  padding: 13px 12px;
+  margin-bottom: 30px;
+  border: 1px solid #000000;
+
+  font-family: 'SourceSansOpen', sans-serif;
+  resize: vertical;
+}
+
+.saveFeedbackButton {
+  width: 150px;
+  height: 40px;
+
+  font-family: 'SourceSansOpen', sans-serif;
+  font-size: 14px;
+}

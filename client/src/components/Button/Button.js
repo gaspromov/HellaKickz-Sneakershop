@@ -1,13 +1,13 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import styles from './Button.module.scss'
 
-const Button = ({ type, style, pt, pb, width, text }) => {
+const Button = ({ type, style, className, text }) => {
   return (
     <button
       type={type}
-      style={{ paddingTop: pt, paddingBottom: pb, width: width }}
-      className={styles[style]}
+      className={classNames(styles[style], className)}
     >
       {text}
     </button>
