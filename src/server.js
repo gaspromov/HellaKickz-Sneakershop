@@ -9,6 +9,7 @@ import cors from 'cors'
 
 import authRoutes from './routes/auth.js'
 import productsRoutes from './routes/products.js'
+import landingRoutes from './routes/landing.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const server = express()
@@ -36,6 +37,7 @@ server.use(
 
 server.use('/api/v1/auth', authRoutes)
 server.use('/api/v1/products', productsRoutes)
+server.use('/api/v1/landing', landingRoutes)
 
 server.get('*', (req, res) => {
   res.setHeader(
