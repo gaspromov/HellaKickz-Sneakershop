@@ -20,7 +20,7 @@ router.post('/', loginValidator, limiter, (req, res) => {
       { login, password },
       config.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: '1d'
+        expiresIn: '15d'
       }
     )
     return res.status(200).json({ accessToken })
