@@ -1,20 +1,16 @@
-import validator from 'express-validator'
 import jwt from 'jsonwebtoken'
 import express from 'express'
 
 import loginValidator from '../validators/auth.validator.js'
 import limiter from '../middleware/limit.middleware.js'
 import config from '../config/config.js'
+import validate from '../middleware/error.middleware.js'
+import { sendMessage } from '../utils/helper.functions.js'
 
 const router = express.Router()
-const { validationResult } = validator
 
-router.post('/', loginValidator, limiter, (req, res) => {
+router.post('/', loginValidator, validate, limiter, (req, res) => {
   try {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ message: errors.array()[0].msg })
-    }
     const { login, password } = req.body
     const accessToken = jwt.sign(
       { login, password },
@@ -25,10 +21,7 @@ router.post('/', loginValidator, limiter, (req, res) => {
     )
     return res.status(200).json({ accessToken })
   } catch (e) {
-    console.log(e)
-    return res
-      .status(500)
-      .json({ message: 'Что-то пошло не так, попробуйте позже' })
+    return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
   }
 })
 

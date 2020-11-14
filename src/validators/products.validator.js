@@ -12,6 +12,7 @@ const sneakersSizes = Array(23)
 const clothesSizes = ['xs', 's', 'm', 'l', 'xl', 'xxl', 'one size']
 
 export const createAndUpdateValidator = [
+  body('photos', 'Укажите фотографии').exists().isArray(),
   body('brand', 'Укажите бренд').exists().trim().notEmpty(),
   body('model', 'Укажите модель').exists().trim().notEmpty(),
   body('color', 'Укажите цвет').exists().trim().notEmpty(),
