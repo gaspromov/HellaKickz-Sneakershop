@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '../../store/product/actions'
+import { fetchProducts, deleteProduct } from '../../store/product/actions'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import Button from '../Button/Button'
@@ -15,6 +15,11 @@ const AdminItems = () => {
   useEffect(() => {
     dispatch(fetchProducts())
   }, [])
+
+  const onDeleteProductButtonClick = (id) => {
+    dispatch(deleteProduct(id))
+    dispatch(fetchProducts())
+  }
 
   return (
     <div>
@@ -49,7 +54,7 @@ const AdminItems = () => {
                       <NavLink to="/admin/edit" className={styles.editItemLink}>
                         <button type="button" className={styles.editItemButton}></button>
                       </NavLink>
-                      <button type="button" className={styles.deleteItemButton}></button>
+                      <button type="button" onClick={() => onDeleteProductButtonClick(_id)} className={styles.deleteItemButton}></button>
                     </td>
                   </tr>
                 )

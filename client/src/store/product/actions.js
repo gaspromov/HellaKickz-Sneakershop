@@ -4,7 +4,10 @@ import {
   ADD_PRODUCT_FAIL,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAIL
+  FETCH_PRODUCTS_FAIL,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAIL
 } from './types'
 import axios from 'axios'
 import cookie from 'js-cookie'
@@ -48,6 +51,27 @@ export const fetchProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FETCH_PRODUCTS_FAIL,
+      payload: error.message
+    })
+  }
+}
+
+export const deleteProduct = (id) => async (dispatch) => {
+  dispatch({ type: DELETE_PRODUCT_REQUEST })
+
+  try {
+    const token = cookie.getJSON('accessToken')
+
+    await axios.delete(`/api/v1/products/${id}`, {
+      headers: {
+        'Authorization': `Basic ${token.accessToken}`
+      }
+    })
+
+    dispatch({ type: DELETE_PRODUCT_SUCCESS })
+  } catch (error) {
+    dispatch({
+      type: DELETE_PRODUCT_FAIL,
       payload: error.message
     })
   }
