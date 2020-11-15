@@ -30,7 +30,6 @@ export const addProduct = (product) => async (dispatch, getState) => {
 
     dispatch({ type: ADD_PRODUCT_SUCCESS })
   } catch (error) {
-    console.dir(error)
     dispatch({
       type: ADD_PRODUCT_FAIL,
       payload: error.response.data.message
