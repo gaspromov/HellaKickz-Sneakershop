@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux'
 import userReducer from './user/reducers'
+import photoReducer from './photo/reducers'
+import { addProductReducer, fetchProductsReducer } from './product/reducers'
 
 export default combineReducers({
-  test: () => 'hello',
-  user: userReducer
+  user: userReducer,
+  photo: photoReducer,
+  addProduct: addProductReducer,
+  products: fetchProductsReducer
 })

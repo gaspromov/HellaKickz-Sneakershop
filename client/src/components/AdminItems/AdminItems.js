@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProducts } from '../../store/product/actions'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import Button from '../Button/Button'
@@ -7,6 +9,13 @@ import styles from './AdminItems.module.scss'
 import mockData from '../../assets/mock/items'
 
 const AdminItems = () => {
+  const { loading, loaded, error, entities } = useSelector(({ products }) => products)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
   return (
     <div>
       <h2 className="visually-hidden">Товары</h2>
@@ -29,15 +38,15 @@ const AdminItems = () => {
               </tr>
             </thead>
             <tbody>
-              {mockData.map(({ _id, brand, name, style, price }) => {
+              {loaded && entities.map(({ _id, brand, model, code, price }) => {
                 return (
                   <tr key={_id}>
                     <td className={styles.itemInfo}>{brand}</td>
-                    <td className={styles.itemInfo}>{name}</td>
-                    <td className={styles.itemInfo}>{style}</td>
+                    <td className={styles.itemInfo}>{model}</td>
+                    <td className={styles.itemInfo}>{code}</td>
                     <td className={styles.itemInfo}>{price}</td>
                     <td className={styles.itemInfo}>
-                      <NavLink to="/admin/edit" className={style.editItemLink}>
+                      <NavLink to="/admin/edit" className={styles.editItemLink}>
                         <button type="button" className={styles.editItemButton}></button>
                       </NavLink>
                       <button type="button" className={styles.deleteItemButton}></button>
