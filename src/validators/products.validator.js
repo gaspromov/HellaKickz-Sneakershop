@@ -47,10 +47,6 @@ export const createAndUpdateValidator = [
     })
 ]
 
-export const deleteValidator = [
-  body('id', 'Некорректный ID').exists().trim().notEmpty().isMongoId()
-]
-
-export const readValidator = [
+export const idValidator = [
   param('id', 'Некорректный ID').exists().trim().notEmpty().isMongoId()
 ]

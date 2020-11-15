@@ -2,8 +2,7 @@ import express from 'express'
 
 import {
   createAndUpdateValidator,
-  deleteValidator,
-  readValidator
+  idValidator
 } from '../validators/products.validator.js'
 import Product from '../models/Product.js'
 import auth from '../middleware/auth.middleware.js'
@@ -24,21 +23,28 @@ router.post('/', auth, createAndUpdateValidator, validate, async (req, res) => {
   }
 })
 
-router.put('/', auth, createAndUpdateValidator, validate, async (req, res) => {
-  try {
-    const product = await Product.findByIdAndUpdate(
-      req.body.id,
-      {
-        ...req.body,
-        sizes: Array.from(new Set(req.body.sizes))
-      },
-      { new: true }
-    )
-    return res.status(200).json(product)
-  } catch (e) {
-    return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
+router.put(
+  '/:id',
+  auth,
+  createAndUpdateValidator,
+  idValidator,
+  validate,
+  async (req, res) => {
+    try {
+      const product = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+          ...req.body,
+          sizes: Array.from(new Set(req.body.sizes))
+        },
+        { new: true }
+      )
+      return res.status(200).json(product)
+    } catch (e) {
+      return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
+    }
   }
-})
+)
 
 router.get('/', async (req, res) => {
   try {
@@ -49,7 +55,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/:id', readValidator, validate, async (req, res) => {
+router.get('/:id', idValidator, validate, async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
     const sameProducts = await Product.find({ code: product.code })
@@ -59,9 +65,9 @@ router.get('/:id', readValidator, validate, async (req, res) => {
   }
 })
 
-router.delete('/', auth, deleteValidator, validate, async (req, res) => {
+router.delete('/:id', auth, idValidator, validate, async (req, res) => {
   try {
-    const product = await Product.findByIdAndDelete(req.body.id)
+    const product = await Product.findByIdAndDelete(req.params.id)
     if (!product) {
       return sendMessage(res, 400, 'Не удалость удалить товар')
     }

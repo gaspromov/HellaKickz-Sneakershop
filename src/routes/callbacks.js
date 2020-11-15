@@ -51,6 +51,7 @@ router.delete('/:id', auth, idValidator, validate, async (req, res) => {
     if (!callback) {
       return sendMessage(res, 400, 'Не удалось удалить заявку')
     }
+    return res.status(200).json(callback)
   } catch (e) {
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
   }
