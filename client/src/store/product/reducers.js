@@ -4,7 +4,10 @@ import {
   ADD_PRODUCT_FAIL,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAIL
+  FETCH_PRODUCTS_FAIL,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_FAIL
 } from './types'
 
 const addProductInitialState = {
@@ -66,6 +69,38 @@ export const fetchProductsReducer = (state = fetchProductsInitialState, action) 
         ...state,
         loading: false,
         loaded: false,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+const deleteProductInitialState = {
+  loading: false,
+  loaded: false,
+  error: null
+}
+
+export const deleteProductReducer = (state = deleteProductInitialState, action) => {
+  switch (action.type) {
+    case DELETE_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case DELETE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      }
+    case DELETE_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
         error: action.payload
       }
     default:
