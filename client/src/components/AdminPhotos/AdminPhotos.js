@@ -20,10 +20,10 @@ const AdminPhotos = () => {
       <div className={styles.hotWrapper}>
         <h3 className={styles.title}>Hot</h3>
         <div className={styles.host}>
-          <AdminHotSave size="2/3 (390х690)" gridArea="a" />
-          <AdminHotSave size="3/4 (280x230)" gridArea="b" />
-          <AdminHotSave size="3/4 (280x230)" gridArea="c" />
-          <AdminHotSave size="5/3 (628x370)" gridArea="d" />
+          <AdminHotSave id={4} size="2/3 (390х690)" gridArea="a" />
+          <AdminHotSave id={5} size="3/4 (280x230)" gridArea="b" />
+          <AdminHotSave id={6} size="3/4 (280x230)" gridArea="c" />
+          <AdminHotSave id={7} size="5/3 (628x370)" gridArea="d" />
         </div>
       </div>
     </div>

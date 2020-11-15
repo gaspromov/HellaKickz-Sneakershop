@@ -36,15 +36,21 @@
 }
 
 .pathWrapper {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 .path {
   display: inline-block;
 
+  max-width: 164px;
   margin-right: 15px;
 
   color: #6d6d6d;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .deleteIcon {

@@ -11,6 +11,8 @@ import {
   readCallbackReducer,
   deleteCallbackReducer
 } from './callback/reducers'
+import { uploadSlideReducer } from './slide/reducers'
+import { uploadHotReducer } from './hot/reducers'
 
 export default combineReducers({
   user: userReducer,
@@ -20,5 +22,7 @@ export default combineReducers({
   deleteProduct: deleteProductReducer,
   callbacks: fetchCallbacksReducer,
   readCallback: readCallbackReducer,
-  deleteCallback: deleteCallbackReducer
+  deleteCallback: deleteCallbackReducer,
+  uploadSlide: uploadSlideReducer,
+  uploadHot: uploadHotReducer
 })
