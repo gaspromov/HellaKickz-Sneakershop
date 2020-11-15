@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   apps: [
     {
       name: 'hellakickz',
@@ -23,7 +23,7 @@ export default {
         NODE_ENV: 'production'
       },
       'post-deploy':
-        'npm install && npm run client:install && npm run client:build && pm2 reload ecosystem.config.js --env production'
+        'npm install && npm run client:install && npm run client:build && pm2 reload ecosystem.config.cjs --env production'
     }
   }
 }
