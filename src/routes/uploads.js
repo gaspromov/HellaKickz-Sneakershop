@@ -4,14 +4,15 @@ import {
   sendMessage,
   uploadFile
 } from '../utils/helper.functions.js'
+import auth from '../middleware/auth.middleware.js'
 
 const router = express.Router()
 
-router.post('/:dirname', (req, res) => {
+router.post('/:dirname', auth, (req, res) => {
   try {
     const { dirname } = req.params
     if (!req.files) {
-      return sendMessage(res, 400, 'Загрузите фоторграфии')
+      return sendMessage(res, 400, 'Загрузите файл')
     }
     const { file } = req.files
     if (Array.isArray(file)) {
