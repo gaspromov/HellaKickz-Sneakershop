@@ -1,4 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  fetchCallbacks,
+  readCallback,
+  deleteCallback
+} from '../../store/callback/actions'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 
@@ -6,6 +12,23 @@ import styles from './AdminCallbacks.module.scss'
 import mockData from '../../assets/mock/callbacks'
 
 const AdminCallbacks = () => {
+  const { loading, loaded, error, entities } = useSelector(({ callbacks }) => callbacks)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCallbacks())
+  }, [])
+
+  const onDeleteCallbackButtonClick = async (id) => {
+    await dispatch(deleteCallback(id))
+    dispatch(fetchCallbacks())
+  }
+
+  const onReadCallbackButtonClick = async (id) => {
+    await dispatch(readCallback(id))
+    dispatch(fetchCallbacks())
+  }
+
   return (
     <div>
       <h2 className="visually-hidden">Заказы</h2>
@@ -23,18 +46,21 @@ const AdminCallbacks = () => {
               </tr>
             </thead>
             <tbody>
-              {mockData.map(({ _id, item, size, name, data, date }) => {
+              {loaded && entities.map(({ _id, link, brand, model, color, size, name, number, createdAt, isRead }) => {
                 return (
                   <tr key={_id}>
                     <td className={styles.itemInfo}>
-                      <NavLink to="/" className={styles.link}>{item}</NavLink>
+                      <NavLink to={link || ''} className={styles.link}>{`${brand} ${model} ${color}`}</NavLink>
                     </td>
                     <td className={styles.itemInfo}>{size}</td>
                     <td className={styles.itemInfo}>{name}</td>
-                    <td className={styles.itemInfo}>{data}</td>
-                    <td className={styles.itemInfo}>{date}</td>
+                    <td className={styles.itemInfo}>{number}</td>
+                    <td className={styles.itemInfo}>{createdAt}</td>
                     <td className={classNames(styles.itemInfo, styles.editCell)}>
-                      <button type="button" className={styles.deleteCallbackButton}></button>
+                      {isRead
+                        ? <button type="button" onClick={() => onDeleteCallbackButtonClick(_id)} className={styles.deleteCallbackButton}></button>
+                        : <button type="button" onClick={() => onReadCallbackButtonClick(_id)} className={styles.readCallbackButton}></button>
+                      }
                     </td>
                   </tr>
                 )

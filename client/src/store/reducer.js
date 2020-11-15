@@ -6,11 +6,19 @@ import {
   fetchProductsReducer,
   deleteProductReducer
 } from './product/reducers'
+import {
+  fetchCallbacksReducer,
+  readCallbackReducer,
+  deleteCallbackReducer
+} from './callback/reducers'
 
 export default combineReducers({
   user: userReducer,
   photo: photoReducer,
   addProduct: addProductReducer,
   products: fetchProductsReducer,
-  deleteProduct: deleteProductReducer
+  deleteProduct: deleteProductReducer,
+  callbacks: fetchCallbacksReducer,
+  readCallback: readCallbackReducer,
+  deleteCallback: deleteCallbackReducer
 })
