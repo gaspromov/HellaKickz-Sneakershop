@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4a66342f.chunk.css",
+    "main.js": "/static/js/main.c267df2e.chunk.js",
+    "main.js.map": "/static/js/main.c267df2e.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8f49b074.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8f49b074.js.map",
+    "static/js/2.a343f3f5.chunk.js": "/static/js/2.a343f3f5.chunk.js",
+    "static/js/2.a343f3f5.chunk.js.map": "/static/js/2.a343f3f5.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.4a66342f.chunk.css.map": "/static/css/main.4a66342f.chunk.css.map",
+    "static/js/2.a343f3f5.chunk.js.LICENSE.txt": "/static/js/2.a343f3f5.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "/static/media/SourceSansPro-SemiBold.43cc81b4.ttf",
+    "static/media/AdminSlideSave.module.scss": "/static/media/deleteIcon.dcd8755c.svg",
+    "static/media/AdminItems.module.scss": "/static/media/searchIcon.1b2eade6.svg",
+    "static/media/AdminAddItem.module.scss": "/static/media/exitIcon.9c759445.svg",
+    "static/media/logoAdmin.73a5d8ce.svg": "/static/media/logoAdmin.73a5d8ce.svg",
+    "static/media/AdminCallbacks.module.scss": "/static/media/trashIcon.15a82335.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8f49b074.js",
+    "static/js/2.a343f3f5.chunk.js",
+    "static/css/main.4a66342f.chunk.css",
+    "static/js/main.c267df2e.chunk.js"
+  ]
+}
