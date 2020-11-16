@@ -7,6 +7,7 @@ import {
 } from './types'
 import axios from 'axios'
 import cookie from 'js-cookie'
+import { nanoid } from 'nanoid'
 
 export const uploadPhoto = (photo, folder, id) => async (dispatch) => {
   dispatch({ type: UPLOAD_PHOTO_REQUEST })
@@ -26,11 +27,10 @@ export const uploadPhoto = (photo, folder, id) => async (dispatch) => {
         'Content-Type': 'multipart/form-data'
       }
     })
-    console.log(id)
 
     dispatch({
       type: UPLOAD_PHOTO_SUCCESS,
-      payload: { link: filePath, id }
+      payload: { link: filePath, id: id || nanoid() }
     })
   } catch (error) {
     dispatch({

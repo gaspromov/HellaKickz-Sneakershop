@@ -1,0 +1,262 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1143px;
+  margin: 0 auto;
+  padding-top: 50px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+
+  @media (min-width: 1097px) {
+    flex-direction: row;
+  }
+}
+
+.photos {
+  position: relative;
+
+  width: 100%;
+  height: 600px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  border: 3px solid #d5d5d5;
+
+  @media (min-width: 1097px) {
+    min-width: 600px;
+    max-width: 600px;
+    margin-bottom: 0;
+  }
+}
+
+.photoButtons {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 30px;
+  margin-right: 10px;
+  border: 1px solid #ec7f62;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #ec7f62;
+    transition: all 0.2s;
+  }
+
+  &:active {
+    border: 1px solid #f9a690;
+    background-color: #f9a690;
+    transition: all 0.2s;
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.deletePhotosButton {
+  width: 100px;
+  height: 30px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+}
+
+.backgroundTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 36px;
+  color: #898989;
+}
+
+.addPanel {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  overflow-wrap: break-word;
+}
+
+.exitButton {
+  position: absolute;
+  right: 0;
+
+  width: 20px;
+  height: 20px;
+
+  background-image: url('../../assets/images/exitIcon.svg');
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+.grayInput {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 30px;
+  border: none;
+  background-color: #e6e6e6;
+  outline: none;
+  white-space: pre-line;
+
+  &:nth-child(2) {
+    margin-bottom: 6px;
+
+    font-size: 36px;
+    font-weight: 600;
+  }
+
+  &:nth-child(3) {
+    margin-bottom: 6px;
+  }
+
+  &:nth-child(4) {
+    margin-bottom: 29px;
+  }
+
+  &:nth-child(5) {
+    margin-bottom: 30px;
+
+    font-weight: 600;
+  }
+}
+
+.codeWrapper {
+  display: flex;
+
+  margin-bottom: 19px;
+}
+
+.title {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 24px;
+}
+
+.codeInput {
+  margin-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: 1px solid #b0b0b0;
+
+  font-size: 14px;
+}
+
+.radioButtons {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin-top: 19px;
+  margin-bottom: 30px;
+}
+
+.radioButtonWrapper {
+  margin-right: 20px;
+}
+
+.radioButton {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.radioLabel {
+  font-family: 'Candara', sans-serif;
+  font-size: 20px;
+
+  &:not(:last-of-type) {
+    margin-right: 20px;
+  }
+}
+
+.sizesWrapper {
+  width: 462px;
+  margin-bottom: 12px;
+}
+
+.sizesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sizesButton {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 18px;
+  text-transform: lowercase;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:first-of-type {
+    margin-right: 20px;
+  }
+}
+
+.checkboxButtons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkboxButtonWrapper {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.checkboxButton {
+  display: none;
+
+  &:checked + .checkboxLabel {
+    background-color: #000000;
+    color: #ffffff;
+    transition: all 0.2s;
+  }
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 67px;
+  max-width: 80px;
+  height: 30px;
+  border: 1px solid #000000;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.error {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 12px;
+  color: #eb4f4f;
+}
+
+.itemButton {
+  width: 150px;
+  height: 40px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+
+  &:first-of-type {
+    margin-right: 20px;
+  }
+}

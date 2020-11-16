@@ -4,6 +4,7 @@ import AdminHeader from '../AdminHeader/AdminHeader'
 import AdminAuth from '../../screens/AdminAuth/AdminAuth'
 import AdminDashboard from '../../screens/AdminDashboard/AdminDashboard'
 import AdminAddItem from '../../screens/AdminAddItem/AdminAddItem'
+import AdminEditItem from '../../screens/AdminEditItem/AdminEditItem'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/admin/auth" component={AdminAuth} />
         <Route path="/admin/dashboard" component={AdminDashboard} />
         <Route path="/admin/add" component={AdminAddItem} />
+        <Route path="/admin/edit/:id" component={AdminEditItem} />
       </Switch>
     </Router>
   )

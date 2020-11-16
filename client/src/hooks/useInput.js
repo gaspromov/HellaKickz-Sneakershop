@@ -9,7 +9,7 @@ const useInput = (initialValue) => {
 
   const clear = () => setValue('')
 
-  const setInitialValue = (value) => setInitialValue(value)
+  const setInitialValue = (value) => setValue(value)
 
   return {
     bind: { value, onChange },

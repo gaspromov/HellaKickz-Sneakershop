@@ -36,7 +36,7 @@ const AdminAddItem = () => {
   }, [category.value])
 
   useEffect(() => {
-    photo && dispatch(uploadPhoto(photo))
+    photo && dispatch(uploadPhoto(photo, 'products'))
   }, [photo])
 
   const onSizesClick = (e) => {

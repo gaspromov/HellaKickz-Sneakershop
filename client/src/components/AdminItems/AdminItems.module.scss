@@ -1,3 +1,36 @@
+.overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 570px) {
+    flex-direction: row;
+  }
+}
+
+.modalButton {
+  width: 150px;
+  height: 40px;
+
+  margin-bottom: 10px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+
+  @media (min-width: 570px) {
+    &:first-of-type {
+      margin-right: 20px;
+    }
+  }
+}
+
 .buttons {
   display: flex;
   flex-direction: column;

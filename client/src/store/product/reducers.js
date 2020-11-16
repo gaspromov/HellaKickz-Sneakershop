@@ -5,6 +5,9 @@ import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAIL,
+  FETCH_PRODUCT_REQUEST,
+  FETCH_PRODUCT_SUCCESS,
+  FETCH_PRODUCT_FAIL,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL
@@ -65,6 +68,40 @@ export const fetchProductsReducer = (state = fetchProductsInitialState, action) 
         entities: action.payload
       }
     case FETCH_PRODUCTS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+const fetchProductInitialState = {
+  loading: false,
+  loaded: false,
+  error: null,
+  entities: {}
+}
+
+export const fetchProductReducer = (state = fetchProductInitialState, action) => {
+  switch (action.type) {
+    case FETCH_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case FETCH_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null,
+        entities: action.payload
+      }
+    case FETCH_PRODUCT_FAIL:
       return {
         ...state,
         loading: false,
