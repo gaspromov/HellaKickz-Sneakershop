@@ -25,7 +25,7 @@ export const uploadSlide = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: UPLOAD_SLIDE_FAIL,
-      payload: error.message
+      payload: error?.response?.data?.message || error.message
     })
   }
 }

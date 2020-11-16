@@ -29,6 +29,18 @@ const AdminCallbacks = () => {
     dispatch(fetchCallbacks())
   }
 
+  if (loading) {
+    return <p className="message">Подождите...</p>
+  }
+
+  if (loaded && !Array.isArray(entities)) {
+    return <p className="message">Данные отсутствуют</p>
+  }
+
+  if (error) {
+    return <p className="error">{error}</p>
+  }
+
   return (
     <div>
       <h2 className="visually-hidden">Заказы</h2>
@@ -46,7 +58,7 @@ const AdminCallbacks = () => {
               </tr>
             </thead>
             <tbody>
-              {loaded && entities.map(({ _id, link, brand, model, color, size, name, number, createdAt, isRead }) => {
+              {entities.map(({ _id, link, brand, model, color, size, name, number, createdAt, isRead }) => {
                 return (
                   <tr key={_id}>
                     <td className={styles.itemInfo}>

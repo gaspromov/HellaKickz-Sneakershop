@@ -36,6 +36,23 @@ ol {
   list-style: none;
 }
 
+.message {
+  height: 15px;
+  margin-bottom: 3px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 12px;
+}
+
+.error {
+  height: 15px;
+  margin-bottom: 3px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 12px;
+  color: #eb4f4f;
+}
+
 .inputText {
   padding-top: 11px;
   padding-bottom: 11px;

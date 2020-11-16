@@ -108,6 +108,8 @@
 }
 
 .grayInput {
+  width: fit-content;
+
   font-family: 'SourceSansPro', sans-serif;
   font-size: 30px;
   border: none;
@@ -259,4 +261,10 @@
   &:first-of-type {
     margin-right: 20px;
   }
+}
+
+[contenteditable='true']:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: #aaa;
 }

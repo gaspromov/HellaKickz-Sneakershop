@@ -15,7 +15,9 @@ export const uploadSlideReducer = (state = uploadSlideInitialState, action) => {
     case UPLOAD_SLIDE_REQUEST:
       return {
         ...state,
-        loading: true
+        loaded: false,
+        loading: true,
+        error: null
       }
     case UPLOAD_SLIDE_SUCCESS:
       return {

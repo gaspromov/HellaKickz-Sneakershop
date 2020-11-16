@@ -11,9 +11,23 @@
   align-items: center;
 }
 
+.message {
+  align-self: flex-start;
+
+  height: 15px;
+  margin-bottom: 3px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 12px;
+}
+
+.error {
+  color: #eb4f4f;
+}
+
 .title {
   width: 100%;
-  margin-bottom: 28px;
+  margin-bottom: 10px;
   border-bottom: 2px solid #ec7f62;
 
   font-family: 'SourceSansPro', sans-serif;
@@ -24,6 +38,13 @@
 
 .input {
   width: 250px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 15px;
+  border: 1px solid #6d6d6d;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
 }
 
 .loginButton {
