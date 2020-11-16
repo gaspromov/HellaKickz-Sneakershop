@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { uploadPhoto, deletePhotos } from '../../store/photo/actions'
 import { uploadSlide } from '../../store/slide/actions'
 import Button from '../Button/Button'

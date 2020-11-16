@@ -9,7 +9,6 @@ import { Modal } from 'react-responsive-modal'
 
 
 import styles from './AdminItems.module.scss'
-import mockData from '../../assets/mock/items'
 
 const AdminItems = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
@@ -35,30 +34,25 @@ const AdminItems = () => {
   }
 
   const onDeleteProductButtonClick = async () => {
-    await dispatch(deleteProduct(selectedId))
-    await dispatch(fetchProducts())
+    dispatch(deleteProduct(selectedId))
+    dispatch(fetchProducts())
     closeModal()
   }
 
-  return (
-    <div>
-      <Modal open={isModalOpen} onClose={closeModal} classNames={{ overlay: styles.overlay }} animationDuration={0} center>
-        <div className="modal">
-          <p className="modalTitle">Внимание</p>
-          <p className="modalText">Вы уверены, что хотите удалить этот товар?</p>
-          <div className={styles.modalButtons}>
-            <Button type="button" style="regular" className={styles.modalButton} text="Удалить" onClick={onDeleteProductButtonClick} />
-            <Button type="button" style="black" className={styles.modalButton} text="Отменить" onClick={closeModal} />
-          </div>
-        </div>
-      </Modal>
-      <h2 className="visually-hidden">Товары</h2>
-      <div className={styles.buttons}>
-        <NavLink to="/admin/add">
-          <Button type="button" style="regular" className={styles.addButton} text="New item" />
-        </NavLink>
-        <input type="text" placeholder="Search" className={classNames('inputText', styles.searchBar)} />
-      </div>
+  const renderTable = () => {
+    if (loading) {
+      return <p className="message">Подождите...</p>
+    }
+
+    if (loaded && entities.length === 0) {
+      return <p className="message">Данные отсутствуют</p>
+    }
+
+    if (error) {
+      return <p className="error">{error}</p>
+    }
+
+    return (
       <div className={styles.tableWrapper}>
         <div className={styles.tableScroll}>
           <table className={styles.table}>
@@ -72,7 +66,7 @@ const AdminItems = () => {
               </tr>
             </thead>
             <tbody>
-              {loaded && entities.map(({ _id, brand, model, code, price }) => {
+              {entities.map(({ _id, brand, model, code, price }) => {
                 return (
                   <tr key={_id}>
                     <td className={styles.itemInfo}>{brand}</td>
@@ -92,6 +86,30 @@ const AdminItems = () => {
           </table>
         </div>
       </div>
+    )
+  }
+
+  return (
+    <div>
+      <Modal open={isModalOpen} onClose={closeModal} classNames={{ overlay: styles.overlay }} animationDuration={0} center>
+        <div className="modal">
+          <p className="modalTitle">Внимание</p>
+          <p className="modalText">Вы уверены, что хотите удалить этот товар?</p>
+          <div className={styles.modalButtons}>
+            <Button type="button" style="regular" className={styles.modalButton} text="Удалить" onClick={onDeleteProductButtonClick} />
+            <Button type="button" style="black" className={styles.modalButton} text="Отменить" onClick={closeModal} />
+          </div>
+        </div>
+      </Modal>
+
+      <h2 className="visually-hidden">Товары</h2>
+      <div className={styles.buttons}>
+        <NavLink to="/admin/add">
+          <Button type="button" style="regular" className={styles.addButton} text="New item" />
+        </NavLink>
+        <input type="text" placeholder="Search" className={classNames('inputText', styles.searchBar)} />
+      </div>
+      {renderTable()}
     </div >
   )
 }

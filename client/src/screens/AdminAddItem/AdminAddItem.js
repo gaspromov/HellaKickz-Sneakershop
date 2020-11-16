@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadPhoto, deletePhotos } from '../../store/photo/actions'
 import { addProduct } from '../../store/product/actions'
 import useInput from '../../hooks/useInput'
 import { NavLink } from 'react-router-dom'
 import Button from '../../components/Button/Button'
-import ElasticInput from 'react-elastic-input'
+import ContentEditable from 'react-contenteditable'
 
 import styles from './AdminAddItem.module.scss'
 import usSizes from '../../assets/sizes/us'
@@ -22,6 +22,7 @@ const AdminAddItem = () => {
   const [sizes, setSizes] = useState({})
   const { loading, loaded, error } = useSelector(({ addProduct }) => addProduct)
   const dispatch = useDispatch()
+  const input = useRef(null)
 
   const onUploadPhotoClick = (e) => {
     setPhoto(e.target.files[0])
@@ -123,10 +124,10 @@ const AdminAddItem = () => {
       </div>
       <div className={styles.addPanel}>
         <NavLink to="/admin/dashboard" className={styles.exitButton}></NavLink>
-        <ElasticInput placeholder="Бренд" {...brand.bind} className={styles.grayInput} />
-        <ElasticInput placeholder="Модель" {...model.bind} className={styles.grayInput} />
-        <ElasticInput placeholder="Цвет" {...color.bind} className={styles.grayInput} />
-        <ElasticInput placeholder="Цена" {...price.bind} className={styles.grayInput} />
+        <ContentEditable placeholder="Бренд" html={brand.bind.value} onChange={brand.bind.onChange} tagName='brand' className={styles.grayInput} />
+        <ContentEditable placeholder="Модель" html={model.bind.value} onChange={model.bind.onChange} tagName='model' className={styles.grayInput} />
+        <ContentEditable placeholder="Цвет" html={color.bind.value} onChange={color.bind.onChange} tagName='color' className={styles.grayInput} />
+        <ContentEditable placeholder="Цена" html={price.bind.value} onChange={price.bind.onChange} tagName='price' className={styles.grayInput} />
         <div className={styles.codeWrapper}>
           <p className={styles.title}>Артикул:</p>
           <input type="text" {...code.bind} className={styles.codeInput} />
@@ -172,7 +173,7 @@ const AdminAddItem = () => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <p className={styles.error}>{error}</p>
+          <p className="error message">{error}</p>
           <Button type="button" style="regular" className={styles.itemButton} text="Сохранить" onClick={onItemSaveButtonClick} />
           <Button type="button" style="black" className={styles.itemButton} text="Сбросить" onClick={onEraseAllButtonClick} />
         </div>

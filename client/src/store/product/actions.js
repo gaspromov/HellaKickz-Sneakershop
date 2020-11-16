@@ -35,7 +35,7 @@ export const addProduct = (product) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ADD_PRODUCT_FAIL,
-      payload: error.message
+      payload: error?.response?.data?.message || error.message
     })
   }
 }
@@ -53,7 +53,7 @@ export const fetchProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FETCH_PRODUCTS_FAIL,
-      payload: error.message
+      payload: error?.response?.data?.message || error.message
     })
   }
 }
@@ -71,7 +71,7 @@ export const fetchProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FETCH_PRODUCT_FAIL,
-      payload: error.message
+      payload: error?.response?.data?.message || error.message
     })
   }
 }
@@ -92,7 +92,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_PRODUCT_FAIL,
-      payload: error.message
+      payload: error?.response?.data?.message || error.message
     })
   }
 }

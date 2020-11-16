@@ -124,7 +124,8 @@ export const deleteProductReducer = (state = deleteProductInitialState, action) 
     case DELETE_PRODUCT_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       }
     case DELETE_PRODUCT_SUCCESS:
       return {

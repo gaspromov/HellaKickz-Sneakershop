@@ -1,7 +1,8 @@
 import {
   USER_REQUEST,
   USER_SUCCESS,
-  USER_FAIL
+  USER_FAIL,
+  USER_LOGOUT
 } from './types'
 import cookie from 'js-cookie'
 
@@ -16,7 +17,8 @@ export default (state = initialUserState, action) => {
     case USER_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: null
       }
     case USER_SUCCESS:
       return {
@@ -31,6 +33,13 @@ export default (state = initialUserState, action) => {
         loading: false,
         isLoggedIn: false,
         error: action.payload
+      }
+    case USER_LOGOUT:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        isLoggedIn: false
       }
     default:
       return state
