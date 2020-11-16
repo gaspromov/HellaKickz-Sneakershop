@@ -4,6 +4,7 @@ import photoReducer from './photo/reducers'
 import {
   addProductReducer,
   fetchProductsReducer,
+  fetchProductReducer,
   deleteProductReducer
 } from './product/reducers'
 import {
@@ -20,6 +21,7 @@ export default combineReducers({
   photo: photoReducer,
   addProduct: addProductReducer,
   products: fetchProductsReducer,
+  product: fetchProductReducer,
   deleteProduct: deleteProductReducer,
   callbacks: fetchCallbacksReducer,
   readCallback: readCallbackReducer,

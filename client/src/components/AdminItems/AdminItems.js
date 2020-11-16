@@ -1,28 +1,57 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, deleteProduct } from '../../store/product/actions'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import Button from '../Button/Button'
+import 'react-responsive-modal/styles.css'
+import { Modal } from 'react-responsive-modal'
+
 
 import styles from './AdminItems.module.scss'
 import mockData from '../../assets/mock/items'
 
 const AdminItems = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedId, setSelectedId] = useState('')
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [])
 
-  const onDeleteProductButtonClick = (id) => {
-    dispatch(deleteProduct(id))
-    dispatch(fetchProducts())
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const onTrashIconClick = (id) => {
+    openModal()
+    setSelectedId(id)
+  }
+
+  const onDeleteProductButtonClick = async () => {
+    await dispatch(deleteProduct(selectedId))
+    await dispatch(fetchProducts())
+    closeModal()
   }
 
   return (
     <div>
+      <Modal open={isModalOpen} onClose={closeModal} classNames={{ overlay: styles.overlay }} animationDuration={0} center>
+        <div className="modal">
+          <p className="modalTitle">Внимание</p>
+          <p className="modalText">Вы уверены, что хотите удалить этот товар?</p>
+          <div className={styles.modalButtons}>
+            <Button type="button" style="regular" className={styles.modalButton} text="Удалить" onClick={onDeleteProductButtonClick} />
+            <Button type="button" style="black" className={styles.modalButton} text="Отменить" onClick={closeModal} />
+          </div>
+        </div>
+      </Modal>
       <h2 className="visually-hidden">Товары</h2>
       <div className={styles.buttons}>
         <NavLink to="/admin/add">
@@ -51,10 +80,10 @@ const AdminItems = () => {
                     <td className={styles.itemInfo}>{code}</td>
                     <td className={styles.itemInfo}>{price}</td>
                     <td className={styles.itemInfo}>
-                      <NavLink to="/admin/edit" className={styles.editItemLink}>
+                      <NavLink to={`/admin/edit/${_id}`} className={styles.editItemLink}>
                         <button type="button" className={styles.editItemButton}></button>
                       </NavLink>
-                      <button type="button" onClick={() => onDeleteProductButtonClick(_id)} className={styles.deleteItemButton}></button>
+                      <button type="button" onClick={openModal} onClick={() => onTrashIconClick(_id)} className={styles.deleteItemButton}></button>
                     </td>
                   </tr>
                 )
@@ -63,7 +92,7 @@ const AdminItems = () => {
           </table>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
