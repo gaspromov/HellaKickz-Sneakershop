@@ -31,6 +31,7 @@
 }
 
 .photoButtons {
+  margin-bottom: 40px;
   padding-top: 20px;
   padding-left: 20px;
 }
@@ -86,6 +87,11 @@
   color: #898989;
 }
 
+.carouselWrapper {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
 .addPanel {
   position: relative;
 
@@ -116,6 +122,7 @@
   background-color: #e6e6e6;
   outline: none;
   white-space: pre-line;
+  cursor: text;
 
   &:nth-child(2) {
     margin-bottom: 6px;

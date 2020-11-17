@@ -30,7 +30,7 @@ export const uploadPhoto = (photo, folder, id) => async (dispatch) => {
 
     dispatch({
       type: UPLOAD_PHOTO_SUCCESS,
-      payload: { link: filePath, id: id || nanoid() }
+      payload: { link: filePath, id: id || id === 0 ? id : nanoid() }
     })
   } catch (error) {
     dispatch({

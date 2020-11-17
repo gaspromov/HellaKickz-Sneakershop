@@ -43,6 +43,7 @@
   width: 100px;
   height: 30px;
   margin-right: 10px;
+  margin-bottom: 40px;
   border: 1px solid #ec7f62;
 
   font-family: 'SourceSansPro', sans-serif;
@@ -80,10 +81,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: -1;
 
   font-family: 'SourceSansPro', sans-serif;
   font-size: 36px;
   color: #898989;
+}
+
+.carouselWrapper {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .addPanel {
@@ -116,6 +123,7 @@
   background-color: #e6e6e6;
   outline: none;
   white-space: pre-line;
+  cursor: text;
 
   &:nth-child(2) {
     margin-bottom: 6px;

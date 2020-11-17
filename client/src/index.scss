@@ -97,6 +97,11 @@ ol {
   text-align: center;
 }
 
+.carousel.carousel-slider {
+  min-height: 350px;
+  max-height: 470px;
+}
+
 .visually-hidden {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);

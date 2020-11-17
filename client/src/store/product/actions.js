@@ -8,6 +8,9 @@ import {
   FETCH_PRODUCT_REQUEST,
   FETCH_PRODUCT_SUCCESS,
   FETCH_PRODUCT_FAIL,
+  EDIT_PRODUCT_REQUEST,
+  EDIT_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_FAIL,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_FAIL
@@ -71,6 +74,33 @@ export const fetchProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FETCH_PRODUCT_FAIL,
+      payload: error?.response?.data?.message || error.message
+    })
+  }
+}
+
+export const editProduct = (id, product) => async (dispatch, getState) => {
+  dispatch({ type: EDIT_PRODUCT_REQUEST })
+
+  try {
+    const { photo: { entities } } = getState()
+    const token = cookie.getJSON('accessToken')
+
+    await axios.put(`/api/v1/products/${id}`,
+      {
+        ...product,
+        photos: [...product.photos, ...Object.values(entities)]
+      },
+      {
+        headers: {
+          'Authorization': `Basic ${token.accessToken}`
+        }
+      })
+
+    dispatch({ type: EDIT_PRODUCT_SUCCESS })
+  } catch (error) {
+    dispatch({
+      type: EDIT_PRODUCT_FAIL,
       payload: error?.response?.data?.message || error.message
     })
   }
