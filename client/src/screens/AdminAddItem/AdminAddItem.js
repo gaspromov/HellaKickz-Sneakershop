@@ -1,18 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadPhoto, deletePhotos } from '../../store/photo/actions'
 import { addProduct } from '../../store/product/actions'
 import useInput from '../../hooks/useInput'
 import { NavLink } from 'react-router-dom'
+import classNames from 'classnames'
 import Button from '../../components/Button/Button'
 import ContentEditable from 'react-contenteditable'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { Carousel } from 'react-responsive-carousel'
 
 import styles from './AdminAddItem.module.scss'
 import usSizes from '../../assets/sizes/us'
 import clothesSizes from '../../assets/sizes/clothes'
 
 const AdminAddItem = () => {
-  const [photo, setPhoto] = useState('')
+  const [photos, setPhotos] = useState([])
   const brand = useInput('')
   const model = useInput('')
   const color = useInput('')
@@ -22,23 +25,23 @@ const AdminAddItem = () => {
   const [sizes, setSizes] = useState({})
   const { loading, loaded, error } = useSelector(({ addProduct }) => addProduct)
   const dispatch = useDispatch()
-  const input = useRef(null)
 
+  // Photo Handlers
   const onUploadPhotoClick = (e) => {
-    setPhoto(e.target.files[0])
+    dispatch(uploadPhoto(e.target.files[0], 'products'))
+    setPhotos((prevPhotos) => [...prevPhotos, e.target.files[0]])
   }
 
   const onDeletePhotosButtonClick = () => {
+    setPhotos([])
     dispatch(deletePhotos())
   }
+  // ----------------------------------------------------------------------
 
+  // Sizes handlers
   useEffect(() => {
     setSizes({})
   }, [category.value])
-
-  useEffect(() => {
-    photo && dispatch(uploadPhoto(photo, 'products'))
-  }, [photo])
 
   const onSizesClick = (e) => {
     if (e.target.tagName === 'LABEL') {
@@ -71,7 +74,7 @@ const AdminAddItem = () => {
 
   const onSelectAllSizesButtonClick = () => {
     setSizes(renderSizesArray().reduce((acc, size) => {
-      acc[size] = true
+      acc[size.toLowerCase()] = true
       return acc
     }, {}))
   }
@@ -79,7 +82,9 @@ const AdminAddItem = () => {
   const onRemoveAllSizesButtonClick = () => {
     setSizes({})
   }
+  // ----------------------------------------------------------------------
 
+  // Save product handlers
   const onItemSaveButtonClick = () => {
     const product = {
       brand: brand.value,
@@ -95,7 +100,7 @@ const AdminAddItem = () => {
   }
 
   const onEraseAllButtonClick = () => {
-    setPhoto('')
+    setPhotos([])
     dispatch(deletePhotos())
     brand.clear()
     model.clear()
@@ -104,6 +109,7 @@ const AdminAddItem = () => {
     code.clear()
     setSizes({})
   }
+  // ----------------------------------------------------------------------
 
   return (
     <div className={styles.container}>
@@ -121,6 +127,13 @@ const AdminAddItem = () => {
           />
         </div>
         <p className={styles.backgroundTitle}>Загрузите фото</p>
+        {photos.length > 0 && (
+          <Carousel renderThumbs={() => []} emulateTouch showStatus={false} className={styles.carouselWrapper}>
+            {photos.map((photo, id) => {
+              return <img src={URL.createObjectURL(photo)} alt={`Фото ${id + 1}`} />
+            })}
+          </Carousel>
+        )}
       </div>
       <div className={styles.addPanel}>
         <NavLink to="/admin/dashboard" className={styles.exitButton}></NavLink>
@@ -165,7 +178,7 @@ const AdminAddItem = () => {
             {renderSizesArray().map((size) => {
               return (
                 <div key={size} className={styles.checkboxButtonWrapper}>
-                  <input type="checkbox" id={size} name={size} checked={!!sizes[size.toLowerCase()]} className={styles.checkboxButton} />
+                  <input type="checkbox" id={size} name={size} checked={!!sizes[size.toLowerCase()]} readOnly className={styles.checkboxButton} />
                   <label htmlFor={size} data-size={size} className={styles.checkboxLabel}>{`${size}${category.value === 'sneakers' || category.value === 'childish' ? ' US' : ''}`}</label>
                 </div>
               )
@@ -173,7 +186,12 @@ const AdminAddItem = () => {
           </div>
         </div>
         <div className={styles.buttons}>
-          <p className="error message">{error}</p>
+          <p className={classNames('message', error && 'error')}>
+            <>
+              {loading && 'Подождите...'}
+              {error}
+            </>
+          </p>
           <Button type="button" style="regular" className={styles.itemButton} text="Сохранить" onClick={onItemSaveButtonClick} />
           <Button type="button" style="black" className={styles.itemButton} text="Сбросить" onClick={onEraseAllButtonClick} />
         </div>
