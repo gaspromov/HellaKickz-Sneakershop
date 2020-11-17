@@ -16,17 +16,19 @@ const router = express.Router()
 
 router.post('/slides/:id', auth, slideValidator, validate, async (req, res) => {
   try {
-    const { photo } = req.body
+    const { photo, link } = req.body
     const { id } = req.params
     const slide = await Slide.findOne({ index: id })
     if (!slide) {
       const newSlide = await Slide.create({
         index: id,
-        photo
+        photo,
+        link
       })
       return res.status(200).json(newSlide)
     }
     slide.photo = photo
+    slide.link = link
     await slide.save()
     return res.status(200).json(slide)
   } catch (e) {
