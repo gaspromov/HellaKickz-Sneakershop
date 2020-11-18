@@ -23,3 +23,21 @@ export const sendMessage = (res, status, message, error) => {
   if (error) console.error(error.message)
   return res.status(status).json({ message })
 }
+
+export const sanitizeParams = params => {
+  return Object.keys(params).reduce(
+    (prev, key) => ({ ...prev, [key]: params[key].trim().toLowerCase() }),
+    {}
+  )
+}
+
+export const filterArray = (array = [], fields = [], filter = '') => {
+  return array.filter(item => {
+    return fields.some(field => {
+      if (Array.isArray(item[field])) {
+        return item[field].some(i => i.trim().toLowerCase().includes(filter))
+      }
+      return item[field].trim().toLowerCase().includes(filter)
+    })
+  })
+}
