@@ -7,7 +7,11 @@ import {
 import Product from '../models/Product.js'
 import auth from '../middleware/auth.middleware.js'
 import validate from '../middleware/error.middleware.js'
-import { sendMessage } from '../utils/helper.functions.js'
+import {
+  filterArray,
+  sanitizeParams,
+  sendMessage
+} from '../utils/helper.functions.js'
 
 const router = express.Router()
 
@@ -48,9 +52,29 @@ router.put(
 
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find()
+    const { search, category, brand, sizes } = sanitizeParams(req.query)
+    const { sort } = req.query
+    let products = await Product.find().sort(sort)
+
+    products = search
+      ? filterArray(products, ['brand', 'model', 'code'], search)
+      : products
+
+    products = category
+      ? filterArray(products, ['category'], category)
+      : products
+
+    products = brand ? filterArray(products, ['brand'], brand) : products
+
+    if (sizes) {
+      sizes.split(',').forEach(size => {
+        products = filterArray(products, ['sizes'], size)
+      })
+    }
+
     return res.status(200).json(products)
   } catch (e) {
+    console.log(e)
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже')
   }
 })

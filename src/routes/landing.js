@@ -92,7 +92,7 @@ router.post(
 
 router.get('/slides', async (req, res) => {
   try {
-    const slides = await Slide.find()
+    const slides = await Slide.find().sort('index')
     return res.status(200).json(slides)
   } catch (e) {
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
@@ -101,7 +101,7 @@ router.get('/slides', async (req, res) => {
 
 router.get('/hots', async (req, res) => {
   try {
-    const hots = await Hot.find()
+    const hots = await Hot.find().sort('index')
     return res.status(200).json(hots)
   } catch (e) {
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
@@ -110,7 +110,7 @@ router.get('/hots', async (req, res) => {
 
 router.get('/feedbacks', async (req, res) => {
   try {
-    const feedbacks = await Feedback.find()
+    const feedbacks = await Feedback.find().sort('index')
     return res.status(200).json(feedbacks)
   } catch (e) {
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
