@@ -1,0 +1,68 @@
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import SubMenu from '../SubMenu/SubMenu'
+
+import styles from './Menu.module.scss'
+import logo from '../../assets/images/logo.svg'
+import logoSmall from '../../assets/images/logoSmall.svg'
+
+const Menu = () => {
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
+
+  const onShoeLinkMouseEnter = () => {
+    setIsSubMenuOpen(true)
+  }
+
+  const onShoeLinkMouseLeave = () => {
+    setIsSubMenuOpen(false)
+  }
+
+  const onCategoryMenuLinkClick = () => {
+    setIsSubMenuOpen(false)
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <nav className={styles.nav}>
+        <ul className={styles.menu}>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>Каталог</NavLink>
+          </li>
+          <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
+            <NavLink to="/" className={styles.menuLink}>Обувь</NavLink>
+            <SubMenu isOpen={isSubMenuOpen} onCategoryMenuLinkClick={onCategoryMenuLinkClick} />
+          </li>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>Одежда</NavLink>
+          </li>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>Аксессуары</NavLink>
+          </li>
+        </ul>
+        <NavLink to="/">
+          <picture>
+            <source srcset={logo} media="(min-width: 1100px)" />
+            <source srcset={logoSmall} media="(min-width: 870px)" />
+            <img src={logoSmall} alt="Лого" className={styles.logo} />
+          </picture>
+        </NavLink>
+        <ul className={styles.menu}>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>FAQ</NavLink>
+          </li>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>О нас</NavLink>
+          </li>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>Отзывы</NavLink>
+          </li>
+          <li className={styles.menuItem}>
+            <NavLink to="/" className={styles.menuLink}>Контакты</NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  )
+}
+
+export default Menu

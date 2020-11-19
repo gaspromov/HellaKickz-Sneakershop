@@ -1,0 +1,56 @@
+@import '../../variables';
+
+.wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.nav {
+  display: none;
+
+  @media (min-width: $tablet-size) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.menu {
+  display: flex;
+
+  width: 390px;
+
+  white-space: nowrap;
+
+  &:last-of-type {
+    justify-content: flex-end;
+  }
+}
+
+.menuItem {
+  &:not(:last-of-type) {
+    margin-right: 30px;
+  }
+}
+
+.menuLink {
+  font-family: 'Candara', sans-serif;
+  font-size: 20px;
+  color: #000000;
+  border-bottom: 2px solid transparent;
+  transition: 0.2s all;
+
+  &:hover {
+    border-bottom: 2px solid #ec7f62;
+    transition: 0.2s all;
+  }
+}
+
+.logo {
+  width: 62px;
+  height: 37px;
+
+  @media (min-width: 1100px) {
+    width: 297px;
+  }
+}

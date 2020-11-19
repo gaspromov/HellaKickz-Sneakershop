@@ -1,0 +1,44 @@
+@import '../../variables';
+
+.link {
+  position: relative;
+
+  background-color: #ec7f62;
+  box-shadow: 4px 4px 0px 0px rgba(255, 255, 255, 1), 4px 4px 0px 1px #ec7f62;
+  transition: 0.2s all;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:active {
+    background-color: #f9a690;
+  }
+}
+
+.text {
+  font-family: 'Candara', sans-serif;
+  font-size: 18px;
+  color: #ffffff;
+  white-space: nowrap;
+
+  @media (min-width: $tablet-size) {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+
+      display: inline-block;
+
+      width: 25px;
+      height: 8px;
+      margin-top: -4px;
+      margin-right: 15px;
+
+      background-image: url('../../assets/images/buttonArrowIcon.svg');
+      background-repeat: no-repeat;
+      background-size: 25px 8px;
+    }
+  }
+}
