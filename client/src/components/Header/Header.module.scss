@@ -1,0 +1,51 @@
+@import '../../variables';
+
+.header {
+  position: relative;
+
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #b0b0b0;
+
+  @media (min-width: $tablet-size) {
+    padding-top: 31px;
+    padding-bottom: 32px;
+  }
+}
+
+.mobileWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (min-width: $tablet-size) {
+    display: none;
+  }
+}
+
+.logo {
+  width: 149px;
+  height: 29px;
+}
+
+.hamburgerIcon {
+  width: 25px;
+  height: 15px;
+
+  background-image: url('../../assets/images/hamburger.svg');
+  background-repeat: no-repeat;
+  background-size: 25px 15px;
+  cursor: pointer;
+}
+
+.closeIcon {
+  width: 15px;
+  height: 15px;
+
+  background-image: url('../../assets/images/deleteIcon.svg');
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  cursor: pointer;
+}

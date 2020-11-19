@@ -13,9 +13,9 @@ import {
   readCallbackReducer,
   deleteCallbackReducer
 } from './callback/reducers'
-import { uploadSlideReducer } from './slide/reducers'
-import { uploadHotReducer } from './hot/reducers'
-import { uploadFeedbackReducer } from './feedback/reducers'
+import { uploadSlideReducer, fetchSlidesReducer } from './slide/reducers'
+import { uploadHotReducer, fetchHotsReducer } from './hot/reducers'
+import { uploadFeedbackReducer, fetchFeedbacksReducer } from './feedback/reducers'
 
 export default combineReducers({
   user: userReducer,
@@ -29,6 +29,9 @@ export default combineReducers({
   readCallback: readCallbackReducer,
   deleteCallback: deleteCallbackReducer,
   uploadSlide: uploadSlideReducer,
+  slides: fetchSlidesReducer,
   uploadHot: uploadHotReducer,
-  uploadFeedback: uploadFeedbackReducer
+  hots: fetchHotsReducer,
+  uploadFeedback: uploadFeedbackReducer,
+  feedbacks: fetchFeedbacksReducer
 })

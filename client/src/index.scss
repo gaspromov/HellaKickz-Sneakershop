@@ -32,7 +32,8 @@ a {
 }
 
 ul,
-ol {
+ol,
+li {
   list-style: none;
 }
 
@@ -97,10 +98,10 @@ ol {
   text-align: center;
 }
 
-.carousel.carousel-slider {
-  min-height: 350px;
-  max-height: 470px;
-}
+// .carousel.carousel-slider {
+//   min-height: 350px;
+//   max-height: 470px;
+// }
 
 .visually-hidden {
   position: absolute !important;

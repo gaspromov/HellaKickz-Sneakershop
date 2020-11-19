@@ -1,7 +1,10 @@
 import {
   UPLOAD_SLIDE_REQUEST,
   UPLOAD_SLIDE_SUCCESS,
-  UPLOAD_SLIDE_FAIL
+  UPLOAD_SLIDE_FAIL,
+  FETCH_SLIDES_REQUEST,
+  FETCH_SLIDES_SUCCESS,
+  FETCH_SLIDES_FAIL
 } from './types'
 
 const uploadSlideInitialState = {
@@ -31,6 +34,40 @@ export const uploadSlideReducer = (state = uploadSlideInitialState, action) => {
         ...state,
         loading: false,
         loaded: true,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+const fetchSlidesInitialState = {
+  loading: false,
+  loaded: false,
+  error: null,
+  entities: []
+}
+
+export const fetchSlidesReducer = (state = fetchSlidesInitialState, action) => {
+  switch (action.type) {
+    case FETCH_SLIDES_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case FETCH_SLIDES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null,
+        entities: action.payload
+      }
+    case FETCH_SLIDES_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
         error: action.payload
       }
     default:

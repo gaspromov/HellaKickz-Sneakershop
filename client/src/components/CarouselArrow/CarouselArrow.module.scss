@@ -1,0 +1,48 @@
+@import '../../variables';
+
+.button {
+  display: none;
+
+  @media (min-width: $tablet-size) {
+    display: block;
+  }
+}
+
+.white {
+  position: absolute;
+  top: calc(50% - 30px);
+  z-index: 1;
+
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ffffff;
+
+  background-image: url('../../assets/images/carouselArrowWhite.svg');
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  background-position: 50% 50%;
+  cursor: pointer;
+  transition: 0.2s all;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+
+    transition: 0.2s all;
+  }
+}
+
+.orange {
+  position: absolute;
+  top: calc(45% - 30px);
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ec7f62;
+
+  background-color: #ffffff;
+  background-image: url('../../assets/images/carouselArrowGray.svg');
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  background-position: 50% 50%;
+  cursor: pointer;
+}

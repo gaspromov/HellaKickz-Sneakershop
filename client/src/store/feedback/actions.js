@@ -1,7 +1,10 @@
 import {
   UPLOAD_FEEDBACK_REQUEST,
   UPLOAD_FEEDBACK_SUCCESS,
-  UPLOAD_FEEDBACK_FAIL
+  UPLOAD_FEEDBACK_FAIL,
+  FETCH_FEEDBACKS_REQUEST,
+  FETCH_FEEDBACKS_SUCCESS,
+  FETCH_FEEDBACKS_FAIL
 } from './types'
 import axios from 'axios'
 import cookie from 'js-cookie'
@@ -27,6 +30,24 @@ export const uploadFeedback = (id, feedback) => async (dispatch, getState) => {
     dispatch({
       type: UPLOAD_FEEDBACK_FAIL,
       payload: error.message
+    })
+  }
+}
+
+export const fetchFeedbacks = () => async (dispatch) => {
+  dispatch({ type: FETCH_FEEDBACKS_REQUEST })
+
+  try {
+    const { data } = await axios.get('/api/v1/landing/feedbacks')
+
+    dispatch({
+      type: FETCH_FEEDBACKS_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: FETCH_FEEDBACKS_FAIL,
+      payload: error?.response?.data?.message || error.message
     })
   }
 }

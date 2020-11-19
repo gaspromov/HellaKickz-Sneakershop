@@ -15,6 +15,7 @@
     "react": "^17.0.1",
     "react-contenteditable": "^3.3.5",
     "react-dom": "^17.0.1",
+    "react-elastic-carousel": "^0.9.5",
     "react-elastic-input": "^1.0.1",
     "react-input-autosize": "^2.2.2",
     "react-modal": "^3.11.2",
@@ -24,8 +25,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-tabs": "^3.1.1",
+    "react-ticker": "^1.2.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
