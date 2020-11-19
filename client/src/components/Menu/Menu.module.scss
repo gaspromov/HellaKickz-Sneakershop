@@ -37,11 +37,11 @@
   font-family: 'Candara', sans-serif;
   font-size: 20px;
   color: #000000;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid white;
   transition: 0.2s all;
 
   &:hover {
-    border-bottom: 2px solid #ec7f62;
+    border-color: #ec7f62;
     transition: 0.2s all;
   }
 }

@@ -3,6 +3,8 @@
   left: 0;
   z-index: 1;
 
+  display: flex;
+
   justify-content: center;
   align-items: center;
 
@@ -10,6 +12,8 @@
   height: 253px;
 
   background-color: #ffffff;
+  transform-origin: top;
+  transition: .2s all;
 }
 
 .menu {
