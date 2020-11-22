@@ -12,7 +12,7 @@ const MobileMenu = ({ isOpen, onMobileMenuLinkClick }) => {
     <nav style={{ display: isOpen ? 'flex' : 'none' }} className={styles.nav}>
       <ul className={styles.menu}>
         <li className={styles.menuItem}>
-          <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Каталог</NavLink>
+          <NavLink to="/catalogue" onClick={onMenuLinkClick} className={styles.menuLink}>Каталог</NavLink>
         </li>
         <li className={styles.menuItem}>
           <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Одежда</NavLink>

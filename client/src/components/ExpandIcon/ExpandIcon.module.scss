@@ -1,0 +1,13 @@
+.icon {
+  position: absolute;
+  right: 0;
+  top: calc(50% - 5px);
+
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+
+  background-image: url('../../assets/images/arrowDown.svg');
+  background-repeat: no-repeat;
+  background-size: 9px 9px;
+}

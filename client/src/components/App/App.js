@@ -7,6 +7,7 @@ import AdminAuth from '../../screens/AdminAuth/AdminAuth'
 import AdminDashboard from '../../screens/AdminDashboard/AdminDashboard'
 import AdminAddItem from '../../screens/AdminAddItem/AdminAddItem'
 import AdminEditItem from '../../screens/AdminEditItem/AdminEditItem'
+import Catalogue from '../../screens/Catalogue/Catalogue'
 import Footer from '../Footer/Footer'
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       }
       <Switch>
         <Route exact path="/" component={Homepage} />
+        <Route path="/catalogue" component={Catalogue} />
         <Route path="/admin/auth" component={AdminAuth} />
         <Route path="/admin/dashboard" component={AdminDashboard} />
         <Route path="/admin/add" component={AdminAddItem} />
