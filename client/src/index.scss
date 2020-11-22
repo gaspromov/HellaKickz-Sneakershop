@@ -103,6 +103,48 @@ li {
 //   max-height: 470px;
 // }
 
+.rc-menu-item-active,
+.rc-menu-submenu-active > .rc-menu-submenu-title,
+.rc-menu-submenu-selected {
+  background-color: transparent;
+}
+
+.rc-menu-item-selected {
+  background-color: transparent;
+}
+
+.rc-menu-submenu-title {
+  padding: 0 !important;
+}
+
+.rc-menu-submenu-title {
+  padding-bottom: 3px;
+  border-bottom: 1px solid #d5d5d5;
+
+  font-family: 'Candara', sans-serif;
+  font-size: 18px;
+  color: #000000;
+  background-color: transparent !important;
+}
+
+.css-yk16xz-control {
+  border: none !important;
+  outline: none !important;
+}
+
+.css-1okebmr-indicatorSeparator {
+  display: none;
+}
+
+.css-yk16xz-control {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.css-1hb7zxy-IndicatorsContainer {
+  display: none !important;
+}
+
 .visually-hidden {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);

@@ -1,0 +1,13 @@
+.control {
+  height: 100%;
+
+  background-image: url('../../assets/images/arrowDown.svg');
+  background-repeat: no-repeat;
+  background-size: 10px 5px;
+  background-position-x: calc(100% - 18px);
+  background-position-y: 50%;
+
+  & > div {
+    height: 100%;
+  }
+}

@@ -56,7 +56,7 @@ const Homepage = () => {
           return <img src={slide} alt={`Фото ${id + 1}`} className={styles.slide} />
         })}
       </Carousel>
-      <Link to="/" text="В каталог" className={styles.link} />
+      <Link to="/catalogue" text="В каталог" className={styles.link} />
       <section className={styles.sectionBest}>
         <h2 className={styles.title}>Наша подборка</h2>
         {hotsLoaded && (

@@ -26,7 +26,7 @@ const Menu = () => {
       <nav className={styles.nav}>
         <ul className={styles.menu}>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>Каталог</NavLink>
+            <NavLink to="/catalogue" className={styles.menuLink}>Каталог</NavLink>
           </li>
           <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
             <NavLink to="/" className={styles.menuLink}>Обувь</NavLink>

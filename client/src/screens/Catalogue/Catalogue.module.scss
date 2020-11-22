@@ -1,0 +1,94 @@
+@import '../../variables';
+
+.wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.products {
+  --gap: 33px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
+  width: calc(100% + var(--gap));
+
+  margin-bottom: 50px;
+
+  & > * {
+    margin: var(--gap) 0 0 var(--gap);
+  }
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 158px;
+
+  color: #000000;
+  word-break: break-all;
+
+  @media (min-width: $tablet-size) {
+    max-width: 288px;
+  }
+}
+
+.image {
+  width: 156px;
+  height: 93px;
+  margin-bottom: 30px;
+  border: 2px solid transparent;
+
+  object-fit: contain;
+  transition: 0.4s all;
+
+  &:hover {
+    border: 2px solid #ec7f62;
+    transition: 0.4s all;
+  }
+
+  @media (min-width: $tablet-size) {
+    width: 242px;
+    height: 155px;
+    margin-bottom: 36px;
+  }
+}
+
+.title {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 10px;
+
+    font-size: 30px;
+  }
+}
+
+.model {
+  margin-bottom: 5px;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 13px;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 15px;
+
+    font-size: 24px;
+  }
+}
+
+.price {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  @media (min-width: $tablet-size) {
+    font-size: 22px;
+  }
+}
