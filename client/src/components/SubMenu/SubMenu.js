@@ -48,7 +48,7 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
   }
 
   return (
-    <div style={{ display: isOpen ? 'flex' : 'none' }} className={styles.subMenu}>
+    <div style={{ transform: isOpen ? 'scale(1,1)' : 'scale(1,0)' }} className={styles.subMenu}>
       <div className={styles.categoriesWrapper}>
         <div className={styles.categories}>
           <div data-category="yeezy" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
