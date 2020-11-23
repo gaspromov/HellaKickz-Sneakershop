@@ -1,3 +1,4 @@
+@import './variables';
 @import './mixins';
 @import './fonts';
 
@@ -94,8 +95,15 @@ li {
   max-width: 372px;
   margin-bottom: 40px;
 
-  font-size: 24px;
+  font-size: 18px;
+  line-height: 16px;
+
   text-align: center;
+
+  @media (min-width: $tablet-size) {
+    font-size: 24px;
+    line-height: 22px;
+  }
 }
 
 // .carousel.carousel-slider {

@@ -7,7 +7,6 @@ import Button from '../Button/Button'
 import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
 
-
 import styles from './AdminItems.module.scss'
 
 const AdminItems = () => {

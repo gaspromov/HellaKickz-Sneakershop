@@ -1,0 +1,309 @@
+@import '../../variables';
+
+.overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 220px;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+
+.modalInput {
+  padding-top: 11px;
+  padding-right: 10px;
+  padding-bottom: 11px;
+  padding-left: 10px;
+  height: 35px;
+
+  border: 1px solid #6d6d6d;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+
+  @media (min-width: $tablet-size) {
+    height: 50px;
+    padding-top: 14px;
+    padding-right: 15px;
+    padding-bottom: 13px;
+    padding-left: 15px;
+  }
+
+  &:first-of-type {
+    margin-bottom: 10px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
+}
+
+.sendCallbackButton {
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  @media (min-width: $tablet-size) {
+    height: 50px;
+    padding-top: 15px;
+    padding-bottom: 11px;
+  }
+}
+
+.policyWarning {
+  display: none;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 20px;
+
+    font-family: 'SourceSansPro', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+
+    &Underline {
+      text-decoration: underline;
+    }
+  }
+}
+
+.writeInstagramMessage {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 18px;
+  text-align: center;
+
+  &Link {
+    color: #ec7f62;
+  }
+}
+
+.toCatalogueButtonClick {
+  width: 220px;
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  @media (min-width: $tablet-size) {
+    width: 280px;
+    height: 50px;
+    padding-top: 15px;
+    padding-bottom: 11px;
+  }
+}
+
+.container {
+  max-width: 1143px;
+  margin: 0 auto;
+  padding-top: 15px;
+  padding-right: 37px;
+  padding-bottom: 52px;
+  padding-left: 37px;
+
+  @media (min-width: $tablet-size) {
+    padding-top: 50px;
+    padding-bottom: 120px;
+  }
+}
+
+.mobileGoBackButton {
+  display: inline-block;
+
+  width: 30px;
+  height: 12px;
+  margin-bottom: 15px;
+
+  background-image: url('../../assets/images/buttonArrowIconBlack.svg');
+  background-repeat: no-repeat;
+  background-size: 30px 12px;
+  transform: rotate(180deg);
+  cursor: pointer;
+
+  @media (min-width: $tablet-size) {
+    display: none;
+  }
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1097px) {
+    flex-direction: row;
+  }
+}
+
+.photos {
+  position: relative;
+
+  max-width: 300px;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #6d6d6d;
+
+  @media (min-width: $tablet-size) {
+    max-width: unset;
+    width: 550px;
+    height: 550px;
+    margin-right: 70px;
+    margin-bottom: 0;
+  }
+}
+
+.photo {
+  height: 300px;
+  object-fit: cover;
+
+  @media (min-width: $tablet-size) {
+    width: 550px;
+    height: 550px;
+  }
+}
+
+.leftArrow {
+  left: 21px;
+}
+
+.rightArrow {
+  right: 21px;
+}
+
+.productInfo {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  max-width: 460px;
+  width: 100%;
+
+  font-family: 'SourceSansPro', sans-serif;
+}
+
+.goBackButton {
+  @media (min-width: $tablet-size) {
+    position: absolute;
+    right: 0;
+
+    width: 20px;
+    height: 20px;
+
+    background-image: url('../../assets/images/exitIcon.svg');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+  }
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 600;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 5px;
+
+    font-size: 36px;
+  }
+}
+
+.model {
+  margin-bottom: 5px;
+
+  font-size: 18px;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 30px;
+
+    font-size: 30px;
+  }
+}
+
+.price {
+  margin-bottom: 15px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 20px;
+
+    font-size: 30px;
+  }
+}
+
+.sizesWrapper {
+  margin-bottom: 20px;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 34px;
+  }
+}
+
+.sizeLabel {
+  margin-bottom: 5px;
+
+  font-size: 14px;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 10px;
+
+    font-size: 24px;
+  }
+}
+
+.sizes {
+  width: 170px;
+  height: 30px;
+  margin-bottom: 5px;
+  border: 1px solid #6d6d6d;
+
+  font-size: 12px;
+
+  @media (min-width: $tablet-size) {
+    width: 300px;
+    height: 40px;
+
+    font-size: 20px;
+  }
+}
+
+.faqButton {
+  font-size: 12px;
+  color: #000000;
+  text-decoration: underline;
+
+  @media (min-width: $tablet-size) {
+    font-size: 16px;
+  }
+}
+
+.buyButton {
+  display: inline-block;
+
+  width: 170px;
+  height: 40px;
+  margin-bottom: 10px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+
+  @media (min-width: $tablet-size) {
+    width: 300px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+}
+
+.priceWarning {
+  font-size: 12px;
+  font-weight: 300;
+
+  @media (min-width: $tablet-size) {
+    max-width: 214px;
+
+    font-size: 18px;
+  }
+}

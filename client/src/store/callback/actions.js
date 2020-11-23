@@ -7,7 +7,10 @@ import {
   READ_CALLBACK_FAIL,
   DELETE_CALLBACK_REQUEST,
   DELETE_CALLBACK_SUCCESS,
-  DELETE_CALLBACK_FAIL
+  DELETE_CALLBACK_FAIL,
+  CREATE_CALLBACK_REQUEST,
+  CREATE_CALLBACK_SUCCESS,
+  CREATE_CALLBACK_FAIL
 } from './types'
 import axios from 'axios'
 import cookie from 'js-cookie'
@@ -74,6 +77,31 @@ export const deleteCallback = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_CALLBACK_FAIL,
+      payload: error?.response?.data?.message || error.message
+    })
+  }
+}
+
+export const createCallback = (name, number, link, brand, model, size, color) => async (dispatch) => {
+  dispatch({ type: CREATE_CALLBACK_REQUEST })
+
+  try {
+    await axios.post('/api/v1/callbacks', {
+      name,
+      number,
+      isRead: false,
+      link,
+      brand,
+      model,
+      size,
+      color
+    })
+
+    dispatch({ type: CREATE_CALLBACK_SUCCESS })
+  } catch (error) {
+    console.dir(error)
+    dispatch({
+      type: CREATE_CALLBACK_FAIL,
       payload: error?.response?.data?.message || error.message
     })
   }

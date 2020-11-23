@@ -7,7 +7,10 @@ import {
   READ_CALLBACK_FAIL,
   DELETE_CALLBACK_REQUEST,
   DELETE_CALLBACK_SUCCESS,
-  DELETE_CALLBACK_FAIL
+  DELETE_CALLBACK_FAIL,
+  CREATE_CALLBACK_REQUEST,
+  CREATE_CALLBACK_SUCCESS,
+  CREATE_CALLBACK_FAIL
 } from './types'
 
 const fetchCallbacksInitialState = {
@@ -97,6 +100,40 @@ export const deleteCallbackReducer = (state = deleteCallbackInitialState, action
         error: null
       }
     case DELETE_CALLBACK_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+const createCallbackInitialState = {
+  loading: false,
+  loaded: false,
+  error: null
+}
+
+export const createCallbackReducer = (state = createCallbackInitialState, action) => {
+  switch (action.type) {
+    case CREATE_CALLBACK_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        error: null
+      }
+    case CREATE_CALLBACK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      }
+    case CREATE_CALLBACK_FAIL:
       return {
         ...state,
         loading: false,

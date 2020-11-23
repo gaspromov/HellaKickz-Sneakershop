@@ -95,7 +95,9 @@ export const fetchProductReducer = (state = fetchProductInitialState, action) =>
     case FETCH_PRODUCT_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
+        loaded: false,
+        entities: {}
       }
     case FETCH_PRODUCT_SUCCESS:
       return {
@@ -109,8 +111,9 @@ export const fetchProductReducer = (state = fetchProductInitialState, action) =>
       return {
         ...state,
         loading: false,
-        loaded: false,
-        error: action.payload
+        loaded: true,
+        error: action.payload,
+        entities: {}
       }
     default:
       return state
