@@ -29,7 +29,7 @@ const Catalogue = () => {
           <div className={styles.products}>
             {loaded && entities.map(({ _id, photos, brand, model, price }) => {
               return (
-                <NavLink key={_id} to="/" className={styles.product}>
+                <NavLink key={_id} to={`/product/${_id}`} className={styles.product}>
                   <img src={product} alt="" className={styles.image} />
                   <h3 className={styles.title}>{brand}</h3>
                   <p className={styles.model}>{model}</p>

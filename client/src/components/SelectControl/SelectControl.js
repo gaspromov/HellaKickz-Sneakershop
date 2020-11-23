@@ -4,7 +4,6 @@ import styles from './SelectControl.module.scss'
 import arrowUp from '../../assets/images/arrowUp.svg'
 
 const SelectControl = ({ children, innerProps, menuIsOpen }) => {
-  console.log(arrowUp)
   return (
     <div {...innerProps} className={styles.control} style={{ backgroundImage: menuIsOpen && `url('${arrowUp}')` }}>
       {children}

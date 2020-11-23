@@ -11,7 +11,8 @@ import {
 import {
   fetchCallbacksReducer,
   readCallbackReducer,
-  deleteCallbackReducer
+  deleteCallbackReducer,
+  createCallbackReducer
 } from './callback/reducers'
 import { uploadSlideReducer, fetchSlidesReducer } from './slide/reducers'
 import { uploadHotReducer, fetchHotsReducer } from './hot/reducers'
@@ -26,6 +27,7 @@ export default combineReducers({
   editProduct: editProductReducer,
   deleteProduct: deleteProductReducer,
   callbacks: fetchCallbacksReducer,
+  createCallback: createCallbackReducer,
   readCallback: readCallbackReducer,
   deleteCallback: deleteCallbackReducer,
   uploadSlide: uploadSlideReducer,
