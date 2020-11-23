@@ -9,6 +9,7 @@ import AdminAddItem from '../../screens/AdminAddItem/AdminAddItem'
 import AdminEditItem from '../../screens/AdminEditItem/AdminEditItem'
 import Catalogue from '../../screens/Catalogue/Catalogue'
 import ProductPage from '../../screens/ProductPage/ProductPage'
+import Faq from '../../screens/Faq/Faq'
 import Footer from '../Footer/Footer'
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/admin/dashboard" component={AdminDashboard} />
         <Route path="/admin/add" component={AdminAddItem} />
         <Route path="/admin/edit/:id" component={AdminEditItem} />
+        <Route path="/faq" component={Faq} />
       </Switch>
       {/* {
         !window.location.href.includes('admin')

@@ -48,7 +48,7 @@ const Menu = () => {
         </NavLink>
         <ul className={styles.menu}>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>FAQ</NavLink>
+            <NavLink to="/faq" className={styles.menuLink}>FAQ</NavLink>
           </li>
           <li className={styles.menuItem}>
             <NavLink to="/" className={styles.menuLink}>О нас</NavLink>

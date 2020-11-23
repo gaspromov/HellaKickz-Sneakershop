@@ -1,0 +1,75 @@
+@import '../../variables';
+
+.table {
+  max-width: 335px;
+  width: 100%;
+  border-collapse: collapse;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 12px;
+
+  @media (min-width: $tablet-size) {
+    max-width: 806px;
+  }
+}
+
+.thead {
+  border: 1px solid #d5d5d5;
+
+  @media (min-width: $tablet-size) {
+    font-size: 24px;
+  }
+}
+
+.header {
+  max-width: 70px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  font-weight: 400;
+  text-align: center;
+
+  &:first-of-type {
+    max-width: 116px;
+    width: 116px;
+    border-right: 1px solid #d5d5d5;
+
+    @media (min-width: $tablet-size) {
+      max-width: 300px;
+      width: 300px;
+    }
+  }
+}
+
+.cmCell {
+  max-width: 116px;
+  width: 116px;
+  border-right: 1px solid #d5d5d5;
+
+  background-color: rgba(236, 127, 98, 0.3);
+
+  @media (min-width: $tablet-size) {
+    max-width: 300px;
+    width: 300px;
+  }
+}
+
+.row {
+  padding-top: 8px;
+  border: 1px solid #d5d5d5;
+
+  text-align: center;
+
+  @media (min-width: $tablet-size) {
+    font-size: 18px;
+  }
+
+  & > * {
+    padding-bottom: 8px;
+    padding-top: 8px;
+  }
+
+  &:hover {
+    background-color: rgba(236, 127, 98, 0.3);
+  }
+}
