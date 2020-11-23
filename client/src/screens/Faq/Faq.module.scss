@@ -1,0 +1,152 @@
+@import '../../variables';
+
+.wrapper {
+  margin-top: 27px;
+}
+
+.title {
+  margin-bottom: 20px;
+  margin-left: 20px;
+  border-bottom: 2px solid #ec7f62;
+
+  font-family: 'Candara', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+
+  @media (min-width: $tablet-size) {
+    margin-left: 100px;
+
+    border-width: 5px;
+    font-size: 48px;
+  }
+}
+
+.container {
+  padding-right: 20px;
+  padding-left: 20px;
+
+  @media (min-width: $tablet-size) {
+    padding-left: 100px;
+  }
+}
+
+.section {
+  font-family: 'Candara', sans-serif;
+
+  &:first-of-type {
+    margin-bottom: 20px;
+
+    @media (min-width: $tablet-size) {
+      margin-bottom: 40px;
+    }
+  }
+
+  &:not(:first-of-type) {
+    margin-bottom: 30px;
+
+    @media (min-width: $tablet-size) {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+.sectionTitle {
+  margin-bottom: 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 17px;
+
+    font-size: 36px;
+  }
+}
+
+.sectionText {
+  font-size: 13px;
+  word-break: break-word;
+
+  @media (min-width: $tablet-size) {
+    font-size: 24px;
+  }
+}
+
+.sectionSizes {
+  margin-bottom: 31px;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 50px;
+  }
+}
+
+.sectionSizesTitle {
+  display: none;
+
+  @media (min-width: $tablet-size) {
+    display: block;
+    margin-bottom: 20px;
+
+    font-family: 'SourceSansPro', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+  }
+}
+
+.tabs {
+  @media (min-width: $tablet-size) {
+    display: flex;
+  }
+}
+
+.tabList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 335px;
+  margin-bottom: 20px;
+
+  @media (min-width: $tablet-size) {
+    flex-direction: column;
+
+    width: 30%;
+    margin-bottom: unset;
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+    background-color: #eeeeee;
+  }
+}
+
+.tabButton {
+  width: 100px;
+  height: 36px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+
+  font-size: 12px;
+
+  @media (min-width: $tablet-size) {
+    width: 200px;
+    height: 50px;
+    padding-top: 14px;
+    padding-bottom: 13px;
+
+    font-size: 18px;
+  }
+}
+
+.tabSelected {
+  color: #ffffff;
+  background-color: #f9a690;
+  border: 1px solid #f9a690;
+  transition: all 0.2s;
+}
+
+.tabTables {
+  @media (min-width: $tablet-size) {
+    width: 60%;
+  }
+}
