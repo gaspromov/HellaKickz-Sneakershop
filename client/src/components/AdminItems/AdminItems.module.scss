@@ -69,16 +69,16 @@
     background-size: 12px 12px;
     background-position-x: 50%;
     background-position-y: 50%;
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 
   &:active::before {
     border-right-color: #f9a690;
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 
   &:hover::before {
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 }
 

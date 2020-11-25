@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, deleteProduct } from '../../store/product/actions'
+import useInput from '../../hooks/useInput'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import Button from '../Button/Button'
@@ -13,11 +14,16 @@ const AdminItems = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedId, setSelectedId] = useState('')
+  const search = useInput('')
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [])
+
+  useEffect(() => {
+    dispatch(fetchProducts(search.value))
+  }, [search.value])
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -71,7 +77,7 @@ const AdminItems = () => {
                     <td className={styles.itemInfo}>{brand}</td>
                     <td className={styles.itemInfo}>{model}</td>
                     <td className={styles.itemInfo}>{code}</td>
-                    <td className={styles.itemInfo}>{price}</td>
+                    <td className={styles.itemInfo}>{price.toLocaleString('ru')} руб.</td>
                     <td className={styles.itemInfo}>
                       <NavLink to={`/admin/edit/${_id}`} className={styles.editItemLink}>
                         <button type="button" className={styles.editItemButton}></button>
@@ -106,7 +112,7 @@ const AdminItems = () => {
         <NavLink to="/admin/add">
           <Button type="button" style="regular" className={styles.addButton} text="New item" />
         </NavLink>
-        <input type="text" placeholder="Search" className={classNames('inputText', styles.searchBar)} />
+        <input type="text" placeholder="Search" {...search.bind} className={classNames('inputText', styles.searchBar)} />
       </div>
       {renderTable()}
     </div >

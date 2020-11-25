@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import useInput from '../../hooks/useInput'
 import { useDispatch, useSelector } from 'react-redux'
 import { uploadPhoto, deletePhotos } from '../../store/photo/actions'
 import { uploadSlide } from '../../store/slide/actions'
+import classNames from 'classnames'
 import Button from '../Button/Button'
 
 import styles from './AdminSlideSave.module.scss'
 
 const AdminSlidesDownload = ({ id }) => {
   const [photo, setPhoto] = useState('')
+  const link = useInput('')
+  const { loading, loaded, error } = useSelector(({ uploadSlide }) => uploadSlide)
   const dispatch = useDispatch()
 
   const onUploadPhotoClick = (e) => {
@@ -20,7 +24,7 @@ const AdminSlidesDownload = ({ id }) => {
   }
 
   const onSaveSlideButtonClick = () => {
-    dispatch(uploadSlide(id - 1))
+    dispatch(uploadSlide(id - 1, link.value))
   }
 
   useEffect(() => {
@@ -47,6 +51,16 @@ const AdminSlidesDownload = ({ id }) => {
           </>
         )}
       </div>
+      <div>
+        <p className={styles.title}>Link:</p>
+        <input type="text" {...link.bind} className={styles.input} />
+      </div>
+      <p className={classNames('message', error[id - 1] && 'error')}>
+        <>
+          {loading[id - 1] && 'Подождите...'}
+          {error[id - 1]}
+        </>
+      </p>
       <Button type="button" style="regular" onClick={onSaveSlideButtonClick} className={styles.saveHeadPhotosButton} text="Сохранить" />
     </div>
   )

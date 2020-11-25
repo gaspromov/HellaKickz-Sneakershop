@@ -55,13 +55,13 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
             <h3 className={styles.title}>Yeezy</h3>
             <ul>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 350</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'yeezy 350' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 350</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 500</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'yeezy 500' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 500</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 700</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'yeezy 700' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 700</NavLink>
               </li>
             </ul>
           </div>
@@ -69,13 +69,13 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
             <h3 className={styles.title}>Nike</h3>
             <ul data-category="nike">
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Dunk</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'dunk' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Dunk</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'air force' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>x Off-White</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'off-white' } }} onClick={onMenuLinkClick} className={styles.menuLink}>x Off-White</NavLink>
               </li>
             </ul>
           </div>
@@ -83,18 +83,18 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
             <h3 className={styles.title}>Air Jordan</h3>
             <ul data-category="jordan">
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 High</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'jordan 1 high' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 High</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Mid</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'jordan 1 mid' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Mid</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Low</NavLink>
+                <NavLink to={{ pathname: `/catalogue`, state: { search: 'jordan 1 low' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Low</NavLink>
               </li>
             </ul>
           </div>
         </div>
-        <Link to="/" text="Смотреть все" className={styles.link} />
+        <Link to="/catalogue" text="Смотреть все" className={styles.link} />
       </div>
       <div className={styles.photos}>
         <img src={photo1} width={250} height={250} className={styles.photo} />

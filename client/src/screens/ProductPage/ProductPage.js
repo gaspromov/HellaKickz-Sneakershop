@@ -123,12 +123,8 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
               emulateTouch
               showStatus={false}
               className={styles.carouselWrapper}
-              renderArrowPrev={(onClickHandler, hasPrev, label) => hasPrev && (
-                <CarouselArrow title={label} onClick={onClickHandler} position="left" style="white" className={styles.leftArrow} />
-              )}
-              renderArrowNext={(onClickHandler, hasNext, label) => hasNext && (
-                <CarouselArrow title={label} onClick={onClickHandler} position="right" style="white" className={styles.rightArrow} />
-              )}
+              renderArrowPrev={(onClickHandler, hasPrev, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
+              renderArrowNext={(onClickHandler, hasNext, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
               renderIndicator={(onClickHandler, isSelected) => {
                 if (isSelected) {
                   return <CarouselIndicator style="gray" isSelected onClick={onClickHandler} />
@@ -145,6 +141,23 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
         </div>
         <div className={styles.productInfo}>
           <NavLink to="/catalogue" className={styles.goBackButton}></NavLink>
+          {entities?.sameProducts?.length > 1 && (
+            <div className={styles.colors}>
+              <p className={styles.colorLabel}>Цвет:</p>
+              {entities.sameProducts.map(({ _id, photos, brand, model, color }) => {
+                return (
+                  <NavLink to={_id} key={_id} className={styles.imageLink}>
+                    <img
+                      src={photos[0]}
+                      alt={`${brand} ${model} ${color}`}
+                      className={classNames(styles.imagePreview, _id === id && styles.imagePreviewCurrent)}
+                    />
+                  </NavLink>
+                )
+              })}
+            </div>
+          )
+          }
           <p className={styles.brand}>{entities?.product?.brand}</p>
           <p className={styles.model}>{entities?.product?.model} {entities?.product?.color}</p>
           <p className={styles.price}>{entities?.product?.price} руб.</p>
@@ -159,7 +172,7 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
                 components={{ Option: SelectOption, Menu: SelectMenu, Control: SelectControl }}
                 onChange={onSizeChange}
               />
-              <NavLink to="/" className={styles.faqButton}>Как выбрать размер?</NavLink>
+              <NavLink to="/faq" className={styles.faqButton}>Как выбрать размер?</NavLink>
             </div>
           )}
           <Button type="button" style="regular" text="Купить" onClick={openCreateCallbackModal} className={styles.buyButton} />

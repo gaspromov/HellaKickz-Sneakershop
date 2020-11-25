@@ -84,7 +84,6 @@
       95px,
       394px
     );
-  // grid-template-rows: minmax(82px, 230px) minmax(124px, 340px);
   column-gap: 10px;
   row-gap: 10px;
 
@@ -229,6 +228,7 @@
 
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  word-break: break-word;
   outline: none;
 
   @media (min-width: $tablet-size) {
@@ -293,14 +293,17 @@
 
 .feedbackComment {
   max-width: 117px;
+  height: 65px;
   padding-top: 15px;
   border-top: 1px solid #ec7f62;
 
   font-family: 'Candara', sans-serif;
   font-size: 13px;
   font-weight: 300;
+  text-align: center;
 
   @media (min-width: $tablet-size) {
+    max-width: 312px;
     padding-top: 20px;
 
     font-size: 20px;

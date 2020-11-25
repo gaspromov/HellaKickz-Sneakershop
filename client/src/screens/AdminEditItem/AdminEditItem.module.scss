@@ -49,19 +49,27 @@
   font-family: 'SourceSansPro', sans-serif;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.4s;
 
   &:hover {
     color: #ffffff;
     background-color: #ec7f62;
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 
   &:active {
     border: 1px solid #f9a690;
     background-color: #f9a690;
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
+}
+
+.leftArrow {
+  left: 21px;
+}
+
+.rightArrow {
+  right: 21px;
 }
 
 .fileInput {
@@ -233,7 +241,7 @@
   &:checked + .checkboxLabel {
     background-color: #000000;
     color: #ffffff;
-    transition: all 0.2s;
+    transition: all 0.4s;
   }
 }
 
@@ -250,7 +258,7 @@
   font-family: 'SourceSansPro', sans-serif;
   font-size: 18px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.4s;
 }
 
 .error {

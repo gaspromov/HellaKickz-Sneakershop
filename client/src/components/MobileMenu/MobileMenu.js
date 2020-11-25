@@ -15,13 +15,13 @@ const MobileMenu = ({ isOpen, onMobileMenuLinkClick }) => {
           <NavLink to="/catalogue" onClick={onMenuLinkClick} className={styles.menuLink}>Каталог</NavLink>
         </li>
         <li className={styles.menuItem}>
-          <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Одежда</NavLink>
+          <NavLink to={{ pathname: `/catalogue`, state: { category: 'clothes' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Одежда</NavLink>
         </li>
         <li className={styles.menuItem}>
-          <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Аксессуары</NavLink>
+          <NavLink to={{ pathname: `/catalogue`, state: { category: 'accessory' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Аксессуары</NavLink>
         </li>
         <li className={styles.menuItem}>
-          <NavLink to="/" onClick={onMenuLinkClick} className={styles.menuLink}>Обувь</NavLink>
+          <NavLink to={{ pathname: `/catalogue`, state: { category: 'sneakers' } }} onClick={onMenuLinkClick} className={styles.menuLink}>Обувь</NavLink>
         </li>
       </ul>
     </nav>

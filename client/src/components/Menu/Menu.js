@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import SubMenu from '../SubMenu/SubMenu'
+import { Link } from 'react-scroll'
 
 import styles from './Menu.module.scss'
 import logo from '../../assets/images/logo.svg'
@@ -29,20 +30,20 @@ const Menu = () => {
             <NavLink to="/catalogue" className={styles.menuLink}>Каталог</NavLink>
           </li>
           <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
-            <NavLink to="/" className={styles.menuLink}>Обувь</NavLink>
+            <NavLink to={{ pathname: `/catalogue`, state: { category: 'sneakers' } }} className={styles.menuLink}>Обувь</NavLink>
             <SubMenu isOpen={isSubMenuOpen} onCategoryMenuLinkClick={onCategoryMenuLinkClick} />
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>Одежда</NavLink>
+            <NavLink to={{ pathname: `/catalogue`, state: { category: 'clothes' } }} className={styles.menuLink}>Одежда</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>Аксессуары</NavLink>
+            <NavLink to={{ pathname: `/catalogue`, state: { category: 'accessory' } }} className={styles.menuLink}>Аксессуары</NavLink>
           </li>
         </ul>
         <NavLink to="/">
           <picture>
-            <source srcset={logo} media="(min-width: 1100px)" />
-            <source srcset={logoSmall} media="(min-width: 870px)" />
+            <source srcSet={logo} media="(min-width: 1100px)" />
+            <source srcSet={logoSmall} media="(min-width: 870px)" />
             <img src={logoSmall} alt="Лого" className={styles.logo} />
           </picture>
         </NavLink>
@@ -51,13 +52,13 @@ const Menu = () => {
             <NavLink to="/faq" className={styles.menuLink}>FAQ</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>О нас</NavLink>
+            <Link className={styles.menuLink} to="about" smooth={true} duration={500}>О нас</Link>
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>Отзывы</NavLink>
+            <Link className={styles.menuLink} to="feedbacks" smooth={true} duration={500}>Отзывы</Link>
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/" className={styles.menuLink}>Контакты</NavLink>
+            <Link className={styles.menuLink} to="contacts" smooth={true} duration={500}>Контакты</Link>
           </li>
         </ul>
       </nav>

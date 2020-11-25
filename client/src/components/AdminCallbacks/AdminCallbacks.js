@@ -62,12 +62,12 @@ const AdminCallbacks = () => {
                 return (
                   <tr key={_id}>
                     <td className={styles.itemInfo}>
-                      <NavLink to={link || ''} className={styles.link}>{`${brand} ${model} ${color}`}</NavLink>
+                      <NavLink to={link || ''} target="_blank" className={styles.link}>{`${brand} ${model} ${color}`}</NavLink>
                     </td>
                     <td className={styles.itemInfo}>{size}</td>
                     <td className={styles.itemInfo}>{name}</td>
-                    <td className={styles.itemInfo}>{number}</td>
-                    <td className={styles.itemInfo}>{createdAt}</td>
+                    <td className={styles.itemInfo}>{number == '0' ? 'No data' : number}</td>
+                    <td className={styles.itemInfo}>{new Date(createdAt).toLocaleString()}</td>
                     <td className={classNames(styles.itemInfo, styles.editCell)}>
                       {isRead
                         ? <button type="button" onClick={() => onDeleteCallbackButtonClick(_id)} className={styles.deleteCallbackButton}></button>

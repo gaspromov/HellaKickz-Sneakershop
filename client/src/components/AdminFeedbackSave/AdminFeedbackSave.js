@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { uploadPhoto, deletePhotos } from '../../store/photo/actions'
 import { uploadFeedback } from '../../store/feedback/actions'
 import useInput from '../../hooks/useInput'
+import classNames from 'classnames'
 import Button from '../Button/Button'
 
 import styles from './AdminFeedbackSave.module.scss'
@@ -12,6 +13,7 @@ const AdminFeedbackSave = ({ id }) => {
   const name = useInput('')
   const subs = useInput('')
   const feedback = useInput('')
+  const { loading, loaded, error } = useSelector(({ uploadFeedback }) => uploadFeedback)
 
   const dispatch = useDispatch()
 
@@ -72,6 +74,12 @@ const AdminFeedbackSave = ({ id }) => {
         <br />
         <textarea placeholder="Отзыв..." {...feedback.bind} className={styles.textarea}></textarea>
       </div>
+      <p className={classNames('message', error[id] && 'error')}>
+        <>
+          {loading[id] && 'Подождите...'}
+          {error[id]}
+        </>
+      </p>
       <Button type="button" style="regular" className={styles.saveFeedbackButton} text="Сохранить" onClick={onUploadFeedbackButtonClick} />
     </div>
   )

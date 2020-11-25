@@ -17,6 +17,14 @@ const Header = () => {
     }
   }, [width])
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+    } else {
+      document.querySelector('header').style.boxShadow = 'none'
+    }
+  }, [isMobileMenuOpen])
+
   const onMenuToggleButtonClick = () => {
     setIsMobileMenuOpen((prevIsMobileMenuOpen) => !prevIsMobileMenuOpen)
   }

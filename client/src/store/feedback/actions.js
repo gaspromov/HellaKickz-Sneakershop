@@ -10,13 +10,16 @@ import axios from 'axios'
 import cookie from 'js-cookie'
 
 export const uploadFeedback = (id, feedback) => async (dispatch, getState) => {
-  dispatch({ type: UPLOAD_FEEDBACK_REQUEST })
+  dispatch({
+    type: UPLOAD_FEEDBACK_REQUEST,
+    payload: id
+  })
 
   try {
     const { photo: { entities } } = getState()
     const token = cookie.getJSON('accessToken')
 
-    await axios.post(`/api/v1/landing/feedbacks/${id - 1}`, {
+    await axios.post(`/api/v1/landing/feedbacks/${id}`, {
       photo: entities[id],
       ...feedback
     }, {
@@ -25,11 +28,17 @@ export const uploadFeedback = (id, feedback) => async (dispatch, getState) => {
       }
     })
 
-    dispatch({ type: UPLOAD_FEEDBACK_SUCCESS })
+    dispatch({
+      type: UPLOAD_FEEDBACK_SUCCESS,
+      payload: id
+    })
   } catch (error) {
     dispatch({
       type: UPLOAD_FEEDBACK_FAIL,
-      payload: error.message
+      payload: {
+        id: id,
+        error: error?.response?.data?.message || error.message
+      }
     })
   }
 }

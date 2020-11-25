@@ -152,7 +152,7 @@ const FilterPanel = ({ onParamsChange }) => {
             <div style={{ display: isCategoryFilterOpen ? 'grid' : 'none' }} className={classNames(styles.selectBox, styles.categorySelectBox)}>
               {CATEGORIES.map((category) => {
                 return (
-                  <div className={styles.item}>
+                  <div key={category[1]} className={styles.item}>
                     <input type="checkbox" id={category[1]} name={category[1]} checked={!!categories[category[1]]} onChange={onCategoryCheckboxChange} className={styles.checkbox} />
                     <label htmlFor={category[1]} className={styles.label}>{category[0]}</label>
                   </div>
@@ -165,7 +165,7 @@ const FilterPanel = ({ onParamsChange }) => {
             <div style={{ display: isBrandFilterOpen ? 'grid' : 'none' }} className={classNames(styles.selectBox, styles.brandSelectBox)}>
               {BRANDS.map((brand) => {
                 return (
-                  <div className={styles.item}>
+                  <div key={brand} className={styles.item}>
                     <input type="checkbox" id={brand} name={brand} checked={!!brands[brand]} onChange={onBrandCheckboxChange} className={styles.checkbox} />
                     <label htmlFor={brand} className={styles.label}>{brand}</label>
                   </div>
@@ -179,7 +179,7 @@ const FilterPanel = ({ onParamsChange }) => {
               <div className={styles.usSizes}>
                 {usSizes.map((size) => {
                   return (
-                    <div className={styles.item}>
+                    <div key={size} className={styles.item}>
                       <input type="checkbox" id={size} name={size} checked={!!sizes[size]} onChange={onSizeCheckboxChange} className={styles.checkbox} />
                       <label htmlFor={size} className={styles.label}>{size} US</label>
                     </div>
@@ -189,7 +189,7 @@ const FilterPanel = ({ onParamsChange }) => {
               <div className={styles.clothesSizes}>
                 {clothesSizes.map((size) => {
                   return (
-                    <div className={styles.item}>
+                    <div key={size} className={styles.item}>
                       <input type="checkbox" id={size} name={size} checked={!!sizes[size]} onChange={onSizeCheckboxChange} className={styles.checkbox} />
                       <label htmlFor={size} className={styles.label}>{size}</label>
                     </div>
@@ -214,13 +214,13 @@ const FilterPanel = ({ onParamsChange }) => {
       {(Object.keys(categories).length > 0 || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0) && (
         <div className={styles.tags}>
           {Object.keys(categories).map((category) => {
-            return <button type="button" onClick={() => onTagRemoveClick(category, 'category')} className={styles.tag}>{category}</button>
+            return <button key={category} type="button" onClick={() => onTagRemoveClick(category, 'category')} className={styles.tag}>{category}</button>
           })}
           {Object.keys(brands).map((brand) => {
-            return <button type="button" onClick={() => onTagRemoveClick(brand, 'brand')} className={styles.tag}>{brand}</button>
+            return <button key={brand} type="button" onClick={() => onTagRemoveClick(brand, 'brand')} className={styles.tag}>{brand}</button>
           })}
           {Object.keys(sizes).map((size) => {
-            return <button type="button" onClick={() => onTagRemoveClick(size, 'size')} className={styles.tag}>{isNaN(size) ? size : `${size} US`}</button>
+            return <button key={size} type="button" onClick={() => onTagRemoveClick(size, 'size')} className={styles.tag}>{isNaN(size) ? size : `${size} US`}</button>
           })}
           <button type="button" onClick={onEraseAllTagsButtonClick} className={styles.eraseAllTagsButton}>Очистить всё</button>
         </div>

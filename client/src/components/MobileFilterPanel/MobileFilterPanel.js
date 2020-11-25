@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames'
 import 'rc-menu/assets/index.css'
 import Menu, { SubMenu, Item as MenuItem } from 'rc-menu'
@@ -13,6 +13,34 @@ const MobileFilterPanel = ({ onParamsChange }) => {
   const [categories, setCategories] = useState({})
   const [brands, setBrands] = useState({})
   const [term, setTerm] = useState('')
+  const filterRef = useRef()
+  const searchRef = useRef()
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick)
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isFilterOpen || isSearchOpen) {
+      document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+    } else {
+      document.querySelector('header').style.boxShadow = 'none'
+    }
+  }, [isFilterOpen, isSearchOpen])
+
+  const handleOutsideClick = (e) => {
+    if (!filterRef.current.contains(e.target)) {
+      setIsFilterOpen(false)
+    }
+
+    if (!searchRef.current.contains(e.target)) {
+      setIsSearchOpen(false)
+    }
+  }
 
   const onFilterOpenButtonClick = () => {
     setIsFilterOpen(true)
@@ -81,7 +109,7 @@ const MobileFilterPanel = ({ onParamsChange }) => {
     <div className={styles.mobileFilterPanel}>
       <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterOpenButtonClick}></button>
       <button type="button" className={classNames(styles.filterPanelButton, styles.searchOpenButton)} onClick={onSearchOpenButtonClick}></button>
-      <div style={{ display: isFilterOpen ? 'block' : 'none' }} className={styles.filter}>
+      <div style={{ display: isFilterOpen ? 'block' : 'none' }} ref={filterRef} className={styles.filter}>
         <div className={styles.filterButtons}>
           <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterCloseButtonClick}></button>
           <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>
@@ -102,7 +130,7 @@ const MobileFilterPanel = ({ onParamsChange }) => {
         </Menu>
         <Button type="button" style="regular" text="Показать" onClick={onShowButtonClick} className={styles.showButton} />
       </div>
-      <div style={{ display: isSearchOpen ? 'block' : 'none' }} className={styles.search}>
+      <div style={{ display: isSearchOpen ? 'block' : 'none' }} ref={searchRef} className={styles.search}>
         <button type="button" onClick={onCloseSearchButtonClick} className={styles.closeSearchButton}></button>
         <input type="text" placeholder="Поиск" value={term} onChange={onTermChange} className={styles.searchBar} />
         <Button type="button" style="regular" text="Найти" onClick={onSearchButtonClick} className={styles.searchButton} />
