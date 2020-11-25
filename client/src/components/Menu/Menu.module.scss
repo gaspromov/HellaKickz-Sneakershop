@@ -38,11 +38,12 @@
   font-size: 20px;
   color: #000000;
   border-bottom: 2px solid white;
-  transition: 0.2s all;
+  transition: 0.4s all;
+  cursor: pointer;
 
   &:hover {
     border-color: #ec7f62;
-    transition: 0.2s all;
+    transition: 0.4s all;
   }
 }
 

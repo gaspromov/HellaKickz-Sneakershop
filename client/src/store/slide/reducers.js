@@ -8,9 +8,9 @@ import {
 } from './types'
 
 const uploadSlideInitialState = {
-  loading: false,
-  loaded: false,
-  error: null
+  loading: { 0: false, 1: false, 2: false },
+  loaded: { 0: false, 1: false, 2: false },
+  error: { 0: null, 1: null, 2: null }
 }
 
 export const uploadSlideReducer = (state = uploadSlideInitialState, action) => {
@@ -18,23 +18,23 @@ export const uploadSlideReducer = (state = uploadSlideInitialState, action) => {
     case UPLOAD_SLIDE_REQUEST:
       return {
         ...state,
-        loaded: false,
-        loading: true,
-        error: null
+        loading: { ...state.loading, [action.payload]: true },
+        loaded: { ...state.loaded, [action.payload]: false },
+        error: { ...state.error, [action.payload]: null }
       }
     case UPLOAD_SLIDE_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
-        error: null
+        loading: { ...state.loading, [action.payload]: false },
+        loaded: { ...state.loaded, [action.payload]: true },
+        error: { ...state.error, [action.payload]: null },
       }
     case UPLOAD_SLIDE_FAIL:
       return {
         ...state,
-        loading: false,
-        loaded: true,
-        error: action.payload
+        loading: { ...state.loading, [action.payload.id]: false },
+        loaded: { ...state.loaded, [action.payload]: true },
+        error: { ...state.error, [action.payload.id]: action.payload.error }
       }
     default:
       return state

@@ -12,7 +12,6 @@ export const auth = (login, password) => async (dispatch) => {
 
   try {
     const { data } = await axios.post('/api/v1/auth', { login, password })
-    console.log(data)
 
     dispatch({ type: USER_SUCCESS })
     cookie.set('accessToken', JSON.stringify(data), { expires: 15 })

@@ -9,12 +9,14 @@ import Button from '../../components/Button/Button'
 import ContentEditable from 'react-contenteditable'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
+import CarouselArrow from '../../components/CarouselArrow/CarouselArrow'
+import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndicator'
 
 import styles from './AdminAddItem.module.scss'
 import usSizes from '../../assets/sizes/us'
 import clothesSizes from '../../assets/sizes/clothes'
 
-const AdminAddItem = () => {
+const AdminAddItem = ({ history }) => {
   const [photos, setPhotos] = useState([])
   const brand = useInput('')
   const model = useInput('')
@@ -25,6 +27,12 @@ const AdminAddItem = () => {
   const [sizes, setSizes] = useState({})
   const { loading, loaded, error } = useSelector(({ addProduct }) => addProduct)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (loaded && !error) {
+      history.push('/admin/dashboard')
+    }
+  }, [loaded, error])
 
   // Photo Handlers
   const onUploadPhotoClick = (e) => {
@@ -128,7 +136,20 @@ const AdminAddItem = () => {
         </div>
         <p className={styles.backgroundTitle}>Загрузите фото</p>
         {photos.length > 0 && (
-          <Carousel renderThumbs={() => []} emulateTouch showStatus={false} className={styles.carouselWrapper}>
+          <Carousel
+            renderThumbs={() => []}
+            emulateTouch
+            showStatus={false}
+            renderArrowPrev={(onClickHandler, hasPrev, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
+            renderArrowNext={(onClickHandler, hasNext, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
+            renderIndicator={(onClickHandler, isSelected) => {
+              if (isSelected) {
+                return <CarouselIndicator style="gray" isSelected onClick={onClickHandler} />
+              }
+
+              return <CarouselIndicator style="gray" onClick={onClickHandler} />
+            }}
+            className={styles.carouselWrapper}>
             {photos.map((photo, id) => {
               return <img src={URL.createObjectURL(photo)} alt={`Фото ${id + 1}`} />
             })}

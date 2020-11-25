@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { uploadPhoto, deletePhotos } from '../../store/photo/actions'
 import { uploadHot } from '../../store/hot/actions'
+import classNames from 'classnames'
 import useInput from '../../hooks/useInput'
 import Button from '../Button/Button'
 
@@ -10,6 +11,7 @@ import styles from './AdminHotSave.module.scss'
 const AdminHotDownload = ({ id, size, gridArea }) => {
   const [photo, setPhoto] = useState('')
   const link = useInput('')
+  const { loading, loaded, error } = useSelector(({ uploadHot }) => uploadHot)
   const dispatch = useDispatch()
 
   const onUploadPhotoClick = (e) => {
@@ -55,6 +57,12 @@ const AdminHotDownload = ({ id, size, gridArea }) => {
           <p className={styles.title}>Link:</p>
           <input type="text" {...link.bind} className={styles.input} />
         </div>
+        <p className={classNames('message', error[id - 4] && 'error')}>
+          <>
+            {loading[id - 4] && 'Подождите...'}
+            {error[id - 4]}
+          </>
+        </p>
         <Button type="button" style="regular" className={styles.saveHotPhotoButton} text="Сохранить" onClick={onSaveHotButtonClick} />
       </div>
     </div>

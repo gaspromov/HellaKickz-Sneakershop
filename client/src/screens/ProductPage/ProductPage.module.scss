@@ -49,10 +49,16 @@
   padding-top: 12px;
   padding-bottom: 12px;
 
+  background-color: #ec7f62;
+  color: #ffffff;
+
   @media (min-width: $tablet-size) {
     height: 50px;
     padding-top: 15px;
     padding-bottom: 11px;
+
+    background-color: transparent;
+    color: #000000;
   }
 }
 
@@ -88,11 +94,17 @@
   padding-top: 12px;
   padding-bottom: 12px;
 
+  background-color: #ec7f62;
+  color: #ffffff;
+
   @media (min-width: $tablet-size) {
     width: 280px;
     height: 50px;
     padding-top: 15px;
     padding-bottom: 11px;
+
+    background-color: transparent;
+    color: #000000;
   }
 }
 
@@ -151,7 +163,6 @@
     width: 550px;
     height: 550px;
     margin-right: 70px;
-    margin-bottom: 0;
   }
 }
 
@@ -199,11 +210,67 @@
   }
 }
 
+.colors {
+  margin-bottom: 2px;
+
+  @media (min-width: $tablet-size) {
+    order: 4;
+
+    margin-bottom: 10px;
+  }
+}
+
+.colorLabel {
+  display: none;
+
+  @media (min-width: $tablet-size) {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-family: 'SourceSansPro', sans-serif;
+    font-size: 24px;
+  }
+}
+
+.imageLink {
+  &:not(:last-of-type) {
+    margin-right: 10px;
+
+    @media (min-width: $tablet-size) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.imagePreview {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #d5d5d5;
+
+  object-fit: cover;
+
+  @media (min-width: $tablet-size) {
+    width: 100px;
+    height: 100px;
+  }
+
+  &Current {
+    border: 1px solid #ec7f62;
+
+    @media (min-width: $tablet-size) {
+      border-width: 2px;
+    }
+  }
+}
+
 .brand {
   font-size: 24px;
   font-weight: 600;
 
   @media (min-width: $tablet-size) {
+    order: 1;
+
     margin-bottom: 5px;
 
     font-size: 36px;
@@ -216,6 +283,8 @@
   font-size: 18px;
 
   @media (min-width: $tablet-size) {
+    order: 2;
+
     margin-bottom: 30px;
 
     font-size: 30px;
@@ -229,6 +298,8 @@
   font-weight: 600;
 
   @media (min-width: $tablet-size) {
+    order: 3;
+
     margin-bottom: 20px;
 
     font-size: 30px;
@@ -239,6 +310,8 @@
   margin-bottom: 20px;
 
   @media (min-width: $tablet-size) {
+    order: 5;
+
     margin-bottom: 34px;
   }
 }
@@ -290,10 +363,18 @@
   padding-top: 11px;
   padding-bottom: 11px;
 
+  background-color: #ec7f62;
+  color: #ffffff;
+
   @media (min-width: $tablet-size) {
+    order: 6;
+
     width: 300px;
     height: 50px;
     margin-bottom: 20px;
+
+    background-color: transparent;
+    color: #000000;
   }
 }
 
@@ -302,6 +383,8 @@
   font-weight: 300;
 
   @media (min-width: $tablet-size) {
+    order: 7;
+
     max-width: 214px;
 
     font-size: 18px;

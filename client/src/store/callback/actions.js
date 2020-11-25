@@ -26,7 +26,6 @@ export const fetchCallbacks = () => async (dispatch) => {
         'Authorization': `Basic ${token.accessToken}`
       }
     })
-    console.log(data)
 
     dispatch({
       type: FETCH_CALLBACKS_SUCCESS,

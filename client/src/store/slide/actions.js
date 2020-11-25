@@ -9,26 +9,36 @@ import {
 import axios from 'axios'
 import cookie from 'js-cookie'
 
-export const uploadSlide = (id) => async (dispatch, getState) => {
-  dispatch({ type: UPLOAD_SLIDE_REQUEST })
+export const uploadSlide = (id, link) => async (dispatch, getState) => {
+  dispatch({
+    type: UPLOAD_SLIDE_REQUEST,
+    payload: id
+  })
 
   try {
     const { photo: { entities } } = getState()
     const token = cookie.getJSON('accessToken')
 
     await axios.post(`/api/v1/landing/slides/${id}`, {
-      photo: entities[id]
+      photo: entities[id],
+      link
     }, {
       headers: {
         'Authorization': `Basic ${token.accessToken}`
       }
     })
 
-    dispatch({ type: UPLOAD_SLIDE_SUCCESS })
+    dispatch({
+      type: UPLOAD_SLIDE_SUCCESS,
+      payload: id
+    })
   } catch (error) {
     dispatch({
       type: UPLOAD_SLIDE_FAIL,
-      payload: error?.response?.data?.message || error.message
+      payload: {
+        id,
+        error: error?.response?.data?.message || error.message
+      }
     })
   }
 }

@@ -9,6 +9,8 @@ import Button from '../../components/Button/Button'
 import ContentEditable from 'react-contenteditable'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
+import CarouselArrow from '../../components/CarouselArrow/CarouselArrow'
+import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndicator'
 
 import styles from './AdminEditItem.module.scss'
 import usSizes from '../../assets/sizes/us'
@@ -163,7 +165,21 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
             onClick={onDeletePhotosButtonClick}
           />
           {newPhotos.length > 0 && (
-            <Carousel renderThumbs={() => []} emulateTouch showStatus={false} className={styles.carouselWrapper}>
+            <Carousel
+              renderThumbs={() => []}
+              emulateTouch
+              showStatus={false}
+              className={styles.carouselWrapper}
+              renderArrowPrev={(onClickHandler, hasPrev, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
+              renderArrowNext={(onClickHandler, hasNext, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
+              renderIndicator={(onClickHandler, isSelected) => {
+                if (isSelected) {
+                  return <CarouselIndicator style="gray" isSelected onClick={onClickHandler} />
+                }
+
+                return <CarouselIndicator style="gray" onClick={onClickHandler} />
+              }}
+            >
               {newPhotos.map((photo, id) => {
                 return <img src={typeof photo === 'object' ? URL.createObjectURL(photo) : `http://localhost:3000/${photo}`} alt={`Фото ${id + 1}`} />
               })}
