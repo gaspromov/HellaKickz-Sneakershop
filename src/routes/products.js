@@ -52,7 +52,7 @@ router.put(
 
 router.get('/', async (req, res) => {
   try {
-    const { search, category, brand, sizes } = sanitizeParams(req.query)
+    const { search, categories, brands, sizes } = sanitizeParams(req.query)
     const { sort } = req.query
     let products = await Product.find().sort(sort)
 
@@ -60,11 +60,17 @@ router.get('/', async (req, res) => {
       ? filterArray(products, ['brand', 'model', 'code'], search)
       : products
 
-    products = category
-      ? filterArray(products, ['category'], category)
-      : products
+    if (categories) {
+      categories.split(',').forEach(category => {
+        products = filterArray(products, ['category'], category)
+      })
+    }
 
-    products = brand ? filterArray(products, ['brand'], brand) : products
+    if (brands) {
+      brands.split(',').forEach(brand => {
+        products = filterArray(products, ['brand'], brand)
+      })
+    }
 
     if (sizes) {
       sizes.split(',').forEach(size => {
@@ -74,8 +80,7 @@ router.get('/', async (req, res) => {
 
     return res.status(200).json(products)
   } catch (e) {
-    console.log(e)
-    return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже')
+    return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
   }
 })
 
