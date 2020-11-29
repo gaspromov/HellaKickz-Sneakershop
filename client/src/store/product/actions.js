@@ -47,7 +47,7 @@ export const fetchProducts = (term, categories, brands, sizes, sort) => async (d
   dispatch({ type: FETCH_PRODUCTS_REQUEST })
 
   try {
-    const { data } = await axios.get(`/api/v1/products?search=${term || ''}&category=${categories || ''}&brand=${brands || ''}&sizes=${sizes || ''}&sort=${sort || ''}`)
+    const { data } = await axios.get(`/api/v1/products?search=${term || ''}&categories=${categories || ''}&brands=${brands || ''}&sizes=${sizes || ''}&sort=${sort || ''}`)
 
     dispatch({
       type: FETCH_PRODUCTS_SUCCESS,

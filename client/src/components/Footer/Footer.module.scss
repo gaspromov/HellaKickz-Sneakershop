@@ -1,5 +1,113 @@
 @import '../../variables';
 
+.overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 220px;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+
+.modalInput {
+  padding-top: 11px;
+  padding-right: 10px;
+  padding-bottom: 11px;
+  padding-left: 10px;
+  height: 35px;
+
+  border: 1px solid #6d6d6d;
+
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 14px;
+
+  @media (min-width: $tablet-size) {
+    height: 50px;
+    padding-top: 14px;
+    padding-right: 15px;
+    padding-bottom: 14px;
+    padding-left: 15px;
+  }
+
+  &:first-of-type {
+    margin-bottom: 10px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
+}
+
+.sendCallbackButton {
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  background-color: #ec7f62;
+  color: #ffffff;
+
+  @media (min-width: $tablet-size) {
+    height: 50px;
+    padding-top: 15px;
+    padding-bottom: 11px;
+
+    background-color: transparent;
+    color: #000000;
+  }
+}
+
+.policyWarning {
+  display: none;
+
+  @media (min-width: $tablet-size) {
+    margin-bottom: 20px;
+
+    font-family: 'SourceSansPro', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+
+    &Underline {
+      text-decoration: underline;
+    }
+  }
+}
+
+.writeInstagramMessage {
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 18px;
+  text-align: center;
+
+  &Link {
+    color: #ec7f62;
+  }
+}
+
+.toCatalogueButtonClick {
+  width: 220px;
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  background-color: #ec7f62;
+  color: #ffffff;
+
+  @media (min-width: $tablet-size) {
+    width: 280px;
+    height: 50px;
+    padding-top: 15px;
+    padding-bottom: 11px;
+
+    background-color: transparent;
+    color: #000000;
+  }
+}
+
 .footer {
   margin-left: 20px;
   padding-top: 20px;
@@ -10,7 +118,7 @@
   @media (min-width: $tablet-size) {
     margin-left: 50px;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 15px;
   }
 }
 
@@ -62,6 +170,8 @@
   font-size: 12px;
   text-transform: lowercase;
   white-space: nowrap;
+  cursor: pointer;
+  outline: none;
 
   @media (min-width: $tablet-size) {
     margin-bottom: 53px;
@@ -172,6 +282,7 @@
 .policy {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   max-width: 815px;
   margin: 0 auto;
@@ -183,33 +294,55 @@
   color: #6d6d6d;
 
   @media (min-width: $tablet-size) {
-    font-size: 18px;
+    font-size: 14px;
   }
 }
 
-.cactusLogoPicture {
+.cactusWebLink {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2a51dc;
+
   @media (min-width: $tablet-size) {
-    display: flex;
-    align-items: center;
+    font-size: 14px;
 
     &::before {
       content: 'Разработано';
 
       display: inline-block;
 
-      width: 106px;
-      height: 23px;
+      width: 82px;
+      height: 18px;
+      margin-right: 5px;
 
       font-family: 'SourceSansPro', sans-serif;
-      font-size: 18px;
+      font-size: 14px;
       color: #6d6d6d;
     }
   }
-}
 
-.cactusLogoImage {
-  @media (min-width: $tablet-size) {
-    width: 130px;
-    height: 23px;
+  &::after {
+    content: '';
+
+    display: inline-block;
+
+    width: 15px;
+    height: 12px;
+    margin-bottom: -2px;
+    margin-left: 5px;
+
+    background-image: url('../../assets/images/cactusWebLogo.svg');
+    background-repeat: no-repeat;
+    background-size: 15px 12px;
+
+    @media (min-width: $tablet-size) {
+      width: 23px;
+      height: 18px;
+      margin-left: 1px;
+      margin-bottom: -3px;
+
+      background-size: 23px 18px;
+    }
   }
 }

@@ -2,15 +2,6 @@ import validator from 'express-validator'
 
 const { body, param } = validator
 
-const sneakersSizes = Array(23)
-  .fill('')
-  .map((_, index) => {
-    if (!index) return '4'
-    return (4 + index * 0.5).toString()
-  })
-
-const clothesSizes = ['xs', 's', 'm', 'l', 'xl', 'xxl', 'one size']
-
 export const createAndUpdateValidator = [
   body('photos', 'Укажите фотографии').exists().isArray(),
   body('brand', 'Укажите бренд').exists().trim().notEmpty(),
@@ -23,28 +14,7 @@ export const createAndUpdateValidator = [
     .trim()
     .notEmpty()
     .isIn(['sneakers', 'clothes', 'accessory', 'childish']),
-  body('sizes', 'Укажите размеры')
-    .exists()
-    .isArray()
-    .custom((value, { req }) => {
-      const { category } = req.body
-      const sizes = Array.from(new Set(value))
-      let isValid
-      if (category === 'sneakers' || category === 'childish') {
-        isValid = sizes.every(v => {
-          return sneakersSizes.includes(v.toString())
-        })
-      } else if (category === 'clothes') {
-        isValid = sizes.every(v => {
-          return clothesSizes.includes(v.toString())
-        })
-      } else if (category === 'accessory') {
-        isValid = sizes.every(v => {
-          return v.toString().toLowerCase().trim() === 'one size'
-        })
-      }
-      return isValid ? true : Promise.reject(new Error('Некорректные размеры'))
-    })
+  body('sizes', 'Укажите размеры').exists().isArray()
 ]
 
 export const idValidator = [

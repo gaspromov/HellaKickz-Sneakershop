@@ -6,12 +6,16 @@ import Button from '../Button/Button'
 import ExpandIcon from '../ExpandIcon/ExpandIcon'
 
 import styles from './MobileFilterPanel.module.scss'
+import usSizes from '../../assets/sizes/us'
+import euSizes from '../../assets/sizes/eu'
+import clothesSizes from '../../assets/sizes/clothes'
 
 const MobileFilterPanel = ({ onParamsChange }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [categories, setCategories] = useState({})
   const [brands, setBrands] = useState({})
+  const [sizes, setSizes] = useState({})
   const [term, setTerm] = useState('')
   const filterRef = useRef()
   const searchRef = useRef()
@@ -84,17 +88,29 @@ const MobileFilterPanel = ({ onParamsChange }) => {
     }
   }
 
+  const onSizeItemClick = (e) => {
+    const size = e.key
+    if (sizes[size]) {
+      setSizes((prevSizes) => {
+        const { [size]: deletedValue, ...newSize } = prevSizes
+        return newSize
+      })
+    } else {
+      setSizes((prevSizes) => ({ ...prevSizes, [size]: true }))
+    }
+  }
+
   const onTermChange = (e) => {
     setTerm(e.target.value)
   }
 
   const onShowButtonClick = () => {
-    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','))
+    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','), Object.keys(sizes).join(','))
     setIsFilterOpen(false)
   }
 
   const onSearchButtonClick = () => {
-    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','))
+    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','), Object.keys(sizes).join(','))
     setIsSearchOpen(false)
   }
 
@@ -126,6 +142,18 @@ const MobileFilterPanel = ({ onParamsChange }) => {
             <MenuItem key="nike" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['nike'] && styles.menuItemSelected)}>Nike</MenuItem>
             <MenuItem key="off-white" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['off-white'] && styles.menuItemSelected)}>Off-white</MenuItem>
             <MenuItem key="supreme" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['supreme'] && styles.menuItemSelected)}>Supreme</MenuItem>
+          </SubMenu>
+          <SubMenu title="Размер" key="sizes" className={styles.submenu}>
+            {(categories.childish ? euSizes : usSizes).map((size) => {
+              return (
+                <MenuItem key={size} onClick={onSizeItemClick} className={classNames(styles.menuItem, sizes[size] && styles.menuItemSelected)}>{size}</MenuItem>
+              )
+            })}
+            {clothesSizes.map((size) => {
+              return (
+                <MenuItem key={size} onClick={onSizeItemClick} className={classNames(styles.menuItem, sizes[size] && styles.menuItemSelected)}>{size}</MenuItem>
+              )
+            })}
           </SubMenu>
         </Menu>
         <Button type="button" style="regular" text="Показать" onClick={onShowButtonClick} className={styles.showButton} />

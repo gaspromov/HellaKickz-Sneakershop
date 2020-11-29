@@ -52,13 +52,13 @@ const Menu = () => {
             <NavLink to="/faq" className={styles.menuLink}>FAQ</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <Link className={styles.menuLink} to="about" smooth={true} duration={500}>О нас</Link>
+            <NavLink to="/#about" className={styles.menuLink}>О нас</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <Link className={styles.menuLink} to="feedbacks" smooth={true} duration={500}>Отзывы</Link>
+            <NavLink to="/#feedbacks" className={styles.menuLink}>Отзывы</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <Link className={styles.menuLink} to="contacts" smooth={true} duration={500}>Контакты</Link>
+            <Link className={styles.menuLink} to="contacts" smooth={true} duration={0}>Контакты</Link>
           </li>
         </ul>
       </nav>

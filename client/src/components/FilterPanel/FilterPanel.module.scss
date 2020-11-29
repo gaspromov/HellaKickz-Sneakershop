@@ -3,10 +3,12 @@
 .filterPanel {
   display: none;
 
+  max-width: 1800px;
+  margin: 0 auto;
+
   @media (min-width: $tablet-size) {
     display: block;
 
-    margin-bottom: 40px;
     padding-top: 50px;
     padding-right: 20px;
     padding-bottom: 20px;
@@ -40,10 +42,7 @@
   font-family: 'Candara', sans-serif;
   font-size: 24px;
   cursor: pointer;
-
-  &:focus {
-    outline: 1px solid #6d6d6d;
-  }
+  outline: none;
 
   &::after {
     content: '';
@@ -90,11 +89,13 @@
 
 .checkbox {
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .label {
   font-family: 'SourceSansPro', sans-serif;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .categorySelectBox {

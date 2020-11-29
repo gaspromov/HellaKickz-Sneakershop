@@ -1,5 +1,10 @@
 @import '../../variables';
 
+.carousel {
+  width: 100%;
+  min-height: 550px;
+}
+
 .carouselWrapper {
   margin-bottom: 20px;
 
@@ -26,25 +31,25 @@
 .link {
   width: 100px;
   height: 30px;
-  margin-left: calc(50% - 50px);
-  padding-top: 7px;
+  margin-left: calc(50% - 57px);
+  padding-top: 6px;
   padding-right: 20px;
   padding-bottom: 6px;
-  padding-left: 21px;
+  padding-left: 20px;
 
   @media (min-width: $tablet-size) {
     width: 300px;
     height: 60px;
-    margin-left: calc(50% - 150px);
+    margin-left: calc(50% - 132px);
     margin-bottom: 72px;
-    padding-top: 16px;
+    padding-top: 15px;
     padding-right: 170px;
     padding-bottom: 15px;
   }
 }
 
 .sectionBest {
-  max-width: 1240px;
+  max-width: 1800px;
   margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 41px;
@@ -84,6 +89,8 @@
       95px,
       394px
     );
+  grid-template-rows: minmax(82px, 230px) minmax(124px, 340px);
+  justify-content: center;
   column-gap: 10px;
   row-gap: 10px;
 
@@ -135,7 +142,7 @@
 }
 
 .sectionAbout {
-  max-width: 1240px;
+  max-width: 1800px;
   margin: 0 auto;
   margin-bottom: 40px;
 
@@ -185,7 +192,7 @@
 }
 
 .sectionFeedbacks {
-  max-width: 1240px;
+  max-width: 1800px;
   margin: 0 auto;
   margin-bottom: 30px;
 
@@ -197,6 +204,9 @@
 .feedbacksWrapper {
   display: flex;
   justify-content: center;
+
+  max-width: 1240px;
+  margin: 0 auto;
 }
 
 .feedbacksLeftArrow {
