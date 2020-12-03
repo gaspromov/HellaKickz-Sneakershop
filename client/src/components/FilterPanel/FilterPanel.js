@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import classNames from 'classnames'
-import { isEqual } from 'lodash'
+import queryString from 'query-string'
 import useDebounce from '../../hooks/useDebounce'
 import Select from 'react-select'
 import SelectOption from '../SelectOption/SelectOption'
@@ -22,18 +22,19 @@ const options = [
   { value: '-price', label: 'Цена: по убыванию' }
 ]
 
-const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
+const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSizes, initialSort }) => {
   const [isCategoryFilterOpen, setIsCategoryFilterOpen] = useState(false)
   const [isBrandFilterOpen, setIsBrandFilterOpen] = useState(false)
   const [isSizeFilterOpen, setIsSizeFilterOpen] = useState(false)
   const [categories, setCategories] = useState({})
   const [brands, setBrands] = useState({})
   const [sizes, setSizes] = useState({})
-  const [term, setTerm, termValue] = useDebounce('', 500)
+  const [search, setSearch, searchValue] = useDebounce(initialSearch, 500)
   const [sort, setSort] = useState('')
   const categoryRef = useRef()
   const brandRef = useRef()
   const sizeRef = useRef()
+  const history = useHistory()
 
   useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick)
@@ -43,22 +44,51 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
     }
   }, [])
 
+  const renderQuery = (search, categories, brands, sizes, sort) => {
+    const query = {
+      search,
+      categories: Object.keys(categories).join(','),
+      brands: Object.keys(brands).join(','),
+      sizes: Object.keys(sizes).join(','),
+      sort
+    }
+    history.push(`/catalogue/?${queryString.stringify(query)}`)
+  }
+
   useEffect(() => {
-    // setTerm(initialSearch)
+    setSearch(initialSearch)
   }, [initialSearch])
 
   useEffect(() => {
-    // setBrands(
-    //   initialBrand ? initialBrand.split(',').reduce((acc, brand) => {
-    //     acc[brand] = true
-    //     return acc
-    //   }, {}) : {}
-    // )
+    setSort(initialSort)
+  }, [initialSort])
+
+  useEffect(() => {
+    setCategories(
+      initialCategories ? initialCategories.split(',').reduce((acc, category) => {
+        acc[category] = true
+        return acc
+      }, {}) : {}
+    )
+  }, [initialCategories])
+
+  useEffect(() => {
+    setBrands(
+      initialBrand ? initialBrand.split(',').reduce((acc, brand) => {
+        acc[brand] = true
+        return acc
+      }, {}) : {}
+    )
   }, [initialBrand])
 
   useEffect(() => {
-    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','), Object.keys(sizes).join(','), sort)
-  }, [term, categories, brands, sizes, sort])
+    setSizes(
+      initialSizes ? initialSizes.split(',').reduce((acc, size) => {
+        acc[size] = true
+        return acc
+      }, {}) : {}
+    )
+  }, [initialSizes])
 
   const handleOutsideClick = (e) => {
     if (!categoryRef.current.contains(e.target)) {
@@ -91,10 +121,15 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
     if (categories[category]) {
       setCategories((prevCategories) => {
         const { [category]: deletedValue, ...newCategories } = prevCategories
+        renderQuery(search, newCategories, brands, sizes, sort)
         return newCategories
       })
     } else {
-      setCategories((prevCategories) => ({ ...prevCategories, [category]: true }))
+      setCategories((prevCategories) => {
+        const newCategories = { ...prevCategories, [category]: true }
+        renderQuery(search, newCategories, brands, sizes, sort)
+        return newCategories
+      })
     }
   }
 
@@ -103,10 +138,15 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
     if (brands[brand]) {
       setBrands((prevBrands) => {
         const { [brand]: deletedValue, ...newBrands } = prevBrands
+        renderQuery(search, categories, newBrands, sizes, sort)
         return newBrands
       })
     } else {
-      setBrands((prevBrands) => ({ ...prevBrands, [brand]: true }))
+      setBrands((prevBrands) => {
+        const newBrands = { ...prevBrands, [brand]: true }
+        renderQuery(search, categories, newBrands, sizes, sort)
+        return newBrands
+      })
     }
   }
 
@@ -115,19 +155,26 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
     if (sizes[size]) {
       setSizes((prevSizes) => {
         const { [size]: deletedValue, ...newSizes } = prevSizes
+        renderQuery(search, categories, brands, newSizes, sort)
         return newSizes
       })
     } else {
-      setSizes((prevSizes) => ({ ...prevSizes, [size]: true }))
+      setSizes((prevSizes) => {
+        const newSizes = { ...prevSizes, [size]: true }
+        renderQuery(search, categories, brands, newSizes, sort)
+        return newSizes
+      })
     }
   }
 
-  const onTermChange = (e) => {
-    setTerm(e.target.value)
+  const onSearchChange = (e) => {
+    setSearch(e.target.value)
+    renderQuery(e.target.value, categories, brands, sizes, sort)
   }
 
   const onSortChange = (e) => {
-    setSort(e.value)
+    setSearch(e.value)
+    renderQuery(search, categories, brands, sizes, e.value)
   }
 
   const onTagRemoveClick = (tag, type) => {
@@ -135,18 +182,21 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
       case 'category':
         setCategories((prevCategories) => {
           const { [tag]: deletedValue, ...newCategories } = prevCategories
+          renderQuery(search, newCategories, brands, sizes, sort)
           return newCategories
         })
         break
       case 'brand':
         setBrands((prevBrands) => {
-          const { [tag]: deletedValue, ...newBrends } = prevBrands
-          return newBrends
+          const { [tag]: deletedValue, ...newBrands } = prevBrands
+          renderQuery(search, categories, newBrands, sizes, sort)
+          return newBrands
         })
         break
       case 'size':
         setSizes((prevSizes) => {
           const { [tag]: deletedValue, ...newSizes } = prevSizes
+          renderQuery(search, categories, brands, newSizes, sort)
           return newSizes
         })
         break
@@ -158,6 +208,7 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
     setCategories({})
     setBrands({})
     setSizes({})
+    renderQuery(search, {}, {}, {}, sort)
   }
 
   return (
@@ -220,8 +271,8 @@ const FilterPanel = ({ onParamsChange, initialSearch, initialBrand }) => {
           <input
             type="text"
             placeholder="Поиск"
-            value={termValue}
-            onChange={onTermChange}
+            value={searchValue}
+            onChange={onSearchChange}
             className={styles.searchBar}
           />
           <Select

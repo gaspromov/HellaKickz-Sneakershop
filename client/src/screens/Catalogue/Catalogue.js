@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useLocation, useHistory } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import MobileFilterPanel from '../../components/MobileFilterPanel/MobileFilterPanel'
@@ -15,28 +15,22 @@ const Catalogue = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
   const [num, setNum] = useState(32)
   const [initialSearch, setInitialSearch] = useState('')
+  const [initialCategories, setInitialCategories] = useState('')
   const [initialBrand, setInitialBrand] = useState('')
+  const [initialSizes, setInitialSizes] = useState('')
+  const [initialSort, setInitialSort] = useState('')
   const dispatch = useDispatch()
   const location = useLocation()
-  const history = useHistory()
 
   useEffect(() => {
     const params = queryString.parse(location.search)
     setInitialSearch(params.search || '')
+    setInitialCategories(params.categories || '')
     setInitialBrand(params.brands || '')
+    setInitialSizes(params.sizes || '')
+    setInitialSort(params.sort || '')
+    dispatch(fetchProducts(params.search, params.categories, params.brands, params.sizes, params.sort))
   }, [location])
-
-  const onParamsChange = (term, categories, brands, sizes, sort) => {
-    const query = {
-      search: term === null ? initialSearch : term,
-      brands: !brands ? initialBrand : brands
-    }
-    console.log(query)
-    // history.push(`/catalogue${query && `?${query}`}`)
-    // history.push(`/catalogue/?${queryString.stringify(query)}`)
-
-    dispatch(fetchProducts(term, categories, brands, sizes, sort))
-  }
 
   const renderProducts = () => {
     if (loading) {
@@ -82,8 +76,8 @@ const Catalogue = () => {
   return (
     <main role="main">
       <div className={styles.wrapper}>
-        <MobileFilterPanel onParamsChange={onParamsChange} />
-        <FilterPanel onParamsChange={onParamsChange} initialSearch={initialSearch} initialBrand={initialBrand} />
+        <MobileFilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
+        <FilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
         <InfiniteScroll
           dataLength={entities.slice(0, num).length}
           next={() => { setNum(num + 32) }}

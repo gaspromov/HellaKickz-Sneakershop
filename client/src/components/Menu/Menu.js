@@ -30,14 +30,14 @@ const Menu = () => {
             <NavLink to="/catalogue" className={styles.menuLink}>Каталог</NavLink>
           </li>
           <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
-            <NavLink to={{ pathname: `/catalogue`, state: { category: 'sneakers' } }} className={styles.menuLink}>Обувь</NavLink>
+            <NavLink to="/catalogue/?categories=sneakers" className={styles.menuLink}>Обувь</NavLink>
             <SubMenu isOpen={isSubMenuOpen} onCategoryMenuLinkClick={onCategoryMenuLinkClick} />
           </li>
           <li className={styles.menuItem}>
-            <NavLink to={{ pathname: `/catalogue`, state: { category: 'clothes' } }} className={styles.menuLink}>Одежда</NavLink>
+            <NavLink to="/catalogue/?categories=clothes" className={styles.menuLink}>Одежда</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <NavLink to={{ pathname: `/catalogue`, state: { category: 'accessory' } }} className={styles.menuLink}>Аксессуары</NavLink>
+            <NavLink to="/catalogue/?categories=accessory" className={styles.menuLink}>Аксессуары</NavLink>
           </li>
         </ul>
         <NavLink to="/">

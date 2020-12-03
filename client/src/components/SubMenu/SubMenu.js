@@ -42,7 +42,6 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
       <div className={styles.categoriesWrapper}>
         <div className={styles.categories}>
           <div data-category="yeezy" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
-            {/* <a ='/catalogue?brands=Yeezy' onClick={onMenuLinkClick} className={styles.title}>Yeezy</a> */}
             <NavLink to='/catalogue?brands=Yeezy' onClick={onMenuLinkClick} className={styles.title}>Yeezy</NavLink>
             <ul>
               <li className={styles.menuItem}>
@@ -85,7 +84,7 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
             </ul>
           </div>
         </div>
-        <Link to="/catalogue" text="Смотреть все" className={styles.link} />
+        <Link to="/catalogue/?categories=sneakers" text="Смотреть все" className={styles.link} />
       </div>
       <div className={styles.photos}>
         <img src={photo1} width={250} height={250} className={styles.photo} />
