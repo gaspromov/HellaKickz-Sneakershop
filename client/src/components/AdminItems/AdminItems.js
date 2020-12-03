@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, deleteProduct } from '../../store/product/actions'
 import useInput from '../../hooks/useInput'
+import useDebounce from '../../hooks/useDebounce'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import Button from '../Button/Button'
@@ -14,7 +15,7 @@ const AdminItems = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedId, setSelectedId] = useState('')
-  const search = useInput('')
+  const [search, setSearch] = useDebounce('', 500)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -22,8 +23,8 @@ const AdminItems = () => {
   }, [])
 
   useEffect(() => {
-    dispatch(fetchProducts(search.value))
-  }, [search.value])
+    dispatch(fetchProducts(search))
+  }, [search])
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -95,7 +96,7 @@ const AdminItems = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Modal open={isModalOpen} onClose={closeModal} classNames={{ overlay: styles.overlay }} animationDuration={0} center>
         <div className="modal">
           <p className="modalTitle">Внимание</p>
@@ -112,7 +113,12 @@ const AdminItems = () => {
         <NavLink to="/admin/add">
           <Button type="button" style="regular" className={styles.addButton} text="New item" />
         </NavLink>
-        <input type="text" placeholder="Search" {...search.bind} className={classNames('inputText', styles.searchBar)} />
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setSearch(e.target.value)}
+          className={classNames('inputText', styles.searchBar)}
+        />
       </div>
       {renderTable()}
     </div >

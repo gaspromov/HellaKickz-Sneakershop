@@ -42,7 +42,7 @@ const AdminCallbacks = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h2 className="visually-hidden">Заказы</h2>
       <div className={styles.tableWrapper}>
         <div className={styles.tableScroll}>
@@ -62,9 +62,9 @@ const AdminCallbacks = () => {
                 return (
                   <tr key={_id}>
                     <td className={styles.itemInfo}>
-                      <NavLink to={link || ''} target="_blank" className={styles.link}>{`${brand} ${model} ${color}`}</NavLink>
+                      <NavLink to={link || ''} target="_blank" className={styles.link}>{`${brand || ''} ${model || ''} ${color || ''}`}</NavLink>
                     </td>
-                    <td className={styles.itemInfo}>{size}</td>
+                    <td className={styles.itemInfo}>{size?.toUpperCase()}</td>
                     <td className={styles.itemInfo}>{name}</td>
                     <td className={styles.itemInfo}>{number == '0' ? 'No data' : number}</td>
                     <td className={styles.itemInfo}>{new Date(createdAt).toLocaleString()}</td>

@@ -1,16 +1,12 @@
 @import '../../variables';
 
 .table {
-  max-width: 335px;
   width: 100%;
   border-collapse: collapse;
+  overflow: scroll;
 
   font-family: 'SourceSansPro', sans-serif;
   font-size: 12px;
-
-  @media (min-width: $tablet-size) {
-    max-width: 806px;
-  }
 }
 
 .thead {
@@ -51,6 +47,15 @@
   @media (min-width: $tablet-size) {
     max-width: 300px;
     width: 300px;
+  }
+}
+
+.container {
+  max-height: 270px;
+  overflow: scroll;
+
+  @media (min-width: $tablet-size) {
+    max-height: 692px;
   }
 }
 

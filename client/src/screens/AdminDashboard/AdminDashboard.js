@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import Button from '../../components/Button/Button'
+import { NavLink, useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 import AdminCallbacks from '../../components/AdminCallbacks/AdminCallbacks'
 import AdminItems from '../../components/AdminItems/AdminItems'
 import AdminPhotos from '../../components/AdminPhotos/AdminPhotos'
@@ -9,21 +10,45 @@ import AdminFeedbacks from '../../components/AdminFeedbacks/AdminFeedbacks'
 import styles from './AdminDashboard.module.scss'
 
 const AdminDashboard = () => {
+  const [index, setIndex] = useState(0)
+  const location = useLocation()
+
+  useEffect(() => {
+    const params = queryString.parse(location.hash)
+    switch (params.section) {
+      case 'callbacks':
+        setIndex(0)
+        break
+      case 'items':
+        setIndex(1)
+        break
+      case 'photos':
+        setIndex(2)
+        break
+      case 'feedbacks':
+        setIndex(3)
+        break;
+      default:
+        setIndex(0)
+        break
+    }
+  }, [location])
+
   return (
-    <Tabs className={styles.tabs}>
+    <Tabs className={styles.tabs} selectedIndex={index} onSelect={(index) => setIndex(index)}>
       <h1 className="visually-hidden">Панель администратора</h1>
       <TabList className={styles.tabList}>
         <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
-          <Button type="button" style="regular" className={styles.tabButton} text="Callbacks" />
-        </Tab>
-        <Tab className={styles.tab} selectedClassName={styles.tabSelected} >
-          <Button type="button" style="regular" className={styles.tabButton} text="Items" />
+          <NavLink to="/admin/dashboard#section=callbacks" className={styles.tabButton}>Callbacks</NavLink>
         </Tab>
         <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
-          <Button type="button" style="regular" className={styles.tabButton} text="Photos" />
+          <NavLink to="/admin/dashboard#section=items" className={styles.tabButton}>Items</NavLink>
         </Tab>
-        <Tab className={styles.tab} selectedClassName={styles.tabSelected} >
-          <Button type="button" style="regular" className={styles.tabButton} text="Feedbacks" />
+        <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
+          <NavLink to="/admin/dashboard#section=photos" className={styles.tabButton}>Photos</NavLink>
+        </Tab>
+        <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
+          <NavLink to="/admin/dashboard#section=feedbacks" className={styles.tabButton}>Feedbacks</NavLink>
         </Tab>
       </TabList>
 

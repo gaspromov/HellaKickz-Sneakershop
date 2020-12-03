@@ -1,20 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import classNames from 'classnames'
+import queryString from 'query-string'
 import 'rc-menu/assets/index.css'
 import Menu, { SubMenu, Item as MenuItem } from 'rc-menu'
 import Button from '../Button/Button'
 import ExpandIcon from '../ExpandIcon/ExpandIcon'
 
 import styles from './MobileFilterPanel.module.scss'
+import usSizes from '../../assets/sizes/us'
+import euSizes from '../../assets/sizes/eu'
+import clothesSizes from '../../assets/sizes/clothes'
 
-const MobileFilterPanel = ({ onParamsChange }) => {
+const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSizes }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [categories, setCategories] = useState({})
   const [brands, setBrands] = useState({})
-  const [term, setTerm] = useState('')
+  const [sizes, setSizes] = useState({})
+  const [search, setSearch] = useState('')
   const filterRef = useRef()
   const searchRef = useRef()
+  const history = useHistory()
 
   useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick)
@@ -60,6 +67,47 @@ const MobileFilterPanel = ({ onParamsChange }) => {
     setIsSearchOpen(false)
   }
 
+  const renderQuery = (search, categories, brands, sizes) => {
+    const query = {
+      search,
+      categories: Object.keys(categories).join(','),
+      brands: Object.keys(brands).join(','),
+      sizes: Object.keys(sizes).join(',')
+    }
+    history.push(`/catalogue/?${queryString.stringify(query)}`)
+  }
+
+  useEffect(() => {
+    setSearch(initialSearch)
+  }, [initialSearch])
+
+  useEffect(() => {
+    setCategories(
+      initialCategories ? initialCategories.split(',').reduce((acc, category) => {
+        acc[category] = true
+        return acc
+      }, {}) : {}
+    )
+  }, [initialCategories])
+
+  useEffect(() => {
+    setBrands(
+      initialBrand ? initialBrand.split(',').reduce((acc, brand) => {
+        acc[brand] = true
+        return acc
+      }, {}) : {}
+    )
+  }, [initialBrand])
+
+  useEffect(() => {
+    setSizes(
+      initialSizes ? initialSizes.split(',').reduce((acc, size) => {
+        acc[size] = true
+        return acc
+      }, {}) : {}
+    )
+  }, [initialSizes])
+
   const onCategoryItemClick = (e) => {
     const category = e.key
     if (categories[category]) {
@@ -84,24 +132,37 @@ const MobileFilterPanel = ({ onParamsChange }) => {
     }
   }
 
-  const onTermChange = (e) => {
-    setTerm(e.target.value)
+  const onSizeItemClick = (e) => {
+    const size = e.key
+    if (sizes[size]) {
+      setSizes((prevSizes) => {
+        const { [size]: deletedValue, ...newSize } = prevSizes
+        return newSize
+      })
+    } else {
+      setSizes((prevSizes) => ({ ...prevSizes, [size]: true }))
+    }
+  }
+
+  const onSearchChange = (e) => {
+    setSearch(e.target.value)
   }
 
   const onShowButtonClick = () => {
-    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','))
+    renderQuery(search, categories, brands, sizes)
     setIsFilterOpen(false)
   }
 
   const onSearchButtonClick = () => {
-    onParamsChange(term, Object.keys(categories).join(','), Object.keys(brands).join(','))
+    renderQuery(search, categories, brands, sizes)
     setIsSearchOpen(false)
   }
 
   const onEraseFiltersButtonClick = () => {
     setCategories({})
     setBrands({})
-    onParamsChange(term, '', '')
+    setSizes({})
+    renderQuery(search, {}, {}, {})
     setIsFilterOpen(false)
   }
 
@@ -127,12 +188,24 @@ const MobileFilterPanel = ({ onParamsChange }) => {
             <MenuItem key="off-white" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['off-white'] && styles.menuItemSelected)}>Off-white</MenuItem>
             <MenuItem key="supreme" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['supreme'] && styles.menuItemSelected)}>Supreme</MenuItem>
           </SubMenu>
+          <SubMenu title="Размер" key="sizes" className={styles.submenu}>
+            {(categories.childish ? euSizes : usSizes).map((size) => {
+              return (
+                <MenuItem key={size} onClick={onSizeItemClick} className={classNames(styles.menuItem, sizes[size] && styles.menuItemSelected)}>{size}</MenuItem>
+              )
+            })}
+            {clothesSizes.map((size) => {
+              return (
+                <MenuItem key={size} onClick={onSizeItemClick} className={classNames(styles.menuItem, sizes[size] && styles.menuItemSelected)}>{size}</MenuItem>
+              )
+            })}
+          </SubMenu>
         </Menu>
         <Button type="button" style="regular" text="Показать" onClick={onShowButtonClick} className={styles.showButton} />
       </div>
       <div style={{ display: isSearchOpen ? 'block' : 'none' }} ref={searchRef} className={styles.search}>
         <button type="button" onClick={onCloseSearchButtonClick} className={styles.closeSearchButton}></button>
-        <input type="text" placeholder="Поиск" value={term} onChange={onTermChange} className={styles.searchBar} />
+        <input type="text" placeholder="Поиск" value={search} onChange={onSearchChange} className={styles.searchBar} />
         <Button type="button" style="regular" text="Найти" onClick={onSearchButtonClick} className={styles.searchButton} />
       </div>
     </div >

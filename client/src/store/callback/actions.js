@@ -81,8 +81,11 @@ export const deleteCallback = (id) => async (dispatch) => {
   }
 }
 
-export const createCallback = (name, number, link, brand, model, size, color) => async (dispatch) => {
-  dispatch({ type: CREATE_CALLBACK_REQUEST })
+export const createCallback = (id, name, number, link, brand, model, size, color) => async (dispatch) => {
+  dispatch({
+    type: CREATE_CALLBACK_REQUEST,
+    payload: id
+  })
 
   try {
     await axios.post('/api/v1/callbacks', {
@@ -96,12 +99,18 @@ export const createCallback = (name, number, link, brand, model, size, color) =>
       color
     })
 
-    dispatch({ type: CREATE_CALLBACK_SUCCESS })
+    dispatch({
+      type: CREATE_CALLBACK_SUCCESS,
+      payload: id
+    })
   } catch (error) {
     console.dir(error)
     dispatch({
       type: CREATE_CALLBACK_FAIL,
-      payload: error?.response?.data?.message || error.message
+      payload: {
+        id,
+        error: error?.response?.data?.message || error.message
+      }
     })
   }
 }

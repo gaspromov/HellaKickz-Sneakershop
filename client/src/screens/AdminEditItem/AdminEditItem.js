@@ -14,6 +14,7 @@ import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndica
 
 import styles from './AdminEditItem.module.scss'
 import usSizes from '../../assets/sizes/us'
+import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
 const AdminEditItem = ({ match: { params: { id } } }) => {
@@ -92,7 +93,7 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
       case 'accessory':
         return ['One size']
       case 'childish':
-        return usSizes
+        return euSizes
       default:
         return usSizes
     }
@@ -189,7 +190,7 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
         <p className={styles.backgroundTitle}>Загрузите фото</p>
       </div>
       <div className={styles.addPanel}>
-        <NavLink to="/admin/dashboard" className={styles.exitButton}></NavLink>
+        <NavLink to="/admin/dashboard#section=items" className={styles.exitButton}></NavLink>
         <ContentEditable placeholder={entities.product.brand} html={newBrand.bind.value} onChange={newBrand.bind.onChange} tagName="brand" className={styles.grayInput} />
         <ContentEditable placeholder={entities.product.model} html={newModel.bind.value} onChange={newModel.bind.onChange} tagName="model" className={styles.grayInput} />
         <ContentEditable placeholder={entities.product.color} html={newColor.bind.value} onChange={newColor.bind.onChange} tagName="color" className={styles.grayInput} />
@@ -232,7 +233,7 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
               return (
                 <div key={size} className={styles.checkboxButtonWrapper}>
                   <input type="checkbox" id={size} name={size} checked={!!newSizes[size.toLowerCase()]} className={styles.checkboxButton} />
-                  <label htmlFor={size} data-size={size} className={styles.checkboxLabel}>{`${size}${newCategory === 'sneakers' || newCategory === 'childish' ? ' US' : ''}`}</label>
+                  <label htmlFor={size} data-size={size} className={styles.checkboxLabel}>{size}</label>
                 </div>
               )
             })}

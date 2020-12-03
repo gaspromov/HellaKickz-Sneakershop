@@ -5,7 +5,7 @@ import styles from './AdminFeedbacks.module.scss'
 
 const AdminFeedbacks = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h2 className="visually-hidden">Отзывы</h2>
       <div className={styles.feedbacks}>
         <AdminFeedbackSave id={0} />

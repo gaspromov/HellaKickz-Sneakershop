@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
 
-  height: 100vh;
+  min-height: 100vh;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -20,7 +20,7 @@
 
   min-width: 210px;
   width: 100%;
-  padding-top: 49px;
+  padding-top: 50px;
 
   background-color: #eeeeee;
 
@@ -33,7 +33,7 @@
 .tab {
   margin-bottom: 30px;
 
-  &Selected button {
+  &Selected a {
     color: #ffffff;
     background-color: #f9a690;
     border: 1px solid #f9a690;
@@ -42,23 +42,41 @@
 }
 
 .tabButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
   width: 160px;
   height: 50px;
   padding-left: 20px;
+  border: 1px solid #ec7f62;
 
   font-family: 'SourceSansPro', sans-serif;
   justify-content: flex-start;
+  font-size: 18px;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #ec7f62;
+    transition: all 0.4s;
+  }
+
+  &:active {
+    border: 1px solid #f9a690;
+    background-color: #f9a690;
+    transition: all 0.4s;
+  }
 }
 
 .panelWrapper {
   width: 70%;
-  height: 85vh;
   margin-top: 50px;
   margin-bottom: 30px;
   padding-top: 50px;
-  padding-right: 31px;
+  padding-right: 30px;
   padding-left: 5%;
   border: 2px solid #e5e5e5;
-
-  overflow-x: auto;
 }

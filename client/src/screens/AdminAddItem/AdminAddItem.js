@@ -14,6 +14,7 @@ import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndica
 
 import styles from './AdminAddItem.module.scss'
 import usSizes from '../../assets/sizes/us'
+import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
 const AdminAddItem = ({ history }) => {
@@ -26,13 +27,14 @@ const AdminAddItem = ({ history }) => {
   const category = useInput('sneakers')
   const [sizes, setSizes] = useState({})
   const { loading, loaded, error } = useSelector(({ addProduct }) => addProduct)
+  const [isCreateButtonClicked, setIsCreateButtonClicked] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (loaded && !error) {
-      history.push('/admin/dashboard')
+    if (loaded && !error && isCreateButtonClicked) {
+      history.push('/admin/dashboard#section=items')
     }
-  }, [loaded, error])
+  }, [loaded, error, isCreateButtonClicked])
 
   // Photo Handlers
   const onUploadPhotoClick = (e) => {
@@ -74,7 +76,7 @@ const AdminAddItem = ({ history }) => {
       case 'accessory':
         return ['One size']
       case 'childish':
-        return usSizes
+        return euSizes
       default:
         return usSizes
     }
@@ -104,6 +106,7 @@ const AdminAddItem = ({ history }) => {
       category: category.value
     }
 
+    setIsCreateButtonClicked(true)
     dispatch(addProduct(product))
   }
 
@@ -157,7 +160,7 @@ const AdminAddItem = ({ history }) => {
         )}
       </div>
       <div className={styles.addPanel}>
-        <NavLink to="/admin/dashboard" className={styles.exitButton}></NavLink>
+        <NavLink to="/admin/dashboard#section=items" className={styles.exitButton}></NavLink>
         <ContentEditable placeholder="Бренд" html={brand.bind.value} onChange={brand.bind.onChange} tagName='brand' className={styles.grayInput} />
         <ContentEditable placeholder="Модель" html={model.bind.value} onChange={model.bind.onChange} tagName='model' className={styles.grayInput} />
         <ContentEditable placeholder="Цвет" html={color.bind.value} onChange={color.bind.onChange} tagName='color' className={styles.grayInput} />
@@ -200,7 +203,7 @@ const AdminAddItem = ({ history }) => {
               return (
                 <div key={size} className={styles.checkboxButtonWrapper}>
                   <input type="checkbox" id={size} name={size} checked={!!sizes[size.toLowerCase()]} readOnly className={styles.checkboxButton} />
-                  <label htmlFor={size} data-size={size} className={styles.checkboxLabel}>{`${size}${category.value === 'sneakers' || category.value === 'childish' ? ' US' : ''}`}</label>
+                  <label htmlFor={size} data-size={size} className={styles.checkboxLabel}>{size}</label>
                 </div>
               )
             })}

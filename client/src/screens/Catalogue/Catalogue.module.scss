@@ -1,8 +1,22 @@
 @import '../../variables';
 
 .wrapper {
-  max-width: 1240px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.infiniteScroll {
+  position: relative !important;
+  height: 100% !important;
+}
+
+.container {
+  max-width: 1800px;
   margin: 0 auto;
+
+  @media (min-width: $tablet-size) {
+    min-height: 810px;
+  }
 }
 
 .products {
@@ -11,6 +25,7 @@
   row-gap: 20px;
   align-items: flex-start;
 
+  margin-top: 40px;
   margin-bottom: 50px;
 
   @media (min-width: $tablet-size) {
@@ -42,7 +57,7 @@
   margin-bottom: 30px;
   border: 2px solid transparent;
 
-  object-fit: cover;
+  object-fit: contain;
   transition: 0.4s all;
 
   &:hover {

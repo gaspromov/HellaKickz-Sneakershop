@@ -112,9 +112,9 @@ export const deleteCallbackReducer = (state = deleteCallbackInitialState, action
 }
 
 const createCallbackInitialState = {
-  loading: false,
-  loaded: false,
-  error: null
+  loading: { 0: false, 1: false },
+  loaded: { 0: false, 1: false },
+  error: { 0: null, 1: null }
 }
 
 export const createCallbackReducer = (state = createCallbackInitialState, action) => {
@@ -122,23 +122,23 @@ export const createCallbackReducer = (state = createCallbackInitialState, action
     case CREATE_CALLBACK_REQUEST:
       return {
         ...state,
-        loading: true,
-        loaded: false,
-        error: null
+        loading: { ...state.loading, [action.payload]: true },
+        loaded: { ...state.loaded, [action.payload]: false },
+        error: { ...state.error, [action.payload]: null }
       }
     case CREATE_CALLBACK_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
-        error: null
+        loading: { ...state.loading, [action.payload]: false },
+        loaded: { ...state.loaded, [action.payload]: true },
+        error: { ...state.error, [action.payload]: null },
       }
     case CREATE_CALLBACK_FAIL:
       return {
         ...state,
-        loading: false,
-        loaded: true,
-        error: action.payload
+        loading: { ...state.loading, [action.payload.id]: false },
+        loaded: { ...state.loaded, [action.payload]: true },
+        error: { ...state.error, [action.payload.id]: action.payload.error }
       }
     default:
       return state

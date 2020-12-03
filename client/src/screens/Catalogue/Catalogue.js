@@ -1,70 +1,91 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import MobileFilterPanel from '../../components/MobileFilterPanel/MobileFilterPanel'
 import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import { fetchProducts } from '../../store/product/actions'
+import queryString from 'query-string'
 
 import styles from './Catalogue.module.scss'
 import product from '../../assets/mock/product.png'
+import spinner from '../../assets/images/spinner.svg'
 
-const Catalogue = ({ location }) => {
+const Catalogue = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
   const [num, setNum] = useState(32)
+  const [initialSearch, setInitialSearch] = useState('')
+  const [initialCategories, setInitialCategories] = useState('')
+  const [initialBrand, setInitialBrand] = useState('')
+  const [initialSizes, setInitialSizes] = useState('')
+  const [initialSort, setInitialSort] = useState('')
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
-    dispatch(fetchProducts(location?.state?.search || '', location?.state?.category || ''))
-  }, [])
-
-  useEffect(() => {
-    dispatch(fetchProducts(location?.state?.search || '', location?.state?.category || ''))
-  }, [location?.state?.search, location?.state?.category])
-
-  const onParamsChange = (term, categories, brands, sizes, sort) => {
-    dispatch(fetchProducts(term, categories, brands, sizes, sort))
-  }
+    const params = queryString.parse(location.search)
+    setInitialSearch(params.search || '')
+    setInitialCategories(params.categories || '')
+    setInitialBrand(params.brands || '')
+    setInitialSizes(params.sizes || '')
+    setInitialSort(params.sort || '')
+    dispatch(fetchProducts(params.search, params.categories, params.brands, params.sizes, params.sort))
+  }, [location])
 
   const renderProducts = () => {
     if (loading) {
-      return <p className="message">Подождите...</p>
+      return (
+        <div className="loader">
+          <img src={spinner} alt="Подождите" className="spinner" />
+        </div>
+      )
     }
 
     if (loaded && entities.length === 0) {
-      return <p className="message">Данные отсутствуют</p>
+      return (
+        <div className={styles.container}>
+          <div style={{ maxWidth: '1800px', margin: '0 auto' }}>
+            <p className="message">Данные отсутствуют</p>
+          </div>
+        </div>
+      )
     }
 
     if (error) {
       return <p className="error">{error}</p>
     }
 
-    return entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
-      return (
-        <NavLink key={_id} to={`/product/${_id}`} className={styles.product}>
-          <img src={photos[0] ? `http://localhost:3000/${photos[0]}` : product} alt={`${brand} ${model}`} className={styles.image} />
-          <h3 className={styles.title}>{brand}</h3>
-          <p className={styles.model}>{model}</p>
-          <p className={styles.price}>{price} руб.</p>
-        </NavLink>
-      )
-    })
+    return (
+      <div className={styles.container}>
+        <div className={styles.products}>
+          {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
+            return (
+              <NavLink key={_id} to={`/product/${_id}`} className={styles.product}>
+                <img src={photos[0] ? `http://localhost:3000/${photos[0]}` : product} alt={`${brand} ${model}`} className={styles.image} />
+                <h3 className={styles.title}>{brand}</h3>
+                <p className={styles.model}>{model}</p>
+                <p className={styles.price}>{price} руб.</p>
+              </NavLink>
+            )
+          })}
+        </div>
+      </div>
+    )
   }
 
   return (
     <main role="main">
       <div className={styles.wrapper}>
-        <MobileFilterPanel onParamsChange onParamsChange={onParamsChange} />
-        <FilterPanel onParamsChange={onParamsChange} />
+        <MobileFilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
+        <FilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
         <InfiniteScroll
           dataLength={entities.slice(0, num).length}
           next={() => { setNum(num + 32) }}
           hasMore={entities.length > entities.slice(0, num).length}
           loader={<h4 className="message">Loading...</h4>}
+          className={loading && styles.infiniteScroll}
         >
-          <div className={styles.products}>
-            {renderProducts()}
-          </div>
+          {renderProducts()}
         </InfiniteScroll>
       </div>
     </main >
