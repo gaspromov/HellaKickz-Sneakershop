@@ -9,7 +9,6 @@ import { Helmet } from 'react-helmet'
 import queryString from 'query-string'
 
 import styles from './Catalogue.module.scss'
-import product from '../../assets/mock/product.png'
 import spinner from '../../assets/images/spinner.svg'
 
 const Catalogue = () => {
@@ -62,7 +61,7 @@ const Catalogue = () => {
           {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
             return (
               <NavLink key={_id} to={`/product/${_id}`} className={styles.product}>
-                <img src={photos[0] ? `http://localhost:3000/${photos[0]}` : product} alt={`${brand} ${model}`} className={styles.image} />
+                <img src={`http://localhost:3000/${photos[0]}`} alt={`${brand} ${model}`} className={styles.image} />
                 <h3 className={styles.title}>{brand}</h3>
                 <p className={styles.model}>{model}</p>
                 <p className={styles.price}>{price} руб.</p>
