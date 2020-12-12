@@ -9,7 +9,6 @@ import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 
 import styles from './AdminCallbacks.module.scss'
-import mockData from '../../assets/mock/callbacks'
 
 const AdminCallbacks = () => {
   const { loading, loaded, error, entities } = useSelector(({ callbacks }) => callbacks)

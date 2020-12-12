@@ -65,10 +65,6 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
     dispatch(createCallback(0, name.value, contact.value, `/product/${id}`, entities.product.brand, entities.product.model, size, entities.product.color))
   }
 
-  const onToCatalogueButtonClick = () => {
-    history.push('/catalogue')
-  }
-
   if (loading) {
     return <p className="message">Подождите...</p>
   }
@@ -115,7 +111,7 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
             <Button type="button" style="regular" text="К товару" onClick={closeThankYouModal} className={styles.toCatalogueButtonClick} />
           </div>
         </Modal>
-        <NavLink to="/catalogue" className={styles.mobileGoBackButton}></NavLink>
+        <NavLink to="/catalogu" className={styles.mobileGoBackButton}></NavLink>
         <div className={styles.productContainer}>
           <div className={styles.photos}>
             {entities?.product?.photos?.length > 0 && (
@@ -141,7 +137,7 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
             )}
           </div>
           <div className={styles.productInfo}>
-            <NavLink to="/catalogue" className={styles.goBackButton}></NavLink>
+            <NavLink to="/catalog" className={styles.goBackButton}></NavLink>
             {entities?.sameProducts?.length > 1 && (
               <div className={styles.colors}>
                 <p className={styles.colorLabel}>Цвет:</p>

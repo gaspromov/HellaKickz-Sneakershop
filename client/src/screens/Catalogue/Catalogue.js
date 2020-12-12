@@ -5,6 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import MobileFilterPanel from '../../components/MobileFilterPanel/MobileFilterPanel'
 import FilterPanel from '../../components/FilterPanel/FilterPanel'
 import { fetchProducts } from '../../store/product/actions'
+import { Helmet } from 'react-helmet'
 import queryString from 'query-string'
 
 import styles from './Catalogue.module.scss'
@@ -75,6 +76,11 @@ const Catalogue = () => {
 
   return (
     <main role="main">
+      <Helmet>
+        <meta name="description" content="Широкий выбор кроссовок Nike, Yeezy, Off-White, Air Jordan, Supreme, Travis Scott, KAWS, BEARBRICK. Поможем Вам подобрать модель и определиться с размером. Оплата после примерки. Доставка в любую точку мира. Гарантии оригинальности." />
+        <meta name="keywords" content="кроссовки, изи, изи 350, YEEZY, yeezy boost, оригинал, только оригинал, yeezy 350 v2, купить изи 350, hellakickz, мода, Jordan, Off-White, офф вайт, yeezy 700, hypestation, депо, kickstown, айзел, aizel, nikita efremov, federation, фederation, оригинальные бренды, tsum, цум, Kanye west, канье вест, коллаборация, фарфетч, farfetch, supreme, kaws, суприм, кавс, travis scott, тревис скот, nike, dunk, virgil abloh, вирджил абло, yeezy black, yeezy white" />
+        <title>Hellakickz - каталог</title>
+      </Helmet>
       <div className={styles.wrapper}>
         <MobileFilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
         <FilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />

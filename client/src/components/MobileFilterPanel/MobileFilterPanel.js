@@ -74,7 +74,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
       brands: Object.keys(brands).join(','),
       sizes: Object.keys(sizes).join(',')
     }
-    history.push(`/catalogue/?${queryString.stringify(query)}`)
+    history.push(`/catalog/?${queryString.stringify(query)}`)
   }
 
   useEffect(() => {

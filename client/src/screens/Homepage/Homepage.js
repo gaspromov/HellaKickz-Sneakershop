@@ -12,14 +12,14 @@ import Link from '../../components/Link/Link'
 import Ticker from 'react-ticker'
 import PageVisibility from 'react-page-visibility'
 import { Element } from 'react-scroll'
+import { Helmet } from 'react-helmet'
 
 import styles from './Homepage.module.scss'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import slide from '../../assets/mock/slide.jpg'
 import logoWhite from '../../assets/images/logoWhite.svg'
-import about from '../../assets/images/about.jpg'
+import aboutPhoto from '../../assets/images/aboutPhoto.jpg'
 
-const Homepage = ({ history }) => {
+const Homepage = () => {
   const { loaded: slidesLoaded, entities: slides } = useSelector(({ slides }) => slides)
   const { loaded: hotsLoaded, entities: hots } = useSelector(({ hots }) => hots)
   const { loaded: feedbacksLoaded, entities: feedbacks } = useSelector(({ feedbacks }) => feedbacks)
@@ -54,6 +54,11 @@ const Homepage = ({ history }) => {
 
   return (
     <main role="main">
+      <Helmet>
+        <meta name="description" content="Мы занимаемся только 100% оригинальной продукцией Yeezy | Jordan и много другое. Гарантии оригинальности товара." />
+        <meta name="keywords" content="кроссовки, изи, изи 350, YEEZY, yeezy boost, оригинал, только оригинал, yeezy 350 v2, купить изи 350, hellakickz, мода, Jordan, Off-White, офф вайт, yeezy 700, hypestation, депо, kickstown, айзел, aizel, nikita efremov, federation, фederation, оригинальные бренды, tsum, цум, Kanye west, канье вест, коллаборация, фарфетч, farfetch, supreme, kaws, суприм, кавс, travis scott, тревис скот, nike, dunk, virgil abloh, вирджил абло, yeezy black, yeezy white" />
+        <title>Hellakickz – больше чем просто кроссовки</title>
+      </Helmet>
       <div>
         <div className={styles.carousel}>
           <Carousel
@@ -78,7 +83,7 @@ const Homepage = ({ history }) => {
             })}
           </Carousel>
         </div>
-        <Link to="/catalogue" text="В каталог" className={styles.link} />
+        <Link to="/catalog" text="В каталог" className={styles.link} />
         <section className={styles.sectionBest}>
           <h2 className={styles.title}>Наша подборка</h2>
           {hotsLoaded && (
@@ -114,16 +119,24 @@ const Homepage = ({ history }) => {
           <section className={styles.sectionAbout}>
             <h2 className={styles.title}>О нас</h2>
             <div className={styles.aboutContainer}>
-              <p className={styles.aboutText}>
-                <span className={styles.aboutName}>HellaKickz</span> – это каждый из нас понимает очевидную вещь:
-            начало повседневной работы
-            по формированию позиции
-            предоставляет широкие
-            возможности для
-            своевременного выполнения
-            сверхзадачи.
-          </p>
-              <img src={about} className={styles.aboutPhoto} />
+              <div className={styles.aboutText}>
+                <p className={styles.aboutTextParagraph}>
+                  <span className={styles.aboutName}>HellaKickz</span> – это не только о лимитированных кросcовках, но и о стритвир-культуре в целом.
+                </p>
+                <p className={styles.aboutTextParagraph}>
+                  С каждым днем все больше людей желает заполучить редкую модель, часто имея дело с подделками или сомнительными продавцами.
+                </p>
+                <p className={styles.aboutTextParagraph}>
+                  Однажды столкнувшись с этой проблемой сами, испытав серьезные трудности, мы решили открыть свой онлайн-стор, который будет помогать Вам в выборе и покупке действительно крутых и оригинальных кроссовок, одежды и аксессуаров, ведь мы не только продаем наши товары, но и сами сходим по ним с ума и с удовольствием носим.
+                </p>
+                <p className={styles.aboutTextParagraph}>
+                  Наш большой опыт и работа в кратчайшие сроки помогут Вам быть стильными и необычными в этом бурно меняющемся мире
+                </p>
+                Ваши Артём и Борис.
+              </div>
+              <div className={styles.aboutPhotoWrapper}>
+                <img src={aboutPhoto} className={styles.aboutPhoto} />
+              </div>
             </div>
           </section>
         </Element>

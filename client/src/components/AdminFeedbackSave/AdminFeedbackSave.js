@@ -13,7 +13,7 @@ const AdminFeedbackSave = ({ id }) => {
   const name = useInput('')
   const subs = useInput('')
   const feedback = useInput('')
-  const { loading, loaded, error } = useSelector(({ uploadFeedback }) => uploadFeedback)
+  const { loading, error } = useSelector(({ uploadFeedback }) => uploadFeedback)
 
   const dispatch = useDispatch()
 

@@ -52,7 +52,7 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
       sizes: Object.keys(sizes).join(','),
       sort
     }
-    history.push(`/catalogue/?${queryString.stringify(query)}`)
+    history.push(`/catalog/?${queryString.stringify(query)}`)
   }
 
   useEffect(() => {
