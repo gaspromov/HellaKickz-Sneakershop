@@ -27,17 +27,17 @@ const Menu = () => {
       <nav className={styles.nav}>
         <ul className={styles.menu}>
           <li className={styles.menuItem}>
-            <NavLink to="/catalogue" className={styles.menuLink}>Каталог</NavLink>
+            <NavLink to="/catalog" className={styles.menuLink}>Каталог</NavLink>
           </li>
           <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
-            <NavLink to="/catalogue/?categories=sneakers" className={styles.menuLink}>Обувь</NavLink>
+            <NavLink to="/catalog/?categories=sneakers" className={styles.menuLink}>Обувь</NavLink>
             <SubMenu isOpen={isSubMenuOpen} onCategoryMenuLinkClick={onCategoryMenuLinkClick} />
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/catalogue/?categories=clothes" className={styles.menuLink}>Одежда</NavLink>
+            <NavLink to="/catalog/?categories=clothes" className={styles.menuLink}>Одежда</NavLink>
           </li>
           <li className={styles.menuItem}>
-            <NavLink to="/catalogue/?categories=accessory" className={styles.menuLink}>Аксессуары</NavLink>
+            <NavLink to="/catalog/?categories=accessory" className={styles.menuLink}>Аксессуары</NavLink>
           </li>
         </ul>
         <NavLink to="/">

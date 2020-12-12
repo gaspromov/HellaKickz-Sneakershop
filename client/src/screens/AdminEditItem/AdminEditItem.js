@@ -18,7 +18,7 @@ import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
 const AdminEditItem = ({ match: { params: { id } } }) => {
-  const { loading: productLoading, loaded, productError, entities } = useSelector(({ product }) => product)
+  const { loading: productLoading, productError, entities } = useSelector(({ product }) => product)
   const { loading: editLoading, error: editError } = useSelector(({ editProduct }) => editProduct)
   const [newPhotos, setNewPhotos] = useState([])
   const newBrand = useInput('')

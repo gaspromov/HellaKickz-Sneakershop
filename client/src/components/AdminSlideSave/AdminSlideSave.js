@@ -11,7 +11,7 @@ import styles from './AdminSlideSave.module.scss'
 const AdminSlidesDownload = ({ id }) => {
   const [photo, setPhoto] = useState('')
   const link = useInput('')
-  const { loading, loaded, error } = useSelector(({ uploadSlide }) => uploadSlide)
+  const { loading, error } = useSelector(({ uploadSlide }) => uploadSlide)
   const dispatch = useDispatch()
 
   const onUploadPhotoClick = (e) => {

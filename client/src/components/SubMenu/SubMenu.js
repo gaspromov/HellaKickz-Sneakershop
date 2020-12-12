@@ -42,49 +42,49 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
       <div className={styles.categoriesWrapper}>
         <div className={styles.categories}>
           <div data-category="yeezy" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
-            <NavLink to='/catalogue?brands=Yeezy' onClick={onMenuLinkClick} className={styles.title}>Yeezy</NavLink>
+            <NavLink to='/catalog?brands=Yeezy' onClick={onMenuLinkClick} className={styles.title}>Yeezy</NavLink>
             <ul>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=yeezy 350' onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 350</NavLink>
+                <NavLink to='/catalog?search=yeezy 350' onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 350</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=yeezy 500' onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 500</NavLink>
+                <NavLink to='/catalog?search=yeezy 500' onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 500</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=yeezy 700' onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 700</NavLink>
+                <NavLink to='/catalog?search=yeezy 700' onClick={onMenuLinkClick} className={styles.menuLink}>Yeezy 700</NavLink>
               </li>
             </ul>
           </div>
           <div data-category="nike" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
-            <NavLink to='/catalogue?brands=Nike' onClick={onMenuLinkClick} className={styles.title}>Nike</NavLink>
+            <NavLink to='/catalog?brands=Nike' onClick={onMenuLinkClick} className={styles.title}>Nike</NavLink>
             <ul data-category="nike">
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=dunk' onClick={onMenuLinkClick} className={styles.menuLink}>Dunk</NavLink>
+                <NavLink to='/catalog?search=dunk' onClick={onMenuLinkClick} className={styles.menuLink}>Dunk</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=air force' onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
+                <NavLink to='/catalog?search=air force' onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=off-white' onClick={onMenuLinkClick} className={styles.menuLink}>x Off-White</NavLink>
+                <NavLink to='/catalog?search=off-white' onClick={onMenuLinkClick} className={styles.menuLink}>x Off-White</NavLink>
               </li>
             </ul>
           </div>
           <div data-category="jordan" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
-            <NavLink to='/catalogue?brands=Air jordan' onClick={onMenuLinkClick} className={styles.title}>Air Jordan</NavLink>
+            <NavLink to='/catalog?brands=Air jordan' onClick={onMenuLinkClick} className={styles.title}>Air Jordan</NavLink>
             <ul data-category="jordan">
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=jordan 1 high' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 High</NavLink>
+                <NavLink to='/catalog?search=jordan 1 high' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 High</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=jordan 1 mid' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Mid</NavLink>
+                <NavLink to='/catalog?search=jordan 1 mid' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Mid</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalogue?search=jordan 1 low' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Low</NavLink>
+                <NavLink to='/catalog?search=jordan 1 low' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Low</NavLink>
               </li>
             </ul>
           </div>
         </div>
-        <Link to="/catalogue/?categories=sneakers" text="Смотреть все" className={styles.link} />
+        <Link to="/catalog/?categories=sneakers" text="Смотреть все" className={styles.link} />
       </div>
       <div className={styles.photos}>
         <img src={photo1} width={250} height={250} className={styles.photo} />

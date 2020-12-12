@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, deleteProduct } from '../../store/product/actions'
-import useInput from '../../hooks/useInput'
 import useDebounce from '../../hooks/useDebounce'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
