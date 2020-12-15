@@ -15,7 +15,7 @@ const Catalogue = () => {
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
   const [num, setNum] = useState(32)
   const [initialSearch, setInitialSearch] = useState('')
-  const [initialCategories, setInitialCategories] = useState('')
+  const [initialCategory, setInitialCategory] = useState('')
   const [initialBrand, setInitialBrand] = useState('')
   const [initialSizes, setInitialSizes] = useState('')
   const [initialSort, setInitialSort] = useState('')
@@ -25,7 +25,7 @@ const Catalogue = () => {
   useEffect(() => {
     const params = queryString.parse(location.search)
     setInitialSearch(params.search || '')
-    setInitialCategories(params.categories || '')
+    setInitialCategory(params.categories || '')
     setInitialBrand(params.brands || '')
     setInitialSizes(params.sizes || '')
     setInitialSort(params.sort || '')
@@ -60,8 +60,10 @@ const Catalogue = () => {
         <div className={styles.products}>
           {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
             return (
-              <NavLink key={_id} to={`/product/${_id}`} className={styles.product}>
-                <img src={`http://localhost:3000/${photos[0]}`} alt={`${brand} ${model}`} className={styles.image} />
+              <NavLink key={_id} to={`/product/${_id}/${brand}-${model}`} className={styles.product}>
+                <div className={styles.imageWrapper}>
+                  <img src={`http://localhost:3000/${photos[0]}`} alt={`${brand} ${model}`} className={styles.image} />
+                </div>
                 <h3 className={styles.title}>{brand}</h3>
                 <p className={styles.model}>{model}</p>
                 <p className={styles.price}>{price} руб.</p>
@@ -81,8 +83,8 @@ const Catalogue = () => {
         <title>Hellakickz - каталог</title>
       </Helmet>
       <div className={styles.wrapper}>
-        <MobileFilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
-        <FilterPanel initialSearch={initialSearch} initialCategories={initialCategories} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
+        <MobileFilterPanel initialSearch={initialSearch} initialCategory={initialCategory} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
+        <FilterPanel initialSearch={initialSearch} initialCategory={initialCategory} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />
         <InfiniteScroll
           dataLength={entities.slice(0, num).length}
           next={() => { setNum(num + 32) }}

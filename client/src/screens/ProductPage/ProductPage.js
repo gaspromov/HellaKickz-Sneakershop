@@ -18,8 +18,9 @@ import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
 
 import styles from './ProductPage.module.scss'
+import spinner from '../../assets/images/spinner.svg'
 
-const ProductPage = ({ match: { params: { id } }, history }) => {
+const ProductPage = ({ match: { params: { id } } }) => {
   const { loading, loaded, error, entities } = useSelector(({ product }) => product)
   const { loading: callbackLoading, loaded: callbackLoaded, error: callbackError } = useSelector(({ createCallback }) => createCallback)
   const [isCreateCallbackModalOpen, setIsCreateCallbackModalOpen] = useState(false)
@@ -48,10 +49,6 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
     setIsCreateCallbackModalOpen(false)
   }
 
-  const openThankYouModal = () => {
-    setIsThankYouModalOpen(true)
-  }
-
   const closeThankYouModal = () => {
     setIsThankYouModalOpen(false)
   }
@@ -65,20 +62,24 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
     dispatch(createCallback(0, name.value, contact.value, `/product/${id}`, entities.product.brand, entities.product.model, size, entities.product.color))
   }
 
-  if (loading) {
-    return <p className="message">Подождите...</p>
-  }
+  const renderProduct = () => {
+    if (loading) {
+      return (
+        <div className="loader">
+          <img src={spinner} alt="Подождите" className="spinner" />
+        </div>
+      )
+    }
 
-  if (loaded && !entities.product) {
-    return <p className="message">Данные отсутствуют</p>
-  }
+    if (loaded && !entities.product) {
+      return <p className="message">Данные отсутствуют</p>
+    }
 
-  if (error) {
-    return <p className="error">{error}</p>
-  }
+    if (error) {
+      return <p className="error">{error}</p>
+    }
 
-  return (
-    <main role="main">
+    return (
       <div className={styles.container}>
         <Modal open={isCreateCallbackModalOpen} onClose={closeCreateCallbackModal} classNames={{ overlay: styles.overlay }} animationDuration={0} center>
           <div className="modal">
@@ -111,7 +112,7 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
             <Button type="button" style="regular" text="К товару" onClick={closeThankYouModal} className={styles.toCatalogueButtonClick} />
           </div>
         </Modal>
-        <NavLink to="/catalogu" className={styles.mobileGoBackButton}></NavLink>
+        <NavLink to="/catalog" className={styles.mobileGoBackButton}></NavLink>
         <div className={styles.productContainer}>
           <div className={styles.photos}>
             {entities?.product?.photos?.length > 0 && (
@@ -143,7 +144,7 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
                 <p className={styles.colorLabel}>Цвет:</p>
                 {entities.sameProducts.map(({ _id, photos, brand, model, color }) => {
                   return (
-                    <NavLink to={_id} key={_id} className={styles.imageLink}>
+                    <NavLink to={`/product/${_id}/${brand}-${model}`} key={_id} className={styles.imageLink}>
                       <img
                         src={photos[0]}
                         alt={`${brand} ${model} ${color}`}
@@ -177,6 +178,12 @@ const ProductPage = ({ match: { params: { id } }, history }) => {
           </div>
         </div>
       </div>
+    )
+  }
+
+  return (
+    <main role="main" className={styles.main}>
+      {renderProduct()}
     </main>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Homepage from '../../screens/Homepage/Homepage'
 import Header from '../Header/Header'
 import AdminHeader from '../AdminHeader/AdminHeader'
@@ -33,6 +33,7 @@ const App = () => {
           <Route path="/admin/add" component={AdminAddItem} />
           <Route path="/admin/edit/:id" component={AdminEditItem} />
           <Route path="/faq" component={Faq} />
+          <Route render={() => <Redirect to={{ pathname: "/" }} />} />
         </Switch>
         {
           !window.location.href.includes('admin') && (

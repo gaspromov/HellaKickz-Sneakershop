@@ -12,10 +12,10 @@ import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
-const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSizes }) => {
+const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSizes }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [categories, setCategories] = useState({})
+  const [category, setCategory] = useState('')
   const [brands, setBrands] = useState({})
   const [sizes, setSizes] = useState({})
   const [search, setSearch] = useState('')
@@ -67,10 +67,10 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
     setIsSearchOpen(false)
   }
 
-  const renderQuery = (search, categories, brands, sizes) => {
+  const renderQuery = (search, category, brands, sizes) => {
     const query = {
       search,
-      categories: Object.keys(categories).join(','),
+      categories: category,
       brands: Object.keys(brands).join(','),
       sizes: Object.keys(sizes).join(',')
     }
@@ -82,13 +82,8 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
   }, [initialSearch])
 
   useEffect(() => {
-    setCategories(
-      initialCategories ? initialCategories.split(',').reduce((acc, category) => {
-        acc[category] = true
-        return acc
-      }, {}) : {}
-    )
-  }, [initialCategories])
+    setCategory(initialCategory)
+  }, [initialCategory])
 
   useEffect(() => {
     setBrands(
@@ -109,14 +104,10 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
   }, [initialSizes])
 
   const onCategoryItemClick = (e) => {
-    const category = e.key
-    if (categories[category]) {
-      setCategories((prevCategories) => {
-        const { [category]: deletedValue, ...newCategories } = prevCategories
-        return newCategories
-      })
+    if (e.key === category) {
+      setCategory('')
     } else {
-      setCategories((prevCategories) => ({ ...prevCategories, [category]: true }))
+      setCategory(e.key)
     }
   }
 
@@ -149,20 +140,20 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
   }
 
   const onShowButtonClick = () => {
-    renderQuery(search, categories, brands, sizes)
+    renderQuery(search, category, brands, sizes)
     setIsFilterOpen(false)
   }
 
   const onSearchButtonClick = () => {
-    renderQuery(search, categories, brands, sizes)
+    renderQuery(search, category, brands, sizes)
     setIsSearchOpen(false)
   }
 
   const onEraseFiltersButtonClick = () => {
-    setCategories({})
+    setCategory('')
     setBrands({})
     setSizes({})
-    renderQuery(search, {}, {}, {})
+    renderQuery(search, '', {}, {})
     setIsFilterOpen(false)
   }
 
@@ -176,11 +167,11 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
           <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>
         </div>
         <Menu multiple mode="inline" className={styles.menu} expandIcon={ExpandIcon}>
-          <SubMenu title="Категория" key="categories" className={styles.submenu}>
-            <MenuItem key="sneakers" onClick={onCategoryItemClick} className={classNames(styles.menuItem, categories['sneakers'] && styles.menuItemSelected)}>Обувь</MenuItem>
-            <MenuItem key="clothes" onClick={onCategoryItemClick} className={classNames(styles.menuItem, categories['clothes'] && styles.menuItemSelected)}>Одежда</MenuItem>
-            <MenuItem key="accessory" onClick={onCategoryItemClick} className={classNames(styles.menuItem, categories['accessory'] && styles.menuItemSelected)}>Аксессуары</MenuItem>
-            <MenuItem key="childish" onClick={onCategoryItemClick} className={classNames(styles.menuItem, categories['childish'] && styles.menuItemSelected)}>Для детей</MenuItem>
+          <SubMenu title="Категория" key="category" className={styles.submenu}>
+            <MenuItem key="sneakers" onClick={onCategoryItemClick} className={classNames(styles.menuItem, category === 'sneakers' && styles.menuItemSelected)}>Обувь</MenuItem>
+            <MenuItem key="clothes" onClick={onCategoryItemClick} className={classNames(styles.menuItem, category === 'clothes' && styles.menuItemSelected)}>Одежда</MenuItem>
+            <MenuItem key="accessory" onClick={onCategoryItemClick} className={classNames(styles.menuItem, category === 'accessory' && styles.menuItemSelected)}>Аксессуары</MenuItem>
+            <MenuItem key="childish" onClick={onCategoryItemClick} className={classNames(styles.menuItem, category === 'childish' && styles.menuItemSelected)}>Для детей</MenuItem>
           </SubMenu>
           <SubMenu title="Бренд" key="brands" className={styles.submenu}>
             <MenuItem key="yeezy" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['yeezy'] && styles.menuItemSelected)}>Yeezy</MenuItem>
@@ -189,7 +180,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategories, initialBrand, ini
             <MenuItem key="supreme" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['supreme'] && styles.menuItemSelected)}>Supreme</MenuItem>
           </SubMenu>
           <SubMenu title="Размер" key="sizes" className={styles.submenu}>
-            {(categories.childish ? euSizes : usSizes).map((size) => {
+            {(category === 'childish' ? euSizes : usSizes).map((size) => {
               return (
                 <MenuItem key={size} onClick={onSizeItemClick} className={classNames(styles.menuItem, sizes[size] && styles.menuItemSelected)}>{size}</MenuItem>
               )

@@ -87,9 +87,9 @@ const Footer = () => {
         </div>
         <ul className={styles.menu}>
           <li className={styles.menuItem}><NavLink to="/faq" className={styles.menuLink}>FAQ</NavLink></li>
-          <li className={styles.menuItem}><NavLink to="/faq" className={styles.menuLink}>Доставка</NavLink></li>
-          <li className={styles.menuItem}><NavLink to="/faq" className={styles.menuLink}>Обмен и возврат</NavLink></li>
-          <li className={styles.menuItem}><NavLink to="/faq" className={styles.menuLink}>Как подобрать размер</NavLink></li>
+          <li className={styles.menuItem}><NavLink to="/faq/#delivery" className={styles.menuLink}>Доставка</NavLink></li>
+          <li className={styles.menuItem}><NavLink to="/faq/#back" className={styles.menuLink}>Обмен и возврат</NavLink></li>
+          <li className={styles.menuItem}><NavLink to="/faq/#sizes" className={styles.menuLink}>Как подобрать размер</NavLink></li>
         </ul>
       </div>
       <div className={styles.policy}>

@@ -13,7 +13,7 @@ import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
-const CATEGORIES = [['Обувь', 'sneakers'], ['Одежда', 'clothes'], ['Аксессуары', 'accessory'], ['Для детей', 'childish']]
+const CATEGORIES = { sneakers: 'Обувь', clothes: 'Одежда', accessory: 'Аксессуары', childish: 'Для детей' }
 const BRANDS = ['Yeezy', 'Nike', 'Stussy', 'Supreme', 'Off-White', 'CPFM', 'Fear of God', 'CDG', 'ACG']
 const options = [
   { value: '', label: 'По умолчанию', className: styles.option },
@@ -22,14 +22,15 @@ const options = [
   { value: '-price', label: 'Цена: по убыванию' }
 ]
 
-const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSizes, initialSort }) => {
+const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSizes, initialSort }) => {
   const [isCategoryFilterOpen, setIsCategoryFilterOpen] = useState(false)
   const [isBrandFilterOpen, setIsBrandFilterOpen] = useState(false)
   const [isSizeFilterOpen, setIsSizeFilterOpen] = useState(false)
-  const [categories, setCategories] = useState({})
+  const [category, setCategory] = useState('')
   const [brands, setBrands] = useState({})
   const [sizes, setSizes] = useState({})
   const [search, setSearch, searchValue] = useDebounce(initialSearch, 500)
+  const [isTyped, setIsTyped] = useState(false)
   const [sort, setSort] = useState('')
   const categoryRef = useRef()
   const brandRef = useRef()
@@ -44,10 +45,11 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
     }
   }, [])
 
-  const renderQuery = (search, categories, brands, sizes, sort) => {
+  const renderQuery = (search, category, brands, sizes, sort) => {
+    console.log(category)
     const query = {
       search,
-      categories: Object.keys(categories).join(','),
+      categories: category,
       brands: Object.keys(brands).join(','),
       sizes: Object.keys(sizes).join(','),
       sort
@@ -60,17 +62,12 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
   }, [initialSearch])
 
   useEffect(() => {
-    setSort(initialSort)
-  }, [initialSort])
+    setCategory(initialCategory)
+  }, [initialCategory])
 
   useEffect(() => {
-    setCategories(
-      initialCategories ? initialCategories.split(',').reduce((acc, category) => {
-        acc[category] = true
-        return acc
-      }, {}) : {}
-    )
-  }, [initialCategories])
+    setSort(initialSort)
+  }, [initialSort])
 
   useEffect(() => {
     setBrands(
@@ -117,19 +114,12 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
   }
 
   const onCategoryCheckboxChange = (e) => {
-    const category = e.target.name
-    if (categories[category]) {
-      setCategories((prevCategories) => {
-        const { [category]: deletedValue, ...newCategories } = prevCategories
-        renderQuery(search, newCategories, brands, sizes, sort)
-        return newCategories
-      })
+    if (e.target.name === category) {
+      setCategory('')
+      renderQuery(search, '', brands, sizes, sort)
     } else {
-      setCategories((prevCategories) => {
-        const newCategories = { ...prevCategories, [category]: true }
-        renderQuery(search, newCategories, brands, sizes, sort)
-        return newCategories
-      })
+      setCategory(e.target.name)
+      renderQuery(search, e.target.name, brands, sizes, sort)
     }
   }
 
@@ -138,13 +128,13 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
     if (brands[brand]) {
       setBrands((prevBrands) => {
         const { [brand]: deletedValue, ...newBrands } = prevBrands
-        renderQuery(search, categories, newBrands, sizes, sort)
+        renderQuery(search, category, newBrands, sizes, sort)
         return newBrands
       })
     } else {
       setBrands((prevBrands) => {
         const newBrands = { ...prevBrands, [brand]: true }
-        renderQuery(search, categories, newBrands, sizes, sort)
+        renderQuery(search, category, newBrands, sizes, sort)
         return newBrands
       })
     }
@@ -155,48 +145,49 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
     if (sizes[size]) {
       setSizes((prevSizes) => {
         const { [size]: deletedValue, ...newSizes } = prevSizes
-        renderQuery(search, categories, brands, newSizes, sort)
+        renderQuery(search, category, brands, newSizes, sort)
         return newSizes
       })
     } else {
       setSizes((prevSizes) => {
         const newSizes = { ...prevSizes, [size]: true }
-        renderQuery(search, categories, brands, newSizes, sort)
+        renderQuery(search, category, brands, newSizes, sort)
         return newSizes
       })
     }
   }
 
   const onSearchChange = (e) => {
+    !isTyped && setIsTyped(true)
     setSearch(e.target.value)
-    renderQuery(e.target.value, categories, brands, sizes, sort)
   }
+
+  useEffect(() => {
+    isTyped && renderQuery(search, category, brands, sizes, sort)
+  }, [search])
 
   const onSortChange = (e) => {
     setSearch(e.value)
-    renderQuery(search, categories, brands, sizes, e.value)
+    renderQuery(search, category, brands, sizes, e.value)
   }
 
   const onTagRemoveClick = (tag, type) => {
     switch (type) {
       case 'category':
-        setCategories((prevCategories) => {
-          const { [tag]: deletedValue, ...newCategories } = prevCategories
-          renderQuery(search, newCategories, brands, sizes, sort)
-          return newCategories
-        })
+        setCategory('')
+        renderQuery(search, '', brands, sizes, sort)
         break
       case 'brand':
         setBrands((prevBrands) => {
           const { [tag]: deletedValue, ...newBrands } = prevBrands
-          renderQuery(search, categories, newBrands, sizes, sort)
+          renderQuery(search, category, newBrands, sizes, sort)
           return newBrands
         })
         break
       case 'size':
         setSizes((prevSizes) => {
           const { [tag]: deletedValue, ...newSizes } = prevSizes
-          renderQuery(search, categories, brands, newSizes, sort)
+          renderQuery(search, category, brands, newSizes, sort)
           return newSizes
         })
         break
@@ -205,10 +196,10 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
   }
 
   const onEraseAllTagsButtonClick = () => {
-    setCategories({})
+    setCategory('')
     setBrands({})
     setSizes({})
-    renderQuery(search, {}, {}, {}, sort)
+    renderQuery(search, '', {}, {}, sort)
   }
 
   return (
@@ -218,11 +209,11 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
           <div className={styles.filterSelect} ref={categoryRef} onMouseEnter={() => onCategoryMouseEvent('open')} onMouseLeave={() => onCategoryMouseEvent('close')}>
             <button type="button" className={classNames(styles.toggleFilterButton, isCategoryFilterOpen && styles.toggleFilterButtonOpen)}>Категория</button>
             <div style={{ display: isCategoryFilterOpen ? 'grid' : 'none' }} className={classNames(styles.selectBox, styles.categorySelectBox)}>
-              {CATEGORIES.map((category) => {
+              {Object.entries(CATEGORIES).map(([key, value]) => {
                 return (
-                  <div key={category[1]} className={styles.item}>
-                    <input type="checkbox" id={category[1]} name={category[1]} checked={!!categories[category[1]]} onChange={onCategoryCheckboxChange} className={styles.checkbox} />
-                    <label htmlFor={category[1]} className={styles.label}>{category[0]}</label>
+                  <div key={key} className={styles.item}>
+                    <input type="checkbox" id={key} name={key} checked={category === key} onChange={onCategoryCheckboxChange} className={styles.checkbox} />
+                    <label htmlFor={key} className={styles.label}>{value}</label>
                   </div>
                 )
               })}
@@ -245,7 +236,7 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
             <button type="button" className={classNames(styles.toggleFilterButton, isSizeFilterOpen && styles.toggleFilterButtonOpen)}>Размер</button>
             <div style={{ display: isSizeFilterOpen ? 'grid' : 'none' }} className={classNames(styles.selectBox, styles.sizesSelectBox)}>
               <div className={styles.usSizes}>
-                {(categories.childish ? euSizes : usSizes).map((size) => {
+                {(category === 'childish' ? euSizes : usSizes).map((size) => {
                   return (
                     <div key={size} className={styles.item}>
                       <input type="checkbox" id={size} name={size} checked={!!sizes[size]} onChange={onSizeCheckboxChange} className={styles.checkbox} />
@@ -285,11 +276,9 @@ const FilterPanel = ({ initialSearch, initialCategories, initialBrand, initialSi
           />
         </div>
       </div>
-      {(Object.keys(categories).length > 0 || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0) && (
+      {(category || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0) && (
         <div className={styles.tags}>
-          {Object.keys(categories).map((category) => {
-            return <button key={category} type="button" onClick={() => onTagRemoveClick(category, 'category')} className={styles.tag}>{category}</button>
-          })}
+          {category && <button type="button" onClick={() => onTagRemoveClick(category, 'category')} className={styles.tag}>{CATEGORIES[category]}</button>}
           {Object.keys(brands).map((brand) => {
             return <button key={brand} type="button" onClick={() => onTagRemoveClick(brand, 'brand')} className={styles.tag}>{brand}</button>
           })}
