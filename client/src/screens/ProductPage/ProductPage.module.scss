@@ -2,6 +2,7 @@
 
 .main {
   position: relative;
+  min-height: 626px;
 }
 
 .overlay {
@@ -376,6 +377,7 @@
 
   background-color: #ec7f62;
   color: #ffffff;
+  line-height: 20px;
 
   @media (min-width: $tablet-size) {
     order: 6;
@@ -386,6 +388,7 @@
 
     background-color: transparent;
     color: #000000;
+    line-height: 30px;
   }
 }
 

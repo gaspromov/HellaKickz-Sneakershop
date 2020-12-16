@@ -132,6 +132,8 @@
   align-items: center;
 
   width: 100%;
+
+  outline: none;
 }
 
 .tabButton {
@@ -141,6 +143,8 @@
   padding-bottom: 10px;
 
   font-size: 12px;
+
+  outline: none;
 
   @media (min-width: $tablet-size) {
     width: 200px;

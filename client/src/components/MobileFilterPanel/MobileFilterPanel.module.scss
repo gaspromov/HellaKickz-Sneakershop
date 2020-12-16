@@ -72,6 +72,8 @@
   padding-left: 20px;
 
   background-color: #ffffff;
+  transform-origin: top;
+  transition: 0.4s all;
 }
 
 .filterButtons {
@@ -146,6 +148,8 @@
   padding-left: 20px;
 
   background-color: #ffffff;
+  transform-origin: top;
+  transition: 0.4s all;
 }
 
 .closeSearchButton {

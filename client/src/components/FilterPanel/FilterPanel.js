@@ -167,7 +167,7 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
   }, [search])
 
   const onSortChange = (e) => {
-    setSearch(e.value)
+    setSort(e.value)
     renderQuery(search, category, brands, sizes, e.value)
   }
 

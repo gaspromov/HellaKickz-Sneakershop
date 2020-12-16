@@ -34,10 +34,14 @@
   margin-bottom: 30px;
 
   &Selected a {
+    background-color: #ec7f62;
+    border: 2px solid #ec7f62;
     color: #ffffff;
-    background-color: #f9a690;
-    border: 1px solid #f9a690;
-    transition: all 0.4s;
+
+    &:hover {
+      background-color: #f9a690;
+      border: 2px solid #f9a690;
+    }
   }
 }
 
@@ -60,13 +64,8 @@
 
   &:hover {
     color: #ffffff;
-    background-color: #ec7f62;
-    transition: all 0.4s;
-  }
-
-  &:active {
-    border: 1px solid #f9a690;
     background-color: #f9a690;
+    border: 2px solid #f9a690;
     transition: all 0.4s;
   }
 }
@@ -79,4 +78,6 @@
   padding-right: 30px;
   padding-left: 5%;
   border: 2px solid #e5e5e5;
+
+  overflow-x: auto;
 }
