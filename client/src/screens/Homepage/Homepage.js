@@ -31,13 +31,20 @@ const Homepage = () => {
     dispatch(fetchSlides())
     dispatch(fetchHots())
     dispatch(fetchFeedbacks())
+    document.querySelector('header').style.zIndex = '3'
+
+    return () => {
+      document.querySelector('header').style.zIndex = 'unset'
+    }
   }, [])
 
   useEffect(() => {
     if (location.hash) {
       const elem = document.getElementById(location.hash.slice(1))
       if (elem) {
-        elem.scrollIntoView({ behavior: "smooth" })
+        setTimeout(() => {
+          elem.scrollIntoView({ behavior: "smooth" })
+        }, 500)
       }
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
@@ -145,9 +152,9 @@ const Homepage = () => {
             <h2 className={styles.title}>Отзывы</h2>
             <div className={styles.feedbacksWrapper}>
               <Slider
-                breakPoints={[{ width: 0, itemsToShow: 2, itemsToScroll: 2 }, { width: 600, itemsToShow: 3, itemsToScroll: 3 }]}
+                breakPoints={[{ width: 0, itemsToShow: 2, itemsToScroll: 2 }, { width: 769, itemsToShow: 3, itemsToScroll: 3 }, { width: 850, itemsToShow: 2, itemsToScroll: 2 }, { width: 1200, itemsToShow: 3, itemsToScroll: 3 }]}
                 itemPadding={[20, 10, 20, 0]}
-                showArrows={true}
+                showArrows
                 renderArrow={({ type, onClick }) =>
                   <CarouselArrow
                     onClick={onClick}

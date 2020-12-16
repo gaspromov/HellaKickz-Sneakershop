@@ -51,13 +51,13 @@
   }
 }
 
-.image {
+.imageWrapper {
   width: 156px;
   height: 93px;
   margin-bottom: 30px;
   border: 2px solid transparent;
 
-  object-fit: contain;
+  overflow: hidden;
   transition: 0.4s all;
 
   &:hover {
@@ -70,6 +70,19 @@
     height: 155px;
     margin-bottom: 36px;
   }
+
+  &:hover img {
+    transform: scale(1.2);
+    transition: 0.4s all;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  transition: 0.4s all;
 }
 
 .title {
