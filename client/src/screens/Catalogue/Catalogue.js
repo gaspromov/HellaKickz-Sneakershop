@@ -62,15 +62,15 @@ const Catalogue = () => {
             return (
               <NavLink key={_id} to={`/product/${_id}/${brand}-${model}`} className={styles.product}>
                 <img
-                  src={`http://localhost:3000/${photos[0]}`}
+                  src={photos[0]}
                   alt={`${brand} ${model}`}
                   onMouseOver={(e) => {
                     if (photos[1]) {
-                      e.currentTarget.src = `http://localhost:3000/${photos[1]}`
+                      e.currentTarget.src = photos[1]
                     }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.src = `http://localhost:3000/${photos[0]}`
+                    e.currentTarget.src = photos[0]
                   }}
                   className={styles.image}
                 />
