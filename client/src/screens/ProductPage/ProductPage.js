@@ -132,7 +132,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
                 }}
               >
                 {entities.product.photos.map((photo, id) => {
-                  return <img key={id} src={`http://localhost:3000/${photo}`} alt={`Фото ${id + 1}`} className={styles.photo} />
+                  return <img key={id} src={photo} alt={`Фото ${id + 1}`} className={styles.photo} />
                 })}
               </Carousel>
             )}

@@ -161,7 +161,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
     <div className={styles.mobileFilterPanel}>
       <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterOpenButtonClick}></button>
       <button type="button" className={classNames(styles.filterPanelButton, styles.searchOpenButton)} onClick={onSearchOpenButtonClick}></button>
-      <div style={{ display: isFilterOpen ? 'block' : 'none' }} ref={filterRef} className={styles.filter}>
+      <div style={{ transform: isFilterOpen ? 'scale(1,1)' : 'scale(1, 0)' }} ref={filterRef} className={styles.filter}>
         <div className={styles.filterButtons}>
           <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterCloseButtonClick}></button>
           <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>
@@ -194,7 +194,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
         </Menu>
         <Button type="button" style="regular" text="Показать" onClick={onShowButtonClick} className={styles.showButton} />
       </div>
-      <div style={{ display: isSearchOpen ? 'block' : 'none' }} ref={searchRef} className={styles.search}>
+      <div style={{ transform: isSearchOpen ? 'scale(1,1)' : 'scale(1,0)' }} ref={searchRef} className={styles.search}>
         <button type="button" onClick={onCloseSearchButtonClick} className={styles.closeSearchButton}></button>
         <input type="text" placeholder="Поиск" value={search} onChange={onSearchChange} className={styles.searchBar} />
         <Button type="button" style="regular" text="Найти" onClick={onSearchButtonClick} className={styles.searchButton} />

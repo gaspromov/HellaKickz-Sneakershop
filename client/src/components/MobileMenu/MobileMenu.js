@@ -23,6 +23,9 @@ const MobileMenu = ({ isOpen, onMobileMenuLinkClick }) => {
         <li className={styles.menuItem}>
           <NavLink to="/catalog/?categories=sneakers" onClick={onMenuLinkClick} className={styles.menuLink}>Обувь</NavLink>
         </li>
+        <li className={styles.menuItem}>
+          <NavLink to="/faq" onClick={onMenuLinkClick} className={styles.menuLink}>FAQ</NavLink>
+        </li>
       </ul>
     </nav>
   )

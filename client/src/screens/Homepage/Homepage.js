@@ -96,16 +96,16 @@ const Homepage = () => {
           {hotsLoaded && (
             <div className={styles.bestContainer}>
               <NavLink to={hots[0].link} style={{ gridArea: 'a' }}>
-                <img src={`http://localhost:3000/${hots[0].photo}`} alt="Подборка 1" className={styles.bestItem} />
+                <img src={hots[0].photo} alt="Подборка 1" className={styles.bestItem} />
               </NavLink>
               <NavLink to={hots[1].link} style={{ gridArea: 'b' }}>
-                <img src={`http://localhost:3000/${hots[1].photo}`} alt="Подборка 2" className={styles.bestItem} />
+                <img src={hots[1].photo} alt="Подборка 2" className={styles.bestItem} />
               </NavLink>
               <NavLink to={hots[2].link} style={{ gridArea: 'c' }}>
-                <img src={`http://localhost:3000/${hots[2].photo}`} alt="Подборка 3" className={styles.bestItem} />
+                <img src={hots[2].photo} alt="Подборка 3" className={styles.bestItem} />
               </NavLink>
               <NavLink to={hots[3].link} style={{ gridArea: 'd' }}>
-                <img src={`http://localhost:3000/${hots[3].photo}`} alt="Подборка 4" className={styles.bestItem} />
+                <img src={hots[3].photo} alt="Подборка 4" className={styles.bestItem} />
               </NavLink>
             </div>
           )}
@@ -181,7 +181,7 @@ const Homepage = () => {
                   return (
                     <div key={index} className={styles.feedback}>
                       <div className={styles.feedbackBorder}></div>
-                      <img src={`http://localhost:3000/${photo}`} alt={`${name} аватар`} className={styles.feedbackImage} />
+                      <img src={photo} alt={`${name} аватар`} className={styles.feedbackImage} />
                       <h3 className={styles.feedbackName}>{name}</h3>
                       <p className={styles.feedbackSubs}>{subs}</p>
                       <p className={styles.feedbackComment}>{feedback}</p>

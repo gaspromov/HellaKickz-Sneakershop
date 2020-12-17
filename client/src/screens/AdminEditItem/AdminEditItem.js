@@ -182,7 +182,7 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
               }}
             >
               {newPhotos.map((photo, id) => {
-                return <img src={typeof photo === 'object' ? URL.createObjectURL(photo) : `http://localhost:3000/${photo}`} alt={`Фото ${id + 1}`} />
+                return <img src={typeof photo === 'object' ? URL.createObjectURL(photo) : photo} alt={`Фото ${id + 1}`} />
               })}
             </Carousel>
           )}

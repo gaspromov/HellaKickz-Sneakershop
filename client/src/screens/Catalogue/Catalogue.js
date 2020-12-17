@@ -61,9 +61,19 @@ const Catalogue = () => {
           {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
             return (
               <NavLink key={_id} to={`/product/${_id}/${brand}-${model}`} className={styles.product}>
-                <div className={styles.imageWrapper}>
-                  <img src={`http://localhost:3000/${photos[0]}`} alt={`${brand} ${model}`} className={styles.image} />
-                </div>
+                <img
+                  src={photos[0]}
+                  alt={`${brand} ${model}`}
+                  onMouseOver={(e) => {
+                    if (photos[1]) {
+                      e.currentTarget.src = photos[1]
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.src = photos[0]
+                  }}
+                  className={styles.image}
+                />
                 <h3 className={styles.title}>{brand}</h3>
                 <p className={styles.model}>{model}</p>
                 <p className={styles.price}>{price} руб.</p>
