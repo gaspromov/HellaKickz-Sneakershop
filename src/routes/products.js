@@ -55,6 +55,7 @@ router.get('/', async (req, res) => {
     const { search, categories, brands, sizes } = sanitizeParams(req.query)
     const { sort } = req.query
     const searchArr = search.replace(/\s+/g, ' ').trim().split(' ')
+    const brandArr = brands.split(',')
     const products = await Product.find().sort(sort)
 
     let result = []
@@ -76,8 +77,10 @@ router.get('/', async (req, res) => {
     }
 
     if (brands) {
-      brands.split(',').forEach(brand => {
-        result = filterArray(result, ['brand'], brand)
+      result = result.filter(p => {
+        return brandArr.some(b => {
+          return p.brand.toLowerCase().includes(b.toLowerCase())
+        })
       })
     }
 
