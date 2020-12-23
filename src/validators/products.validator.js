@@ -6,7 +6,6 @@ export const createAndUpdateValidator = [
   body('photos', 'Укажите фотографии').exists().isArray(),
   body('brand', 'Укажите бренд').exists().trim().notEmpty(),
   body('model', 'Укажите модель').exists().trim().notEmpty(),
-  body('color', 'Укажите цвет').exists().trim().notEmpty(),
   body('code', 'Укажите артикул').exists().trim().notEmpty(),
   body('price', 'Укажите цену').exists().trim().notEmpty().isInt({ min: 0 }),
   body('category', 'Укажите тип')
