@@ -17,8 +17,7 @@ export const hotValidator = [
     .trim()
     .notEmpty()
     .isInt({ min: 0, max: 3 }),
-  body('photo', 'Укажите фотографию').exists().trim().notEmpty(),
-  body('link', 'Укажите ссылку').exists().trim().notEmpty().isURL()
+  body('photo', 'Укажите фотографию').exists().trim().notEmpty()
 ]
 
 export const feedbackValidator = [
