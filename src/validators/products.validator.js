@@ -7,7 +7,7 @@ export const createAndUpdateValidator = [
   body('brand', 'Укажите бренд').exists().trim().notEmpty(),
   body('model', 'Укажите модель').exists().trim().notEmpty(),
   body('code', 'Укажите артикул').exists().trim().notEmpty(),
-  body('price', 'Укажите цену').exists().trim().notEmpty().isInt({ min: 0 }),
+  body('price', 'Укажите цену').exists().trim().notEmpty(),
   body('category', 'Укажите тип')
     .exists()
     .trim()
