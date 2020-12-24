@@ -9,16 +9,16 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndicator'
 import CarouselArrow from '../../components/CarouselArrow/CarouselArrow'
-import Select from 'react-select'
-import SelectOption from '../../components/SelectOption/SelectOption'
-import SelectMenu from '../../components/SelectMenu/SelectMenu'
-import SelectControl from '../../components/SelectControl/SelectControl'
+import Select from 'react-dropdown-select'
 import Button from '../../components/Button/Button'
 import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
 
 import styles from './ProductPage.module.scss'
 import spinner from '../../assets/images/spinner.svg'
+import usSizes from '../../assets/sizes/us'
+import euSizes from '../../assets/sizes/eu'
+import clothesSizes from '../../assets/sizes/clothes'
 
 const ProductPage = ({ match: { params: { id } } }) => {
   const { loading, loaded, error, entities } = useSelector(({ product }) => product)
@@ -53,8 +53,18 @@ const ProductPage = ({ match: { params: { id } } }) => {
     setIsThankYouModalOpen(false)
   }
 
+  const sortOptions = (a, b) => {
+    if (a.includes('us')) {
+      return usSizes.indexOf(a.toUpperCase()) - usSizes.indexOf(b.toUpperCase())
+    } else if (a.includes('eu')) {
+      return euSizes.indexOf(a.toUpperCase()) - euSizes.indexOf(b.toUpperCase())
+    }
+
+    return clothesSizes.indexOf(a.toUpperCase()) - clothesSizes.indexOf(b.toUpperCase())
+  }
+
   const onSizeChange = (e) => {
-    setSize(e.value)
+    setSize(e[0].value)
   }
 
   const onSendCallbackSubmit = (e) => {
@@ -101,7 +111,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
             с политикой <span className={styles.policyWarningUnderline}>обработки персональных данных</span>
             </p>
             <p className={styles.writeInstagramMessage}>Или напишите нам в Instagram <br />
-              <span className={styles.writeInstagramMessageLink}>@hellakickz_</span>
+              <a href="https://www.instagram.com/hellakickz_/" target="_blank" className={styles.writeInstagramMessageLink}>@hellakickz_</a>
             </p>
           </div>
         </Modal>
@@ -158,17 +168,18 @@ const ProductPage = ({ match: { params: { id } } }) => {
             }
             <p className={styles.brand}>{entities?.product?.brand}</p>
             <p className={styles.model}>{entities?.product?.model} {entities?.product?.color}</p>
-            <p className={styles.price}>{entities?.product?.price} руб.</p>
+            <p className={styles.price}>от {entities?.product?.price.toLocaleString('ru')} руб.</p>
             {entities?.product?.sizes.length > 0 && (
               <div className={styles.sizesWrapper}>
                 <p className={styles.sizeLabel}>Размер:</p>
                 <Select
-                  options={entities?.product?.sizes.map((size) => ({ value: size, label: size.toUpperCase() }))}
-                  placeholder="Выбрать размер"
-                  isSearchable={false}
-                  className={styles.sizes}
-                  components={{ Option: SelectOption, Menu: SelectMenu, Control: SelectControl }}
+                  options={entities?.product?.sizes.sort(sortOptions).map((size) => ({ value: size, label: size.toUpperCase() }))}
                   onChange={onSizeChange}
+                  searchable={false}
+                  placeholder="Выберите размер"
+                  color="#000000"
+                  dropdownGap={-3}
+                  className={styles.sizes}
                 />
                 <NavLink to="/faq" className={styles.faqButton}>Как выбрать размер?</NavLink>
               </div>

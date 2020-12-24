@@ -135,26 +135,14 @@ li {
   background-color: transparent !important;
 }
 
-.css-yk16xz-control {
-  border: none !important;
-  outline: none !important;
-}
-
-.css-1okebmr-indicatorSeparator {
-  display: none;
-}
-
-.css-yk16xz-control {
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.css-1hb7zxy-IndicatorsContainer {
-  display: none !important;
-}
-
 .infinite-scroll-component__outerdiv {
   height: 100%;
+}
+
+.react-dropdown-select-dropdown {
+  border: 1px solid #d5d5d5 !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
 }
 
 @keyframes spin {

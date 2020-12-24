@@ -3,10 +3,7 @@ import { useHistory } from 'react-router-dom'
 import classNames from 'classnames'
 import queryString from 'query-string'
 import useDebounce from '../../hooks/useDebounce'
-import Select from 'react-select'
-import SelectOption from '../SelectOption/SelectOption'
-import SelectMenu from '../SelectMenu/SelectMenu'
-import SelectControl from '../SelectControl/SelectControl'
+import Select from 'react-dropdown-select'
 
 import styles from './FilterPanel.module.scss'
 import usSizes from '../../assets/sizes/us'
@@ -14,9 +11,8 @@ import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
 const CATEGORIES = { sneakers: 'Обувь', clothes: 'Одежда', accessory: 'Аксессуары', childish: 'Для детей' }
-const BRANDS = ['Yeezy', 'Nike', 'Stussy', 'Supreme', 'Off-White', 'CPFM', 'Fear of God', 'CDG', 'ACG']
+const BRANDS = ['Yeezy', 'Jordan', 'Stussy', 'Supreme', 'Off-White', 'Nike', 'CPFM', 'Fear of God', 'CDG', 'ACG']
 const options = [
-  { value: '', label: 'По умолчанию', className: styles.option },
   { value: '-createdAt', label: 'Новинки' },
   { value: 'price', label: 'Цена: по возрастанию' },
   { value: '-price', label: 'Цена: по убыванию' }
@@ -167,8 +163,8 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
   }, [search])
 
   const onSortChange = (e) => {
-    setSort(e.value)
-    renderQuery(search, category, brands, sizes, e.value)
+    setSort(e[0].value)
+    renderQuery(search, category, brands, sizes, e[0].value)
   }
 
   const onTagRemoveClick = (tag, type) => {
@@ -267,12 +263,14 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
             className={styles.searchBar}
           />
           <Select
+            values={sort ? [{ value: sort, label: options.find(({ value }) => value === sort).label }] : [{ value: '', label: 'Сортировать' }]}
             options={options}
-            placeholder="Сортировать"
             onChange={onSortChange}
-            isSearchable={false}
+            searchable={false}
+            placeholder="Сортировать"
+            color="#000000"
+            dropdownGap={-3}
             className={styles.sortBar}
-            components={{ Option: SelectOption, Menu: SelectMenu, Control: SelectControl }}
           />
         </div>
       </div>

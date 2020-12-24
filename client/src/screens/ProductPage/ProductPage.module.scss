@@ -340,15 +340,17 @@
 }
 
 .sizes {
-  width: 170px;
+  max-width: 170px;
   height: 30px;
   margin-bottom: 5px;
-  border: 1px solid #6d6d6d;
+  border: 1px solid #6d6d6d !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
 
   font-size: 12px;
 
   @media (min-width: $tablet-size) {
-    width: 300px;
+    max-width: 300px;
     height: 40px;
 
     font-size: 20px;

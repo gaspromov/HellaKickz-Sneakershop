@@ -22,15 +22,8 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
       case 'jordan':
         setPhoto1(jordan1)
         break
-      default:
-        setPhoto1(default1)
-        break
     }
 
-  }
-
-  const onCategoryMouseLeave = () => {
-    setPhoto1(default1)
   }
 
   const onMenuLinkClick = () => {
@@ -41,7 +34,7 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
     <div style={{ display: isOpen ? 'flex' : 'none' }} className={styles.subMenu}>
       <div className={styles.categoriesWrapper}>
         <div className={styles.categories}>
-          <div data-category="yeezy" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
+          <div data-category="yeezy" onMouseEnter={onCategoryMouseEnter} className={styles.category}>
             <NavLink to='/catalog?brands=Yeezy' onClick={onMenuLinkClick} className={styles.title}>Yeezy</NavLink>
             <ul>
               <li className={styles.menuItem}>
@@ -55,21 +48,7 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
               </li>
             </ul>
           </div>
-          <div data-category="nike" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
-            <NavLink to='/catalog?brands=Nike' onClick={onMenuLinkClick} className={styles.title}>Nike</NavLink>
-            <ul data-category="nike">
-              <li className={styles.menuItem}>
-                <NavLink to='/catalog?search=dunk' onClick={onMenuLinkClick} className={styles.menuLink}>Dunk</NavLink>
-              </li>
-              <li className={styles.menuItem}>
-                <NavLink to='/catalog?search=air force' onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
-              </li>
-              <li className={styles.menuItem}>
-                <NavLink to='/catalog?search=off-white' onClick={onMenuLinkClick} className={styles.menuLink}>x Off-White</NavLink>
-              </li>
-            </ul>
-          </div>
-          <div data-category="jordan" onMouseEnter={onCategoryMouseEnter} onMouseLeave={onCategoryMouseLeave} className={styles.category}>
+          <div data-category="jordan" onMouseEnter={onCategoryMouseEnter} className={styles.category}>
             <NavLink to='/catalog?brands=Air jordan' onClick={onMenuLinkClick} className={styles.title}>Air Jordan</NavLink>
             <ul data-category="jordan">
               <li className={styles.menuItem}>
@@ -80,6 +59,20 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
               </li>
               <li className={styles.menuItem}>
                 <NavLink to='/catalog?search=jordan 1 low' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 Low</NavLink>
+              </li>
+            </ul>
+          </div>
+          <div data-category="nike" onMouseEnter={onCategoryMouseEnter} className={styles.category}>
+            <NavLink to='/catalog?brands=Nike' onClick={onMenuLinkClick} className={styles.title}>Nike</NavLink>
+            <ul data-category="nike">
+              <li className={styles.menuItem}>
+                <NavLink to='/catalog?search=dunk' onClick={onMenuLinkClick} className={styles.menuLink}>Dunk</NavLink>
+              </li>
+              <li className={styles.menuItem}>
+                <NavLink to='/catalog?search=air force' onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
+              </li>
+              <li className={styles.menuItem}>
+                <NavLink to='/catalog?search=off-white' onClick={onMenuLinkClick} className={styles.menuLink}>& Off-White</NavLink>
               </li>
             </ul>
           </div>

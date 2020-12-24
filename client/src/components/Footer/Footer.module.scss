@@ -173,6 +173,12 @@
   white-space: nowrap;
   cursor: pointer;
   outline: none;
+  transition: all 0.4s;
+
+  &:hover {
+    border-color: #ec7f62;
+    transition: all 0.4s;
+  }
 
   @media (min-width: $tablet-size) {
     margin-bottom: 53px;
@@ -282,25 +288,12 @@
 
 .policy {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
   max-width: 815px;
   margin: 0 auto;
-
-  @media (min-width: $tablet-size) {
-    margin-bottom: 15px;
-  }
-}
-
-.policyMessage {
-  font-family: 'SourceSansPro', sans-serif;
-  font-size: 12px;
-  color: #6d6d6d;
-
-  @media (min-width: $tablet-size) {
-    font-size: 14px;
-  }
+  margin-bottom: 15px !important;
 }
 
 .cactusWebLink {
