@@ -56,7 +56,7 @@ const Catalogue = () => {
     }
 
     return (
-      <div className={styles.container}>
+      <div className={styles.container} id="products">
         <div className={styles.products}>
           {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
             return (

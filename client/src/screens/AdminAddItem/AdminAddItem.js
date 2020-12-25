@@ -107,7 +107,7 @@ const AdminAddItem = ({ history }) => {
       model: model.value,
       color: color.value,
       code: code.value,
-      price: +price.value,
+      price: price.value,
       sizes: Object.keys(sizes),
       category: category.value
     }

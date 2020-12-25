@@ -34,8 +34,10 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
   useEffect(() => {
     if (isFilterOpen || isSearchOpen) {
       document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+      document.getElementById('products').style.pointerEvents = 'none'
     } else {
       document.querySelector('header').style.boxShadow = 'none'
+      document.getElementById('products').style.pointerEvents = 'unset'
     }
   }, [isFilterOpen, isSearchOpen])
 

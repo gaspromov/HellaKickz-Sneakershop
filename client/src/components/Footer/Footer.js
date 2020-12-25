@@ -93,6 +93,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className={styles.policy}>
+        <NavLink to="/user_agreement" target="_blank" className={styles.policyMessage}>Пользовательское соглашение</NavLink>
         <a href="https://CactusWeb.io" className={styles.cactusWebLink}>CactusWeb</a>
       </div>
     </footer>

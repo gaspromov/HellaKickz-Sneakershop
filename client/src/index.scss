@@ -188,3 +188,37 @@ li {
   width: 1px !important;
   overflow: hidden;
 }
+
+.WordSection1 {
+  max-width: 625px;
+  margin: 0 auto;
+}
+
+p.MsoNormal,
+li.MsoNormal,
+div.MsoNormal {
+  margin-top: 0in;
+  margin-right: 0in;
+  margin-bottom: 8pt;
+  margin-left: 0in;
+  line-height: 107%;
+  font-size: 11pt;
+  font-family: 'Calibri', sans-serif;
+}
+
+a.wordLink:link span {
+  color: #0563c1 !important;
+}
+
+a.wordLink:link,
+span.MsoHyperlink {
+  color: #0563c1;
+  text-decoration: underline;
+}
+.MsoChpDefault {
+  font-family: 'Calibri', sans-serif;
+}
+.MsoPapDefault {
+  margin-bottom: 8pt;
+  line-height: 107%;
+}
