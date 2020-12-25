@@ -102,6 +102,7 @@
 .submenu {
   margin-bottom: 15px;
 
+  &:nth-child(2) ul,
   &:nth-child(3) ul {
     max-height: 140px;
     overflow: auto;

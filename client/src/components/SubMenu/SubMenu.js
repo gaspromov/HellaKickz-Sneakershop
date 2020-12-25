@@ -72,7 +72,7 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
                 <NavLink to='/catalog?search=air force' onClick={onMenuLinkClick} className={styles.menuLink}>Air Force</NavLink>
               </li>
               <li className={styles.menuItem}>
-                <NavLink to='/catalog?search=off-white' onClick={onMenuLinkClick} className={styles.menuLink}>& Off-White</NavLink>
+                <NavLink to='/catalog?search=off white' onClick={onMenuLinkClick} className={styles.menuLink}>& Off-White</NavLink>
               </li>
             </ul>
           </div>

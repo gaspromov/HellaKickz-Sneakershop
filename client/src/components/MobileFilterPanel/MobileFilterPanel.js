@@ -11,6 +11,7 @@ import styles from './MobileFilterPanel.module.scss'
 import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
+const BRANDS = ['Yeezy', 'Jordan', 'Stussy', 'Supreme', 'Off-White', 'Nike', 'CPFM', 'Fear of God', 'CDG', 'ACG']
 
 const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSizes }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -33,11 +34,15 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
 
   useEffect(() => {
     if (isFilterOpen || isSearchOpen) {
-      document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
-      document.getElementById('products').style.pointerEvents = 'none'
+      if (document.querySelector('header') && document.getElementById('products')) {
+        document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+        document.getElementById('products').style.pointerEvents = 'none'
+      }
     } else {
-      document.querySelector('header').style.boxShadow = 'none'
-      document.getElementById('products').style.pointerEvents = 'unset'
+      if (document.querySelector('header') && document.getElementById('products')) {
+        document.querySelector('header').style.boxShadow = 'none'
+        document.getElementById('products').style.pointerEvents = 'unset'
+      }
     }
   }, [isFilterOpen, isSearchOpen])
 
@@ -176,10 +181,11 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
             <MenuItem key="childish" onClick={onCategoryItemClick} className={classNames(styles.menuItem, category === 'childish' && styles.menuItemSelected)}>Для детей</MenuItem>
           </SubMenu>
           <SubMenu title="Бренд" key="brands" className={styles.submenu}>
-            <MenuItem key="yeezy" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['yeezy'] && styles.menuItemSelected)}>Yeezy</MenuItem>
-            <MenuItem key="nike" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['nike'] && styles.menuItemSelected)}>Nike</MenuItem>
-            <MenuItem key="off-white" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['off-white'] && styles.menuItemSelected)}>Off-white</MenuItem>
-            <MenuItem key="supreme" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['supreme'] && styles.menuItemSelected)}>Supreme</MenuItem>
+            {BRANDS.map(brand => {
+              return (
+                <MenuItem key={brand} onClick={onBrandItemClick} className={classNames(styles.menuItem, brands[brand] && styles.menuItemSelected)}>{brand}</MenuItem>
+              )
+            })}
           </SubMenu>
           <SubMenu title="Размер" key="sizes" className={styles.submenu}>
             {(category === 'childish' ? euSizes : usSizes).map((size) => {
