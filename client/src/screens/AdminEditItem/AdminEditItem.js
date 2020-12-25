@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput'
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import Button from '../../components/Button/Button'
-import ContentEditable from 'react-contenteditable'
+import AutosizeInput from 'react-input-autosize'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselArrow from '../../components/CarouselArrow/CarouselArrow'
@@ -32,6 +32,10 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
 
   useEffect(() => {
     dispatch(fetchProduct(id))
+
+    return () => {
+      dispatch(deletePhotos())
+    }
   }, [])
 
   useEffect(() => {
@@ -113,6 +117,7 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
 
   // Save product handlers
   const onItemSaveButtonClick = () => {
+    console.log(newPhotos.filter((photo) => typeof photo !== 'object'))
     const product = {
       photos: newPhotos.filter((photo) => typeof photo !== 'object'),
       brand: newBrand.value,
@@ -165,36 +170,36 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
             text="Удалить все"
             onClick={onDeletePhotosButtonClick}
           />
-          {newPhotos.length > 0 && (
-            <Carousel
-              renderThumbs={() => []}
-              emulateTouch
-              showStatus={false}
-              className={styles.carouselWrapper}
-              renderArrowPrev={(onClickHandler, hasPrev, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
-              renderArrowNext={(onClickHandler, hasNext, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
-              renderIndicator={(onClickHandler, isSelected) => {
-                if (isSelected) {
-                  return <CarouselIndicator style="gray" isSelected onClick={onClickHandler} />
-                }
-
-                return <CarouselIndicator style="gray" onClick={onClickHandler} />
-              }}
-            >
-              {newPhotos.map((photo, id) => {
-                return <img src={typeof photo === 'object' ? URL.createObjectURL(photo) : photo} alt={`Фото ${id + 1}`} />
-              })}
-            </Carousel>
-          )}
         </div>
+        {newPhotos.length > 0 && (
+          <Carousel
+            renderThumbs={() => []}
+            emulateTouch
+            showStatus={false}
+            className={styles.carouselWrapper}
+            renderArrowPrev={(onClickHandler, hasPrev, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
+            renderArrowNext={(onClickHandler, hasNext, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
+            renderIndicator={(onClickHandler, isSelected) => {
+              if (isSelected) {
+                return <CarouselIndicator style="gray" isSelected onClick={onClickHandler} />
+              }
+
+              return <CarouselIndicator style="gray" onClick={onClickHandler} />
+            }}
+          >
+            {newPhotos.map((photo, id) => {
+              return <img src={typeof photo === 'object' ? URL.createObjectURL(photo) : photo} alt={`Фото ${id + 1}`} className={styles.photo} />
+            })}
+          </Carousel>
+        )}
         <p className={styles.backgroundTitle}>Загрузите фото</p>
       </div>
       <div className={styles.addPanel}>
         <NavLink to="/admin/dashboard#section=items" className={styles.exitButton}></NavLink>
-        <ContentEditable placeholder={entities.product.brand} html={newBrand.bind.value} onChange={newBrand.bind.onChange} tagName="brand" className={styles.grayInput} />
-        <ContentEditable placeholder={entities.product.model} html={newModel.bind.value} onChange={newModel.bind.onChange} tagName="model" className={styles.grayInput} />
-        <ContentEditable placeholder={entities.product.color} html={newColor.bind.value} onChange={newColor.bind.onChange} tagName="color" className={styles.grayInput} />
-        <ContentEditable placeholder={entities.product.price} html={newPrice.bind.value.toString()} onChange={newPrice.bind.onChange} tagName="price" className={styles.grayInput} />
+        <AutosizeInput name="brand" value={newBrand.bind.value} onChange={newBrand.bind.onChange} placeholder={entities.product.brand} className={styles.grayInput} />
+        <AutosizeInput name="model" value={newModel.bind.value} onChange={newModel.bind.onChange} placeholder={entities.product.model} className={styles.grayInput} />
+        <AutosizeInput name="color" value={newColor.bind.value} onChange={newColor.bind.onChange} placeholder={entities.product.color} className={styles.grayInput} />
+        <AutosizeInput name="price" value={newPrice.bind.value} onChange={newPrice.bind.onChange} placeholder={entities.product.price} className={styles.grayInput} />
         <div className={styles.codeWrapper}>
           <p className={styles.title}>Артикул:</p>
           <input type="text" placeholder={entities.product.code} {...newCode.bind} className={styles.codeInput} />

@@ -45,18 +45,20 @@ const Faq = () => {
             <h2 className={styles.sectionSizesTitle}>Размерные сетки</h2>
             <Tabs className={styles.tabs}>
               <TabList className={styles.tabList}>
-                <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
-                  <Button type="button" style="regular" className={styles.tabButton} text="Обувь – Nike" />
-                </Tab>
-                <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
-                  <Button type="button" style="regular" className={styles.tabButton} text="Обувь – Adidas" />
-                </Tab>
-                <Tab className={styles.tab} selectedClassName={styles.tabSelected} >
-                  <Button type="button" style="regular" className={styles.tabButton} text="Детская обувь Nike" />
-                </Tab>
-                <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
-                  <Button type="button" style="regular" className={styles.tabButton} text="Детская обувь Adidas" />
-                </Tab>
+                <div className={styles.tabsContainer}>
+                  <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
+                    <Button type="button" style="regular" className={styles.tabButton} text="Обувь – Nike" />
+                  </Tab>
+                  <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
+                    <Button type="button" style="regular" className={styles.tabButton} text="Обувь – Adidas" />
+                  </Tab>
+                  <Tab className={styles.tab} selectedClassName={styles.tabSelected} >
+                    <Button type="button" style="regular" className={styles.tabButton} text="Детская обувь Nike" />
+                  </Tab>
+                  <Tab className={styles.tab} selectedClassName={styles.tabSelected}>
+                    <Button type="button" style="regular" className={styles.tabButton} text="Детская обувь Adidas" />
+                  </Tab>
+                </div>
               </TabList>
 
               <div className={styles.tabTables}>

@@ -64,7 +64,7 @@ const Footer = () => {
             с политикой <span className={styles.policyWarningUnderline}>обработки персональных данных</span>
           </p>
           <p className={styles.writeInstagramMessage}>Или напишите нам в Instagram <br />
-            <span className={styles.writeInstagramMessageLink}>@hellakickz_</span>
+            <a href="https://www.instagram.com/hellakickz_/" target="_blank" className={styles.writeInstagramMessageLink}>@hellakickz_</a>
           </p>
         </div>
       </Modal>
@@ -93,7 +93,7 @@ const Footer = () => {
         </ul>
       </div>
       <div className={styles.policy}>
-        <p className={styles.policyMessage}>Пользовательское соглашение</p>
+        <NavLink to="/user_agreement" target="_blank" className={styles.policyMessage}>Пользовательское соглашение</NavLink>
         <a href="https://CactusWeb.io" className={styles.cactusWebLink}>CactusWeb</a>
       </div>
     </footer>

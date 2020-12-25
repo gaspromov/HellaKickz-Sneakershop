@@ -56,7 +56,7 @@ const Catalogue = () => {
     }
 
     return (
-      <div className={styles.container}>
+      <div className={styles.container} id="products">
         <div className={styles.products}>
           {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
             return (
@@ -76,7 +76,7 @@ const Catalogue = () => {
                 />
                 <h3 className={styles.title}>{brand}</h3>
                 <p className={styles.model}>{model}</p>
-                <p className={styles.price}>{price} руб.</p>
+                <p className={styles.price}>от {price.toLocaleString('ru')} руб.</p>
               </NavLink>
             )
           })}
