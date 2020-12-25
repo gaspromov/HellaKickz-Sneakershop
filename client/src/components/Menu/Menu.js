@@ -12,12 +12,16 @@ const Menu = () => {
 
   const onShoeLinkMouseEnter = () => {
     setIsSubMenuOpen(true)
-    document.getElementById('sneakersLink').style.borderBottom = '2px solid #ec7f62'
+    if (document.getElementById('sneakersLink')) {
+      document.getElementById('sneakersLink').style.borderBottom = '2px solid #ec7f62'
+    }
   }
 
   const onShoeLinkMouseLeave = () => {
     setIsSubMenuOpen(false)
-    document.getElementById('sneakersLink').style.borderBottom = '2px solid transparent'
+    if (document.getElementById('sneakersLink')) {
+      document.getElementById('sneakersLink').style.borderBottom = '2px solid transparent'
+    }
   }
 
   const onCategoryMenuLinkClick = () => {

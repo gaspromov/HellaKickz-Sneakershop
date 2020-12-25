@@ -34,15 +34,20 @@ const Header = () => {
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
-      document.querySelector('body').style.height = '100%'
-      document.querySelector('body').style.overflow = 'hidden'
-      document.querySelector('main').style.pointerEvents = 'none'
+      if (document.querySelector('header') && document.querySelector('body') && document.querySelector('main')) {
+        document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+        document.querySelector('header').style.zIndex = '3'
+        document.querySelector('body').style.height = '100%'
+        document.querySelector('body').style.overflow = 'hidden'
+        document.querySelector('main').style.pointerEvents = 'none'
+      }
     } else {
-      document.querySelector('header').style.boxShadow = 'none'
-      document.querySelector('body').style.height = 'unset'
-      document.querySelector('body').style.overflow = 'unset'
-      document.querySelector('main').style.pointerEvents = 'unset'
+      if (document.querySelector('header') && document.querySelector('body') && document.querySelector('main')) {
+        document.querySelector('header').style.boxShadow = 'none'
+        document.querySelector('body').style.height = 'unset'
+        document.querySelector('body').style.overflow = 'unset'
+        document.querySelector('main').style.pointerEvents = 'unset'
+      }
     }
   }, [isMobileMenuOpen])
 

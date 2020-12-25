@@ -293,30 +293,29 @@
 
   max-width: 815px;
   margin: 0 auto;
-  margin-bottom: 15px;
 }
 
 .policyMessage {
-  margin-bottom: 15px;
-
   font-family: 'SourceSansPro', sans-serif;
   font-size: 12px;
   color: #6d6d6d;
 
   @media (min-width: $tablet-size) {
+    margin-bottom: 15px;
+
     font-size: 14px;
   }
 }
 
 .cactusWebLink {
-  margin-bottom: 15px;
-
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #2a51dc;
 
   @media (min-width: $tablet-size) {
+    margin-bottom: 15px;
+
     font-size: 14px;
 
     &::before {

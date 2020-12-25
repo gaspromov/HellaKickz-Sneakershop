@@ -31,11 +31,6 @@ const Homepage = () => {
     dispatch(fetchSlides())
     dispatch(fetchHots())
     dispatch(fetchFeedbacks())
-    document.querySelector('header').style.zIndex = '3'
-
-    return () => {
-      document.querySelector('header').style.zIndex = 'unset'
-    }
   }, [])
 
   useEffect(() => {
