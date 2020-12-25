@@ -58,10 +58,10 @@ router.get('/', async (req, res) => {
       brands = '',
       sizes = ''
     } = sanitizeParams(req.query)
-    const { sort = '-createdAt' } = req.query
+    const { sort } = req.query
     const searchArr = search.replace(/\s+/g, ' ').trim().split(' ')
     const brandArr = brands.split(',')
-    const products = await Product.find().sort(sort)
+    const products = await Product.find().sort(sort || '-createdAt')
 
     let result = []
 
