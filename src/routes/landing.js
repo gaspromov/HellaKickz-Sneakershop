@@ -18,18 +18,11 @@ router.post('/slides/:id', auth, slideValidator, validate, async (req, res) => {
   try {
     const { photo, link } = req.body
     const { id } = req.params
-    const slide = await Slide.findOne({ index: id })
-    if (!slide) {
-      const newSlide = await Slide.create({
-        index: id,
-        photo,
-        link
-      })
-      return res.status(200).json(newSlide)
-    }
-    slide.photo = photo
-    slide.link = link
-    await slide.save()
+    const slide = await Slide.findOneAndUpdate(
+      { index: id },
+      { index: id, photo, link },
+      { upsert: true }
+    )
     return res.status(200).json(slide)
   } catch (e) {
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
