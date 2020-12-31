@@ -90,7 +90,7 @@ const Catalogue = () => {
       <Helmet>
         <meta name="description" content="Широкий выбор кроссовок Nike, Yeezy, Off-White, Air Jordan, Supreme, Travis Scott, KAWS, BEARBRICK. Поможем Вам подобрать модель и определиться с размером. Оплата после примерки. Доставка в любую точку мира. Гарантии оригинальности." />
         <meta name="keywords" content="кроссовки, изи, изи 350, YEEZY, yeezy boost, оригинал, только оригинал, yeezy 350 v2, купить изи 350, hellakickz, мода, Jordan, Off-White, офф вайт, yeezy 700, hypestation, депо, kickstown, айзел, aizel, nikita efremov, federation, фederation, оригинальные бренды, tsum, цум, Kanye west, канье вест, коллаборация, фарфетч, farfetch, supreme, kaws, суприм, кавс, travis scott, тревис скот, nike, dunk, virgil abloh, вирджил абло, yeezy black, yeezy white" />
-        <title>Hellakickz - каталог</title>
+        <title>Hellakickz - Каталог</title>
       </Helmet>
       <div className={styles.wrapper}>
         <MobileFilterPanel initialSearch={initialSearch} initialCategory={initialCategory} initialBrand={initialBrand} initialSizes={initialSizes} initialSort={initialSort} />

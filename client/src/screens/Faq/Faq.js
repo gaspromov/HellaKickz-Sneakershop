@@ -28,7 +28,7 @@ const Faq = () => {
       <Helmet>
         <meta name="description" content="Многие модели Yeezy и других кроссовок имеют не стандартный размер. Поможем Вам с выбором модели и размера." />
         <meta name="keywords" content="популярные вопросы, часто задаваемые вопросы, faq, кроссовки, изи, изи 350, YEEZY, yeezy boost, оригинал, только оригинал, yeezy 350 v2, купить изи 350, hellakickz, мода, Jordan, Off-White, офф вайт, yeezy 700, hypestation, депо, kickstown, айзел, aizel, nikita efremov, federation, фederation, оригинальные бренды, tsum, цум, Kanye west, канье вест, коллаборация, фарфетч, farfetch, supreme, kaws, суприм, кавс, travis scott, тревис скот, nike, dunk, virgil abloh, вирджил абло, yeezy black, yeezy white" />
-        <title>Hellakickz – размерная сетка обуви и частозадваемые вопросы</title>
+        <title>Hellakickz – Размерная сетка обуви и частозадваемые вопросы</title>
       </Helmet>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Faq</h1>
