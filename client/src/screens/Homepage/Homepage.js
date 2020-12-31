@@ -59,7 +59,7 @@ const Homepage = () => {
       <Helmet>
         <meta name="description" content="Мы занимаемся только 100% оригинальной продукцией Yeezy | Jordan и много другое. Гарантии оригинальности товара." />
         <meta name="keywords" content="кроссовки, изи, изи 350, YEEZY, yeezy boost, оригинал, только оригинал, yeezy 350 v2, купить изи 350, hellakickz, мода, Jordan, Off-White, офф вайт, yeezy 700, hypestation, депо, kickstown, айзел, aizel, nikita efremov, federation, фederation, оригинальные бренды, tsum, цум, Kanye west, канье вест, коллаборация, фарфетч, farfetch, supreme, kaws, суприм, кавс, travis scott, тревис скот, nike, dunk, virgil abloh, вирджил абло, yeezy black, yeezy white" />
-        <title>Hellakickz – больше чем просто кроссовки</title>
+        <title>Hellakickz – Больше чем просто кроссовки</title>
       </Helmet>
       <div>
         <div className={styles.carousel}>
