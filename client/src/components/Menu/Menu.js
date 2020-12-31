@@ -12,16 +12,10 @@ const Menu = () => {
 
   const onShoeLinkMouseEnter = () => {
     setIsSubMenuOpen(true)
-    if (document.getElementById('sneakersLink')) {
-      document.getElementById('sneakersLink').style.borderBottom = '2px solid #ec7f62'
-    }
   }
 
   const onShoeLinkMouseLeave = () => {
     setIsSubMenuOpen(false)
-    if (document.getElementById('sneakersLink')) {
-      document.getElementById('sneakersLink').style.borderBottom = '2px solid transparent'
-    }
   }
 
   const onCategoryMenuLinkClick = () => {
@@ -36,7 +30,7 @@ const Menu = () => {
             <NavLink to="/catalog" className={styles.menuLink}>Каталог</NavLink>
           </li>
           <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
-            <NavLink to="/catalog/?categories=sneakers" className={styles.menuLink} id="sneakersLink">Обувь</NavLink>
+            <NavLink to="/catalog/?categories=sneakers" id="sneakerLink" className={styles.menuLink} style={{ borderBottom: isSubMenuOpen && '2px solid #ec7f62' }}>Обувь</NavLink>
             <SubMenu isOpen={isSubMenuOpen} onCategoryMenuLinkClick={onCategoryMenuLinkClick} />
           </li>
           <li className={styles.menuItem}>

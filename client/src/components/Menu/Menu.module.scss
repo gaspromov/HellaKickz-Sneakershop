@@ -36,13 +36,15 @@
 .menuLink {
   font-family: 'Candara', sans-serif;
   font-size: 20px;
+  height: 24px;
+  line-height: 24px;
   color: #000000;
   border-bottom: 2px solid transparent;
   transition: 0.4s all;
   cursor: pointer;
 
-  &:hover {
-    border-color: #ec7f62;
+  &:hover:not(#sneakerLink) {
+    border-bottom: 2px solid #ec7f62;
     transition: 0.4s all;
   }
 }

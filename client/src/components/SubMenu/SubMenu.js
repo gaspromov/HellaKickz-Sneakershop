@@ -3,24 +3,24 @@ import { NavLink } from 'react-router-dom'
 import Link from '../Link/Link'
 
 import styles from './SubMenu.module.scss'
-import default1 from '../../assets/images/default1.jpg'
-import yeezy1 from '../../assets/images/yeezy1.jpg'
-import nike1 from '../../assets/images/nike1.jpg'
-import jordan1 from '../../assets/images/jordan1.jpg'
+import defaultImage from '../../assets/images/default.jpg'
+import yeezy from '../../assets/images/yeezy.jpg'
+import nike from '../../assets/images/nike.jpg'
+import jordan from '../../assets/images/jordan.jpg'
 
 const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
-  const [photo1, setPhoto1] = useState(default1)
+  const [photo1, setPhoto1] = useState(defaultImage)
 
   const onCategoryMouseEnter = (e) => {
     switch (e.currentTarget.dataset.category) {
       case 'yeezy':
-        setPhoto1(yeezy1)
+        setPhoto1(yeezy)
         break
       case 'nike':
-        setPhoto1(nike1)
+        setPhoto1(nike)
         break
       case 'jordan':
-        setPhoto1(jordan1)
+        setPhoto1(jordan)
         break
     }
 

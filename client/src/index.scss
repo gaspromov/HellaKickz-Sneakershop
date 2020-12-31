@@ -11,8 +11,8 @@
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -92,8 +92,12 @@ li {
 .modalTitle {
   margin-bottom: 10px;
 
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 600;
+
+  @media (min-width: $tablet-size) {
+    font-size: 48px;
+  }
 }
 
 .modalText {
@@ -109,6 +113,10 @@ li {
     font-size: 24px;
     line-height: 22px;
   }
+}
+
+.slide {
+  background: #ffffff !important;
 }
 
 .rc-menu-item-active,

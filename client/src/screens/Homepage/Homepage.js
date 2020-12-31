@@ -126,15 +126,15 @@ const Homepage = () => {
                   <span className={styles.aboutName}>HellaKickz</span> – это не только о лимитированных кросcовках, но и о стритвир-культуре в целом.
                 </p>
                 <p className={styles.aboutTextParagraph}>
-                  С каждым днем все больше людей желает заполучить редкую модель, часто имея дело с подделками или сомнительными продавцами.
+                  С каждым днем все больше людей желает заполучить редкую модель, часто сталкиваясь с подделками или сомнительными продавцами.
                 </p>
                 <p className={styles.aboutTextParagraph}>
-                  Однажды столкнувшись с этой проблемой сами, испытав серьезные трудности, мы решили открыть свой онлайн-стор, который будет помогать Вам в выборе и покупке действительно крутых и оригинальных кроссовок, одежды и аксессуаров, ведь мы не только продаем наши товары, но и сами сходим по ним с ума и с удовольствием носим.
+                  В свое время осознав эту проблему и испытав серьезные трудности при поиске и покупке лимитированной обуви, мы решили открыть свой онлайн-стор, который будет помогать в выборе и приобретении крутых и оригинальных кроссовок, одежды и аксессуаров, ведь мы не только продаем наши товары, но и сами сходим по ним с ума и с удовольствием носим.
                 </p>
                 <p className={styles.aboutTextParagraph}>
                   Наш большой опыт и работа в кратчайшие сроки помогут Вам быть стильными и необычными в этом бурно меняющемся мире
                 </p>
-                Ваши Артём и Борис.
+                Ваши Борис и Артем
               </div>
               <div className={styles.aboutPhotoWrapper}>
                 <img src={aboutPhoto} className={styles.aboutPhoto} />
@@ -176,7 +176,9 @@ const Homepage = () => {
                   return (
                     <div key={index} className={styles.feedback}>
                       <div className={styles.feedbackBorder}></div>
-                      <img src={photo} alt={`${name} аватар`} className={styles.feedbackImage} />
+                      <a href="https://www.instagram.com/stories/highlights/17845431986031638/" target="_blank">
+                        <img src={photo} alt={`${name} аватар`} className={styles.feedbackImage} onClick={() => console.log('hello')} />
+                      </a>
                       <h3 className={styles.feedbackName}>{name}</h3>
                       <p className={styles.feedbackSubs}>{subs}</p>
                       <p className={styles.feedbackComment}>{feedback}</p>

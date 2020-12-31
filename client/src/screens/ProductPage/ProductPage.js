@@ -4,7 +4,7 @@ import { fetchProduct } from '../../store/product/actions'
 import { createCallback } from '../../store/callback/actions'
 import useInput from '../../hooks/useInput'
 import classNames from 'classnames'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndicator'
@@ -20,7 +20,7 @@ import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
-const ProductPage = ({ match: { params: { id } } }) => {
+const ProductPage = ({ match: { params: { id } }, location }) => {
   const { loading, loaded, error, entities } = useSelector(({ product }) => product)
   const { loading: callbackLoading, loaded: callbackLoaded, error: callbackError } = useSelector(({ createCallback }) => createCallback)
   const [isCreateCallbackModalOpen, setIsCreateCallbackModalOpen] = useState(false)
@@ -29,6 +29,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
   const contact = useInput('')
   const [size, setSize] = useState('')
   const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(fetchProduct(id))
@@ -70,6 +71,10 @@ const ProductPage = ({ match: { params: { id } } }) => {
   const onSendCallbackSubmit = (e) => {
     e.preventDefault()
     dispatch(createCallback(0, name.value, contact.value, `/product/${id}`, entities.product.brand, entities.product.model, size, entities.product.color))
+  }
+
+  const onBackLinkClick = () => {
+    history.push(`/catalog/${location?.props?.prevPath || ''}`)
   }
 
   const renderProduct = () => {
@@ -122,7 +127,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
             <Button type="button" style="regular" text="К товару" onClick={closeThankYouModal} className={styles.toCatalogueButtonClick} />
           </div>
         </Modal>
-        <NavLink to="/catalog" className={styles.mobileGoBackButton}></NavLink>
+        <button className={styles.mobileGoBackButton} onClick={onBackLinkClick}></button>
         <div className={styles.productContainer}>
           <div className={styles.photos}>
             {entities?.product?.photos?.length > 0 && (
@@ -148,7 +153,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
             )}
           </div>
           <div className={styles.productInfo}>
-            <NavLink to="/catalog" className={styles.goBackButton}></NavLink>
+            <button className={styles.goBackButton} onClick={onBackLinkClick}></button>
             {entities?.sameProducts?.length > 1 && (
               <div className={styles.colors}>
                 <p className={styles.colorLabel}>Цвет:</p>

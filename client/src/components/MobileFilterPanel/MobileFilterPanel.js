@@ -34,15 +34,11 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
 
   useEffect(() => {
     if (isFilterOpen || isSearchOpen) {
-      if (document.querySelector('header') && document.getElementById('products')) {
-        document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
-        document.getElementById('products').style.pointerEvents = 'none'
-      }
+      document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+      document.getElementById('products').style.pointerEvents = 'none'
     } else {
-      if (document.querySelector('header') && document.getElementById('products')) {
-        document.querySelector('header').style.boxShadow = 'none'
-        document.getElementById('products').style.pointerEvents = 'unset'
-      }
+      document.querySelector('header').style.boxShadow = 'none'
+      document.getElementById('products').style.pointerEvents = 'unset'
     }
   }, [isFilterOpen, isSearchOpen])
 
@@ -160,7 +156,8 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
     setCategory('')
     setBrands({})
     setSizes({})
-    renderQuery(search, '', {}, {})
+    setSearch('')
+    renderQuery('', '', {}, {})
     setIsFilterOpen(false)
   }
 
@@ -171,7 +168,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
       <div style={{ transform: isFilterOpen ? 'scale(1,1)' : 'scale(1, 0)' }} ref={filterRef} className={styles.filter}>
         <div className={styles.filterButtons}>
           <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterCloseButtonClick}></button>
-          <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>
+          {(category || Object.values(brands).length > 0 || Object.values(sizes).length > 0 || search) && <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>}
         </div>
         <Menu multiple mode="inline" className={styles.menu} expandIcon={ExpandIcon}>
           <SubMenu title="Категория" key="category" className={styles.submenu}>
