@@ -75,26 +75,33 @@ const Footer = () => {
           <Button type="button" style="regular" text="Вернутся на главную" onClick={closeThankYouModal} className={styles.toCatalogueButtonClick} />
         </div>
       </Modal>
-      <div className={styles.wrapper}>
-        <div className={styles.contacts}>
-          <p className={styles.phone}><span className={styles.phoneCode}>+7 </span>(999) 123-33-42</p>
-          <button type="button" onClick={onOrderCallbackButtonClick} className={styles.callback}>Заказать обратный звонок</button>
-          <ul className={styles.socialMenu}>
-            <li className={styles.socialIcon}><a href="https://www.instagram.com/hellakickz_/" target="_blank"></a></li>
-            <li className={styles.socialIcon}><a href="https://t.me/hellakickz" target="_blank"></a></li>
-            <li className={styles.socialIcon}><a href="https://api.whatsapp.com/send/?phone=79854920460&text&app_absent=0" target="_blank"></a></li>
+      <div className={styles.container}>
+        <ul className={styles.mobileSocialMenu}>
+          <li className={styles.socialIcon}><a href="https://www.instagram.com/hellakickz_/" target="_blank"></a></li>
+          <li className={styles.socialIcon}><a href="https://t.me/hellakickz" target="_blank"></a></li>
+          <li className={styles.socialIcon}><a href="https://api.whatsapp.com/send/?phone=79854920460&text&app_absent=0" target="_blank"></a></li>
+        </ul>
+        <div className={styles.wrapper}>
+          <div className={styles.contacts}>
+            <p className={styles.phone}><span className={styles.phoneCode}>+7 </span>(999) 123-33-42</p>
+            <button type="button" onClick={onOrderCallbackButtonClick} className={styles.callback}>Заказать обратный звонок</button>
+            <ul className={styles.desktopSocialMenu}>
+              <li className={styles.socialIcon}><a href="https://www.instagram.com/hellakickz_/" target="_blank"></a></li>
+              <li className={styles.socialIcon}><a href="https://t.me/hellakickz" target="_blank"></a></li>
+              <li className={styles.socialIcon}><a href="https://api.whatsapp.com/send/?phone=79854920460&text&app_absent=0" target="_blank"></a></li>
+            </ul>
+          </div>
+          <ul className={styles.menu}>
+            <li className={styles.menuItem}><NavLink to="/faq" className={styles.menuLink}>FAQ</NavLink></li>
+            <li className={styles.menuItem}><NavLink to="/faq/#delivery" className={styles.menuLink}>Доставка</NavLink></li>
+            <li className={styles.menuItem}><NavLink to="/faq/#back" className={styles.menuLink}>Обмен и возврат</NavLink></li>
+            <li className={styles.menuItem}><NavLink to="/faq/#sizes" className={styles.menuLink}>Как подобрать размер</NavLink></li>
           </ul>
         </div>
-        <ul className={styles.menu}>
-          <li className={styles.menuItem}><NavLink to="/faq" className={styles.menuLink}>FAQ</NavLink></li>
-          <li className={styles.menuItem}><NavLink to="/faq/#delivery" className={styles.menuLink}>Доставка</NavLink></li>
-          <li className={styles.menuItem}><NavLink to="/faq/#back" className={styles.menuLink}>Обмен и возврат</NavLink></li>
-          <li className={styles.menuItem}><NavLink to="/faq/#sizes" className={styles.menuLink}>Как подобрать размер</NavLink></li>
-        </ul>
-      </div>
-      <div className={styles.policy}>
-        <NavLink to="/user_agreement" target="_blank" className={styles.policyMessage}>Пользовательское соглашение</NavLink>
-        <a href="https://CactusWeb.io" className={styles.cactusWebLink}>CactusWeb</a>
+        <div className={styles.policy}>
+          <NavLink to="/user_agreement" target="_blank" className={styles.policyMessage}>Пользовательское соглашение</NavLink>
+          <a href="https://CactusWeb.io" className={styles.cactusWebLink}>CactusWeb</a>
+        </div>
       </div>
     </footer>
   )

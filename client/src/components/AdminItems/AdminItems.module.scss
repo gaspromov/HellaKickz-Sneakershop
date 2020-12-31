@@ -63,10 +63,11 @@
   &::before {
     position: absolute;
     left: 0;
+    top: 0;
     content: '';
 
     width: 40px;
-    height: 40px;
+    height: 38px;
     border-right: 1px solid #ec7f62;
 
     background-image: url('../../assets/images/plusIcon.svg');

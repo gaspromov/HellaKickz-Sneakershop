@@ -60,7 +60,7 @@ const Catalogue = () => {
         <div className={styles.products}>
           {entities.slice(0, num).map(({ _id, photos, brand, model, price }) => {
             return (
-              <NavLink key={_id} to={`/product/${_id}/${brand}-${model}`} className={styles.product}>
+              <NavLink key={_id} to={{ pathname: `/product/${_id}/${brand}-${model}`, props: { prevPath: window.location.search } }} className={styles.product}>
                 <img
                   src={photos[0]}
                   alt={`${brand} ${model}`}

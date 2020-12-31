@@ -24,6 +24,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
   row-gap: 20px;
+  column-gap: 20px;
   align-items: flex-start;
 
   margin-top: 40px;
@@ -80,7 +81,7 @@
   font-weight: 600;
 
   @media (min-width: 975px) {
-    margin-bottom: 3px;
+    margin-bottom: -2px;
 
     font-size: 30px;
     line-height: 37px;
@@ -94,7 +95,7 @@
   font-size: 13px;
 
   @media (min-width: 975px) {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     font-size: 24px;
     line-height: 30px;

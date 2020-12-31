@@ -150,6 +150,9 @@
 }
 
 .sortBar {
+  position: relative;
+  z-index: 1;
+
   width: 230px !important;
   height: 42px;
   border: 1px solid #000000 !important;
