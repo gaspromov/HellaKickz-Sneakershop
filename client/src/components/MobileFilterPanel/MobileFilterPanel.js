@@ -20,6 +20,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
   const [brands, setBrands] = useState({})
   const [sizes, setSizes] = useState({})
   const [search, setSearch] = useState('')
+  const [isShowButtonClicked, setIsShowButtonClicked] = useState(false)
   const filterRef = useRef()
   const searchRef = useRef()
   const history = useHistory()
@@ -34,11 +35,17 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
 
   useEffect(() => {
     if (isFilterOpen || isSearchOpen) {
+      document.querySelector('header').style.zIndex = '2'
       document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
-      document.getElementById('products').style.pointerEvents = 'none'
+      if (document.getElementById('products')) {
+        document.getElementById('products').style.pointerEvents = 'none'
+      }
     } else {
       document.querySelector('header').style.boxShadow = 'none'
-      document.getElementById('products').style.pointerEvents = 'unset'
+      document.querySelector('header').style.zIndex = 'unset'
+      if (document.getElementById('products')) {
+        document.getElementById('products').style.pointerEvents = 'unset'
+      }
     }
   }, [isFilterOpen, isSearchOpen])
 
@@ -145,11 +152,13 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
   const onShowButtonClick = () => {
     renderQuery(search, category, brands, sizes)
     setIsFilterOpen(false)
+    setIsShowButtonClicked(true)
   }
 
   const onSearchButtonClick = () => {
     renderQuery(search, category, brands, sizes)
     setIsSearchOpen(false)
+    setIsShowButtonClicked(true)
   }
 
   const onEraseFiltersButtonClick = () => {
@@ -159,6 +168,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
     setSearch('')
     renderQuery('', '', {}, {})
     setIsFilterOpen(false)
+    setIsShowButtonClicked(false)
   }
 
   return (
@@ -168,7 +178,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
       <div style={{ transform: isFilterOpen ? 'scale(1,1)' : 'scale(1, 0)' }} ref={filterRef} className={styles.filter}>
         <div className={styles.filterButtons}>
           <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterCloseButtonClick}></button>
-          {(category || Object.values(brands).length > 0 || Object.values(sizes).length > 0 || search) && <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>}
+          {(category || Object.values(brands).length > 0 || Object.values(sizes).length > 0 || search) && isShowButtonClicked && <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>}
         </div>
         <Menu multiple mode="inline" className={styles.menu} expandIcon={ExpandIcon}>
           <SubMenu title="Категория" key="category" className={styles.submenu}>

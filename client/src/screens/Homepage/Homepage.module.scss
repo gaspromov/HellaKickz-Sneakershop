@@ -264,6 +264,7 @@
 
 .feedbacksWrapper {
   display: flex;
+  align-items: baseline;
   justify-content: center;
 
   max-width: 890px;
@@ -295,11 +296,11 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   width: 158px;
-  height: 205px;
+  min-height: 205px;
+  padding-top: 10px;
 
   background-color: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
@@ -309,28 +310,28 @@
 
   @media (min-width: $tablet-size) {
     width: 390px;
-    height: 340px;
+    min-height: 340px;
     padding-top: 30px;
-    justify-content: unset;
   }
 }
 
 .feedbackBorder {
   position: absolute;
-  // z-index: -1;
+  top: -5px;
   bottom: 5px;
   left: 5px;
 
   width: 158px;
-  height: 200px;
+  min-height: 200px;
   border: 1px solid #ec7f62;
 
   @media (min-width: $tablet-size) {
+    top: -10px;
     bottom: 10px;
     left: 10px;
 
     width: 390px;
-    height: 340px;
+    min-height: 340px;
   }
 }
 
@@ -341,7 +342,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid #ec7f62;
+  border: 4px solid #ec7f62;
   object-fit: cover;
 
   @media (min-width: $tablet-size) {
@@ -385,8 +386,8 @@
   z-index: 1;
 
   max-width: 117px;
-  height: 76px;
   padding-top: 15px;
+  padding-bottom: 15px;
   border-top: 1px solid #ec7f62;
 
   font-family: 'Candara', sans-serif;
@@ -394,7 +395,6 @@
   line-height: 13px;
   font-weight: 300;
   text-align: center;
-  overflow-y: auto;
 
   @media (min-width: $tablet-size) {
     max-width: 312px;

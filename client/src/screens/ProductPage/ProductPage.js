@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../../store/product/actions'
 import { createCallback } from '../../store/callback/actions'
 import useInput from '../../hooks/useInput'
 import classNames from 'classnames'
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndicator'
@@ -20,7 +21,7 @@ import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
-const ProductPage = ({ match: { params: { id } }, location }) => {
+const ProductPage = ({ match: { params: { id } }, location, history }) => {
   const { loading, loaded, error, entities } = useSelector(({ product }) => product)
   const { loading: callbackLoading, loaded: callbackLoaded, error: callbackError } = useSelector(({ createCallback }) => createCallback)
   const [isCreateCallbackModalOpen, setIsCreateCallbackModalOpen] = useState(false)
@@ -29,7 +30,6 @@ const ProductPage = ({ match: { params: { id } }, location }) => {
   const contact = useInput('')
   const [size, setSize] = useState('')
   const dispatch = useDispatch()
-  const history = useHistory()
 
   useEffect(() => {
     dispatch(fetchProduct(id))
@@ -186,7 +186,7 @@ const ProductPage = ({ match: { params: { id } }, location }) => {
                   dropdownGap={-3}
                   className={styles.sizes}
                 />
-                <NavLink to="/faq" className={styles.faqButton}>Как выбрать размер?</NavLink>
+                <NavLink to="/faq" className={styles.faqButton}>Как подобрать размер?</NavLink>
               </div>
             )}
             <Button type="button" style="regular" text="Купить" onClick={openCreateCallbackModal} className={styles.buyButton} />
@@ -204,4 +204,4 @@ const ProductPage = ({ match: { params: { id } }, location }) => {
   )
 }
 
-export default ProductPage
+export default withRouter(ProductPage)

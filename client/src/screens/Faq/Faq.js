@@ -34,7 +34,7 @@ const Faq = () => {
         <h1 className={styles.title}>Faq</h1>
         <div className={styles.container}>
           <section className={styles.section} id="sizes">
-            <h2 className={styles.sectionTitle}>Как выбрать размер</h2>
+            <h2 className={styles.sectionTitle}>Как подобрать размер</h2>
             <p className={styles.sectionText}>
               Мы не хотим, чтобы Вы ошиблись с размером, поэтому прикрепили сюда размерные сетки необходимой одежды и обуви.
               <br />
