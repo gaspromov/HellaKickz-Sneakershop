@@ -186,7 +186,7 @@ const ProductPage = ({ match: { params: { id } }, location, history }) => {
                   dropdownGap={-3}
                   className={styles.sizes}
                 />
-                <NavLink to="/faq" className={styles.faqButton}>Как выбрать размер?</NavLink>
+                <NavLink to="/faq" className={styles.faqButton}>Как подобрать размер?</NavLink>
               </div>
             )}
             <Button type="button" style="regular" text="Купить" onClick={openCreateCallbackModal} className={styles.buyButton} />
