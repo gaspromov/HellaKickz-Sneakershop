@@ -186,6 +186,8 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
           return newSizes
         })
         break
+      case 'search':
+        setSearch('')
     }
 
   }
@@ -194,7 +196,8 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
     setCategory('')
     setBrands({})
     setSizes({})
-    renderQuery(search, '', {}, {}, sort)
+    setSearch('')
+    renderQuery('', '', {}, {}, sort)
   }
 
   return (
@@ -273,7 +276,7 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
           />
         </div>
       </div>
-      {(category || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0) && (
+      {(category || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0 || (search && searchValue)) && (
         <div className={styles.tags}>
           {category && <button type="button" onClick={() => onTagRemoveClick(category, 'category')} className={styles.tag}>{CATEGORIES[category]}</button>}
           {Object.keys(brands).map((brand) => {
@@ -282,6 +285,7 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
           {Object.keys(sizes).map((size) => {
             return <button key={size} type="button" onClick={() => onTagRemoveClick(size, 'size')} className={styles.tag}>{size}</button>
           })}
+          {searchValue && search && <button type="button" onClick={() => onTagRemoveClick(search, 'search')} className={styles.tag}>{search}</button>}
           <button type="button" onClick={onEraseAllTagsButtonClick} className={styles.eraseAllTagsButton}>Очистить всё</button>
         </div>
       )}
