@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../../store/product/actions'
 import { createCallback } from '../../store/callback/actions'
@@ -21,7 +21,7 @@ import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
-const ProductPage = ({ match: { params: { id } }, location, history }) => {
+const ProductPage = ({ match: { params: { id } } }) => {
   const { loading, loaded, error, entities } = useSelector(({ product }) => product)
   const { loading: callbackLoading, loaded: callbackLoaded, error: callbackError } = useSelector(({ createCallback }) => createCallback)
   const [isCreateCallbackModalOpen, setIsCreateCallbackModalOpen] = useState(false)
@@ -29,6 +29,8 @@ const ProductPage = ({ match: { params: { id } }, location, history }) => {
   const name = useInput('')
   const contact = useInput('')
   const [size, setSize] = useState('')
+  const location = useLocation()
+  const history = useHistory()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -74,7 +76,11 @@ const ProductPage = ({ match: { params: { id } }, location, history }) => {
   }
 
   const onBackLinkClick = () => {
-    history.push(`/catalog/${location?.props?.prevPath || ''}`)
+    history.push({
+      pathname: '/catalog',
+      search: location?.props?.prevPath || '',
+      state: { initialNum: location?.props?.num || 32, id }
+    })
   }
 
   const renderProduct = () => {
@@ -159,41 +165,44 @@ const ProductPage = ({ match: { params: { id } }, location, history }) => {
                 <p className={styles.colorLabel}>Цвет:</p>
                 {entities.sameProducts.map(({ _id, photos, brand, model, color }) => {
                   return (
-                    <NavLink to={`/product/${_id}/${brand}-${model}`} key={_id} className={styles.imageLink}>
-                      <img
+                    <NavLink to={`/ product / ${_id} /${brand}-${model}`} key={_id} className={styles.imageLink}>
+                      < img
                         src={photos[0]}
-                        alt={`${brand} ${model} ${color}`}
+                        alt={`${brand} ${model} ${color}`
+                        }
                         className={classNames(styles.imagePreview, _id === id && styles.imagePreviewCurrent)}
                       />
-                    </NavLink>
+                    </NavLink >
                   )
                 })}
-              </div>
+              </div >
             )
             }
             <p className={styles.brand}>{entities?.product?.brand}</p>
             <p className={styles.model}>{entities?.product?.model} {entities?.product?.color}</p>
             <p className={styles.price}>от {entities?.product?.price.toLocaleString('ru')} руб.</p>
-            {entities?.product?.sizes.length > 0 && (
-              <div className={styles.sizesWrapper}>
-                <p className={styles.sizeLabel}>Размер:</p>
-                <Select
-                  options={entities?.product?.sizes.sort(sortOptions).map((size) => ({ value: size, label: size.toUpperCase() }))}
-                  onChange={onSizeChange}
-                  searchable={false}
-                  placeholder="Выберите размер"
-                  color="#000000"
-                  dropdownGap={-3}
-                  className={styles.sizes}
-                />
-                <NavLink to="/faq" className={styles.faqButton}>Как подобрать размер?</NavLink>
-              </div>
-            )}
+            {
+              entities?.product?.sizes.length > 0 && (
+                <div className={styles.sizesWrapper}>
+                  <p className={styles.sizeLabel}>Размер:</p>
+                  <Select
+                    options={entities?.product?.sizes.sort(sortOptions).map((size) => ({ value: size, label: size.toUpperCase() }))}
+                    onChange={onSizeChange}
+                    searchable={false}
+                    placeholder="Выберите размер"
+                    color="#000000"
+                    dropdownGap={-3}
+                    className={styles.sizes}
+                  />
+                  <NavLink to="/faq" className={styles.faqButton}>Как подобрать размер?</NavLink>
+                </div>
+              )
+            }
             <Button type="button" style="regular" text="Купить" onClick={openCreateCallbackModal} className={styles.buyButton} />
             <p className={styles.priceWarning}>Цены на разные размеры могут различаться</p>
-          </div>
-        </div>
-      </div>
+          </div >
+        </div >
+      </div >
     )
   }
 
@@ -204,4 +213,4 @@ const ProductPage = ({ match: { params: { id } }, location, history }) => {
   )
 }
 
-export default withRouter(ProductPage)
+export default ProductPage

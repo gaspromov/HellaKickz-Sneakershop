@@ -42,7 +42,6 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
   }, [])
 
   const renderQuery = (search, category, brands, sizes, sort) => {
-    console.log(category)
     const query = {
       search,
       categories: category,
