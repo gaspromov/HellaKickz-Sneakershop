@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import ScrollMemory from 'react-router-scroll-memory'
 import Homepage from '../../screens/Homepage/Homepage'
 import Header from '../Header/Header'
 import AdminHeader from '../AdminHeader/AdminHeader'
@@ -25,29 +26,28 @@ const App = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Router>
-        {renderHeader()}
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route path="/catalog" component={Catalogue} />
-          <Route path="/product/:id" component={ProductPage} />
-          <Route path="/admin/auth" component={AdminAuth} />
-          <Route path="/admin/dashboard" component={AdminDashboard} />
-          <Route path="/admin/add" component={AdminAddItem} />
-          <Route path="/admin/edit/:id" component={AdminEditItem} />
-          <Route path="/faq" component={Faq} />
-          <Route path="/user_agreement" component={Policy} />
-          <Route render={() => <Redirect to={{ pathname: "/" }} />} />
-        </Switch>
-        {
-          !window.location.href.includes('admin') && !window.location.href.includes('user_agreement') && (
-            <Element name="contacts">
-              <Footer />
-            </Element>
-          )
-        }
-      </Router >
-    </div>
+      {renderHeader()}
+      <ScrollMemory />
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/catalog" component={Catalogue} />
+        <Route path="/product/:id" component={ProductPage} />
+        <Route path="/admin/auth" component={AdminAuth} />
+        <Route path="/admin/dashboard" component={AdminDashboard} />
+        <Route path="/admin/add" component={AdminAddItem} />
+        <Route path="/admin/edit/:id" component={AdminEditItem} />
+        <Route path="/faq" component={Faq} />
+        <Route path="/user_agreement" component={Policy} />
+        <Route render={() => <Redirect to={{ pathname: "/" }} />} />
+      </Switch>
+      {
+        !window.location.href.includes('admin') && !window.location.href.includes('user_agreement') && (
+          <Element name="contacts">
+            <Footer />
+          </Element>
+        )
+      }
+    </div >
   )
 }
 

@@ -117,7 +117,6 @@ const AdminEditItem = ({ match: { params: { id } } }) => {
 
   // Save product handlers
   const onItemSaveButtonClick = () => {
-    console.log(newPhotos.filter((photo) => typeof photo !== 'object'))
     const product = {
       photos: newPhotos.filter((photo) => typeof photo !== 'object'),
       brand: newBrand.value,

@@ -177,7 +177,7 @@ const Homepage = () => {
                     <div key={index} className={styles.feedback}>
                       <div className={styles.feedbackBorder}></div>
                       <a href="https://www.instagram.com/stories/highlights/17845431986031638/" target="_blank">
-                        <img src={photo} alt={`${name} аватар`} className={styles.feedbackImage} onClick={() => console.log('hello')} />
+                        <img src={photo} alt={`${name} аватар`} className={styles.feedbackImage} />
                       </a>
                       <h3 className={styles.feedbackName}>{name}</h3>
                       <p className={styles.feedbackSubs}>{subs}</p>
