@@ -165,7 +165,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
                 <p className={styles.colorLabel}>Цвет:</p>
                 {entities.sameProducts.map(({ _id, photos, brand, model, color }) => {
                   return (
-                    <NavLink to={`/ product / ${_id} /${brand}-${model}`} key={_id} className={styles.imageLink}>
+                    <NavLink to={`/product/${_id}/${brand}-${model}`} key={_id} className={styles.imageLink}>
                       < img
                         src={photos[0]}
                         alt={`${brand} ${model} ${color}`
