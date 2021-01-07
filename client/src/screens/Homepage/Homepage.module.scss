@@ -346,6 +346,7 @@
   object-fit: cover;
 
   @media (min-width: $tablet-size) {
+    border-width: 2px;
     width: 131px;
     height: 131px;
     margin-bottom: 10px;
