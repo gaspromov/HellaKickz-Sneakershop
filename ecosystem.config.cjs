@@ -13,8 +13,8 @@ module.exports = {
   ],
   deploy: {
     production: {
-      user: 'hellakickz',
-      host: ['194.67.104.166'],
+      user: 'root',
+      host: ['194.58.103.194'],
       ref: 'origin/master',
       repo: 'git@github.com:gaspromov/HellaKickz.git',
       path: '/var/www/hellakickz.ru',

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { NavLink, useLocation } from 'react-router-dom'
 import queryString from 'query-string'
@@ -9,9 +10,16 @@ import AdminFeedbacks from '../../components/AdminFeedbacks/AdminFeedbacks'
 
 import styles from './AdminDashboard.module.scss'
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ history }) => {
   const [index, setIndex] = useState(0)
   const location = useLocation()
+  const { isLoggedIn } = useSelector(({ user }) => user)
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      history.push('/admin/auth')
+    }
+  }, [])
 
   useEffect(() => {
     const params = queryString.parse(location.hash)

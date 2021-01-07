@@ -34,7 +34,7 @@
   width: 8px;
   height: 8px;
 
-  background-color: #d5d5d5;
+  background-color: #6d6d6d;
   border-radius: 50%;
   cursor: pointer;
 
@@ -48,6 +48,6 @@
   }
 
   &Selected {
-    background-color: #6d6d6d;
+    background-color: #d5d5d5;
   }
 }

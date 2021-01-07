@@ -14,10 +14,7 @@ const schema = new mongoose.Schema(
       type: String,
       required: true
     },
-    color: {
-      type: String,
-      required: true
-    },
+    color: String,
     code: {
       type: String,
       required: true

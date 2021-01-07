@@ -69,9 +69,11 @@
 .sectionText {
   font-size: 13px;
   word-break: break-word;
+  line-height: 16px;
 
   @media (min-width: $tablet-size) {
     font-size: 24px;
+    line-height: 30px;
   }
 }
 
@@ -103,19 +105,13 @@
 }
 
 .tabList {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
-  row-gap: 15px;
-  column-gap: 25px;
-
   max-width: 335px;
   margin-bottom: 20px;
 
   @media (min-width: $tablet-size) {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    display: flex;
     justify-content: center;
+    align-items: center;
 
     width: 30%;
     margin-bottom: unset;
@@ -126,12 +122,28 @@
   }
 }
 
+.tabsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  row-gap: 20px;
+  column-gap: 25px;
+
+  @media (min-width: $tablet-size) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+  }
+}
+
 .tab {
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 100%;
+
+  outline: none;
 }
 
 .tabButton {
@@ -140,7 +152,10 @@
   padding-top: 10px;
   padding-bottom: 10px;
 
+  font-family: 'SourceSansPro', sans-serif;
   font-size: 12px;
+
+  outline: none;
 
   @media (min-width: $tablet-size) {
     width: 200px;
@@ -149,6 +164,7 @@
     padding-bottom: 14px;
 
     font-size: 18px;
+    line-height: 22px;
   }
 }
 

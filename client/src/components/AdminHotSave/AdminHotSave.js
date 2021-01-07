@@ -11,7 +11,7 @@ import styles from './AdminHotSave.module.scss'
 const AdminHotDownload = ({ id, size, gridArea }) => {
   const [photo, setPhoto] = useState('')
   const link = useInput('')
-  const { loading, loaded, error } = useSelector(({ uploadHot }) => uploadHot)
+  const { loading, error } = useSelector(({ uploadHot }) => uploadHot)
   const dispatch = useDispatch()
 
   const onUploadPhotoClick = (e) => {

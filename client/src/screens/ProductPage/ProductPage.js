@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../../store/product/actions'
 import { createCallback } from '../../store/callback/actions'
@@ -9,16 +10,16 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselIndicator from '../../components/CarouselIndicator/CarouselIndicator'
 import CarouselArrow from '../../components/CarouselArrow/CarouselArrow'
-import Select from 'react-select'
-import SelectOption from '../../components/SelectOption/SelectOption'
-import SelectMenu from '../../components/SelectMenu/SelectMenu'
-import SelectControl from '../../components/SelectControl/SelectControl'
+import Select from 'react-dropdown-select'
 import Button from '../../components/Button/Button'
 import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
 
 import styles from './ProductPage.module.scss'
 import spinner from '../../assets/images/spinner.svg'
+import usSizes from '../../assets/sizes/us'
+import euSizes from '../../assets/sizes/eu'
+import clothesSizes from '../../assets/sizes/clothes'
 
 const ProductPage = ({ match: { params: { id } } }) => {
   const { loading, loaded, error, entities } = useSelector(({ product }) => product)
@@ -28,6 +29,8 @@ const ProductPage = ({ match: { params: { id } } }) => {
   const name = useInput('')
   const contact = useInput('')
   const [size, setSize] = useState('')
+  const location = useLocation()
+  const history = useHistory()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -53,13 +56,31 @@ const ProductPage = ({ match: { params: { id } } }) => {
     setIsThankYouModalOpen(false)
   }
 
+  const sortOptions = (a, b) => {
+    if (a.includes('us')) {
+      return usSizes.indexOf(a.toUpperCase()) - usSizes.indexOf(b.toUpperCase())
+    } else if (a.includes('eu')) {
+      return euSizes.indexOf(a.toUpperCase()) - euSizes.indexOf(b.toUpperCase())
+    }
+
+    return clothesSizes.indexOf(a.toUpperCase()) - clothesSizes.indexOf(b.toUpperCase())
+  }
+
   const onSizeChange = (e) => {
-    setSize(e.value)
+    setSize(e[0].value)
   }
 
   const onSendCallbackSubmit = (e) => {
     e.preventDefault()
     dispatch(createCallback(0, name.value, contact.value, `/product/${id}`, entities.product.brand, entities.product.model, size, entities.product.color))
+  }
+
+  const onBackLinkClick = () => {
+    history.push({
+      pathname: '/catalog',
+      search: location?.props?.prevPath || '',
+      state: { initialNum: location?.props?.num || 32, id }
+    })
   }
 
   const renderProduct = () => {
@@ -101,7 +122,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
             с политикой <span className={styles.policyWarningUnderline}>обработки персональных данных</span>
             </p>
             <p className={styles.writeInstagramMessage}>Или напишите нам в Instagram <br />
-              <span className={styles.writeInstagramMessageLink}>@hellakickz_</span>
+              <a href="https://www.instagram.com/hellakickz_/" target="_blank" className={styles.writeInstagramMessageLink}>@hellakickz_</a>
             </p>
           </div>
         </Modal>
@@ -112,7 +133,7 @@ const ProductPage = ({ match: { params: { id } } }) => {
             <Button type="button" style="regular" text="К товару" onClick={closeThankYouModal} className={styles.toCatalogueButtonClick} />
           </div>
         </Modal>
-        <NavLink to="/catalog" className={styles.mobileGoBackButton}></NavLink>
+        <button className={styles.mobileGoBackButton} onClick={onBackLinkClick}></button>
         <div className={styles.productContainer}>
           <div className={styles.photos}>
             {entities?.product?.photos?.length > 0 && (
@@ -132,52 +153,56 @@ const ProductPage = ({ match: { params: { id } } }) => {
                 }}
               >
                 {entities.product.photos.map((photo, id) => {
-                  return <img key={id} src={`http://localhost:3000/${photo}`} alt={`Фото ${id + 1}`} className={styles.photo} />
+                  return <img key={id} src={photo} alt={`Фото ${id + 1}`} className={styles.photo} />
                 })}
               </Carousel>
             )}
           </div>
           <div className={styles.productInfo}>
-            <NavLink to="/catalog" className={styles.goBackButton}></NavLink>
+            <button className={styles.goBackButton} onClick={onBackLinkClick}></button>
             {entities?.sameProducts?.length > 1 && (
               <div className={styles.colors}>
                 <p className={styles.colorLabel}>Цвет:</p>
                 {entities.sameProducts.map(({ _id, photos, brand, model, color }) => {
                   return (
                     <NavLink to={`/product/${_id}/${brand}-${model}`} key={_id} className={styles.imageLink}>
-                      <img
+                      < img
                         src={photos[0]}
-                        alt={`${brand} ${model} ${color}`}
+                        alt={`${brand} ${model} ${color}`
+                        }
                         className={classNames(styles.imagePreview, _id === id && styles.imagePreviewCurrent)}
                       />
-                    </NavLink>
+                    </NavLink >
                   )
                 })}
-              </div>
+              </div >
             )
             }
             <p className={styles.brand}>{entities?.product?.brand}</p>
             <p className={styles.model}>{entities?.product?.model} {entities?.product?.color}</p>
-            <p className={styles.price}>{entities?.product?.price} руб.</p>
-            {entities?.product?.sizes.length > 0 && (
-              <div className={styles.sizesWrapper}>
-                <p className={styles.sizeLabel}>Размер:</p>
-                <Select
-                  options={entities?.product?.sizes.map((size) => ({ value: size, label: size.toUpperCase() }))}
-                  placeholder="Выбрать размер"
-                  isSearchable={false}
-                  className={styles.sizes}
-                  components={{ Option: SelectOption, Menu: SelectMenu, Control: SelectControl }}
-                  onChange={onSizeChange}
-                />
-                <NavLink to="/faq" className={styles.faqButton}>Как выбрать размер?</NavLink>
-              </div>
-            )}
+            <p className={styles.price}>от {entities?.product?.price.toLocaleString('ru')} руб.</p>
+            {
+              entities?.product?.sizes.length > 0 && (
+                <div className={styles.sizesWrapper}>
+                  <p className={styles.sizeLabel}>Размер:</p>
+                  <Select
+                    options={entities?.product?.sizes.sort(sortOptions).map((size) => ({ value: size, label: size.toUpperCase() }))}
+                    onChange={onSizeChange}
+                    searchable={false}
+                    placeholder="Выберите размер"
+                    color="#000000"
+                    dropdownGap={-3}
+                    className={styles.sizes}
+                  />
+                  <NavLink to="/faq" className={styles.faqButton}>Как подобрать размер?</NavLink>
+                </div>
+              )
+            }
             <Button type="button" style="regular" text="Купить" onClick={openCreateCallbackModal} className={styles.buyButton} />
             <p className={styles.priceWarning}>Цены на разные размеры могут различаться</p>
-          </div>
-        </div>
-      </div>
+          </div >
+        </div >
+      </div >
     )
   }
 

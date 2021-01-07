@@ -150,17 +150,29 @@
 }
 
 .sortBar {
-  width: 230px;
+  position: relative;
+  z-index: 1;
+
+  width: 230px !important;
   height: 42px;
-  padding-top: 2px;
-  border: 1px solid #000000;
+  border: 1px solid #000000 !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
 
   font-family: 'Candara', sans-serif;
   font-size: 18px;
-}
 
-.sort__option {
-  background-color: red !important;
+  & span {
+    padding-top: 3px;
+    padding-left: 5px;
+  }
+
+  & input {
+    padding-top: 3px;
+
+    font-family: 'Candara', sans-serif;
+    font-size: 18px;
+  }
 }
 
 .tags {

@@ -12,7 +12,10 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "lint": "eslint --debug src/",
     "lint:write": "eslint --fix --debug src/ ",
-    "prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**/*.js",
+    "setup": "pm2 deploy ecosystem.config.cjs production setup",
+    "deploy": "pm2 deploy ecosystem.config.cjs production",
+    "deploy:update": "pm2 deploy ecosystem.config.cjs production update"
   },
   "type": "module",
   "husky": {

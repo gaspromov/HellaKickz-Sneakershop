@@ -2,6 +2,11 @@
 
 .main {
   position: relative;
+  min-height: 626px;
+}
+
+.carouselWrapper {
+  background-color: transparent;
 }
 
 .overlay {
@@ -53,6 +58,9 @@
   padding-top: 12px;
   padding-bottom: 12px;
 
+  font-size: 18px;
+  line-height: 16px;
+  font-family: 'SourceSansPro', sans-serif;
   background-color: #ec7f62;
   color: #ffffff;
 
@@ -98,6 +106,9 @@
   padding-top: 12px;
   padding-bottom: 12px;
 
+  font-size: 18px;
+  line-height: 16px;
+  font-family: 'SourceSansPro', sans-serif;
   background-color: #ec7f62;
   color: #ffffff;
 
@@ -139,7 +150,7 @@
   transform: rotate(180deg);
   cursor: pointer;
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 1097px) {
     display: none;
   }
 }
@@ -152,15 +163,11 @@
 
   @media (min-width: 1097px) {
     flex-direction: row;
-
-    max-height: 550px;
   }
 }
 
 .photos {
   position: relative;
-
-  flex: 1;
 
   max-width: 300px;
   width: 100%;
@@ -177,12 +184,12 @@
 }
 
 .photo {
-  height: 300px;
+  height: 298px;
   object-fit: contain;
 
   @media (min-width: $tablet-size) {
     width: 550px;
-    height: 550px;
+    height: 548px;
   }
 }
 
@@ -209,7 +216,9 @@
 }
 
 .goBackButton {
-  @media (min-width: $tablet-size) {
+  cursor: pointer;
+
+  @media (min-width: 1097px) {
     position: absolute;
     right: 0;
 
@@ -258,7 +267,7 @@
   height: 80px;
   border: 1px solid #d5d5d5;
 
-  object-fit: cover;
+  object-fit: contain;
 
   @media (min-width: $tablet-size) {
     width: 100px;
@@ -317,12 +326,10 @@
 }
 
 .sizesWrapper {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
   @media (min-width: $tablet-size) {
     order: 5;
-
-    margin-bottom: 34px;
   }
 }
 
@@ -339,15 +346,17 @@
 }
 
 .sizes {
-  width: 170px;
+  max-width: 170px;
   height: 30px;
   margin-bottom: 5px;
-  border: 1px solid #6d6d6d;
+  border: 1px solid #6d6d6d !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
 
   font-size: 12px;
 
   @media (min-width: $tablet-size) {
-    width: 300px;
+    max-width: 300px;
     height: 40px;
 
     font-size: 20px;
@@ -369,29 +378,35 @@
 
   width: 170px;
   height: 40px;
-  margin-top: auto;
+  margin-top: 10px;
   margin-bottom: 10px;
-  padding-top: 11px;
-  padding-bottom: 11px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
+  font-family: 'SourceSansPro', sans-serif;
   background-color: #ec7f62;
   color: #ffffff;
+  font-size: 14px;
+  line-height: 17px;
 
   @media (min-width: $tablet-size) {
     order: 6;
 
+    font-size: 24px;
+    line-height: 30px;
     width: 300px;
     height: 50px;
-    margin-bottom: unset;
 
     background-color: transparent;
     color: #000000;
+    line-height: 30px;
   }
 }
 
 .priceWarning {
   font-size: 12px;
   font-weight: 300;
+  line-height: 18px;
 
   @media (min-width: $tablet-size) {
     order: 7;

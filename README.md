@@ -1,3 +1,7 @@
-Пароль от учетной записи hellakickz: `8fm8foTmQYmBXql8`
+# HellaKickz
 
-Пароль от пользователя hellakickz в MongoDB: `cK5Q7zUY1gSLmiR2`
+Пароль от учетной записи root:
+`iojaeVuuti9n`
+
+Пароль от пользователя root в MongoDB:
+`cK5Q7zUY1gSLmiR2`

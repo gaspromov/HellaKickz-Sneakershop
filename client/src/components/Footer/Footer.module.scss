@@ -110,7 +110,7 @@
 
 .footer {
   margin-left: 20px;
-  padding-top: 20px;
+  padding-top: 27px;
   padding-right: 20px;
   padding-bottom: 30px;
   border-top: 3px solid #ec7f62;
@@ -126,7 +126,7 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
 
   max-width: 815px;
   margin: 0 auto;
@@ -173,6 +173,12 @@
   white-space: nowrap;
   cursor: pointer;
   outline: none;
+  transition: all 0.4s;
+
+  &:hover {
+    border-color: #ec7f62;
+    transition: all 0.4s;
+  }
 
   @media (min-width: $tablet-size) {
     margin-bottom: 53px;
@@ -181,7 +187,18 @@
   }
 }
 
-.socialMenu {
+.mobileSocialMenu {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 30px;
+
+  @media (min-width: $tablet-size) {
+    display: none;
+  }
+}
+
+.desktopSocialMenu {
   display: none;
 
   @media (min-width: $tablet-size) {
@@ -287,10 +304,6 @@
 
   max-width: 815px;
   margin: 0 auto;
-
-  @media (min-width: $tablet-size) {
-    margin-bottom: 15px;
-  }
 }
 
 .policyMessage {
@@ -299,6 +312,8 @@
   color: #6d6d6d;
 
   @media (min-width: $tablet-size) {
+    margin-bottom: 15px;
+
     font-size: 14px;
   }
 }
@@ -310,6 +325,8 @@
   color: #2a51dc;
 
   @media (min-width: $tablet-size) {
+    margin-bottom: 15px;
+
     font-size: 14px;
 
     &::before {

@@ -46,7 +46,7 @@ server.use('/api/v1/uploads', uploadsRoutes)
 server.get('*', (req, res) => {
   res.setHeader(
     'Content-Security-Policy',
-    "default-src * 'self'; script-src * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src * 'self' data: https:;"
+    "default-src * 'self'; script-src * 'self' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; img-src * 'self' data: https: blob:;"
   )
   return res.sendFile(
     path.resolve(__dirname, '..', 'client', 'build', 'index.html')

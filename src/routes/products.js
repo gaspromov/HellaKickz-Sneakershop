@@ -52,33 +52,50 @@ router.put(
 
 router.get('/', async (req, res) => {
   try {
-    const { search, categories, brands, sizes } = sanitizeParams(req.query)
+    const {
+      search = '',
+      categories = '',
+      brands = '',
+      sizes = ''
+    } = sanitizeParams(req.query)
     const { sort } = req.query
-    let products = await Product.find().sort(sort)
+    const searchArr = search.replace(/\s+/g, ' ').trim().split(' ')
+    const brandArr = brands.split(',')
+    const products = await Product.find().sort(sort || '-createdAt')
 
-    products = search
-      ? filterArray(products, ['brand', 'model', 'code'], search)
-      : products
+    let result = []
+
+    products.forEach(p => {
+      const brandAndModel = p.brand + p.model
+      const isNeed = searchArr.every(s => {
+        return brandAndModel.toLowerCase().includes(s)
+      })
+      if (isNeed) {
+        result.push(p)
+      }
+    })
 
     if (categories) {
       categories.split(',').forEach(category => {
-        products = filterArray(products, ['category'], category)
+        result = filterArray(result, ['category'], category)
       })
     }
 
     if (brands) {
-      brands.split(',').forEach(brand => {
-        products = filterArray(products, ['brand'], brand)
+      result = result.filter(p => {
+        return brandArr.some(b => {
+          return p.brand.toLowerCase().includes(b.toLowerCase())
+        })
       })
     }
 
     if (sizes) {
       sizes.split(',').forEach(size => {
-        products = filterArray(products, ['sizes'], size)
+        result = filterArray(result, ['sizes'], size)
       })
     }
 
-    return res.status(200).json(products)
+    return res.status(200).json(result)
   } catch (e) {
     return sendMessage(res, 500, 'Что-то пошло не так, попробуйте позже', e)
   }

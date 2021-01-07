@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -18,15 +20,29 @@
   position: relative;
 
   width: 100%;
-  height: 600px;
+  height: 450px;
   margin-right: 50px;
   margin-bottom: 20px;
   border: 3px solid #d5d5d5;
+
+  @media (min-width: $tablet-size) {
+    height: 700px;
+  }
 
   @media (min-width: 1097px) {
     min-width: 600px;
     max-width: 600px;
     margin-bottom: 0;
+  }
+}
+
+.photo {
+  height: 300px;
+  object-fit: contain;
+
+  @media (min-width: $tablet-size) {
+    width: 550px;
+    height: 550px;
   }
 }
 
@@ -132,11 +148,21 @@
   white-space: pre-line;
   cursor: text;
 
+  & input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: 'SourceSansPro', sans-serif;
+    font-size: 30px;
+  }
+
   &:nth-child(2) {
     margin-bottom: 6px;
 
-    font-size: 36px;
-    font-weight: 600;
+    & input {
+      font-size: 36px;
+      font-weight: 600;
+    }
   }
 
   &:nth-child(3) {
@@ -150,7 +176,9 @@
   &:nth-child(5) {
     margin-bottom: 30px;
 
-    font-weight: 600;
+    & input {
+      font-weight: 600;
+    }
   }
 }
 

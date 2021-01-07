@@ -31,11 +31,6 @@ const Homepage = () => {
     dispatch(fetchSlides())
     dispatch(fetchHots())
     dispatch(fetchFeedbacks())
-    document.querySelector('header').style.zIndex = '3'
-
-    return () => {
-      document.querySelector('header').style.zIndex = 'unset'
-    }
   }, [])
 
   useEffect(() => {
@@ -64,7 +59,7 @@ const Homepage = () => {
       <Helmet>
         <meta name="description" content="Мы занимаемся только 100% оригинальной продукцией Yeezy | Jordan и много другое. Гарантии оригинальности товара." />
         <meta name="keywords" content="кроссовки, изи, изи 350, YEEZY, yeezy boost, оригинал, только оригинал, yeezy 350 v2, купить изи 350, hellakickz, мода, Jordan, Off-White, офф вайт, yeezy 700, hypestation, депо, kickstown, айзел, aizel, nikita efremov, federation, фederation, оригинальные бренды, tsum, цум, Kanye west, канье вест, коллаборация, фарфетч, farfetch, supreme, kaws, суприм, кавс, travis scott, тревис скот, nike, dunk, virgil abloh, вирджил абло, yeezy black, yeezy white" />
-        <title>Hellakickz – больше чем просто кроссовки</title>
+        <title>Hellakickz – Больше чем просто кроссовки</title>
       </Helmet>
       <div>
         <div className={styles.carousel}>
@@ -96,16 +91,16 @@ const Homepage = () => {
           {hotsLoaded && (
             <div className={styles.bestContainer}>
               <NavLink to={hots[0].link} style={{ gridArea: 'a' }}>
-                <img src={`http://localhost:3000/${hots[0].photo}`} alt="Подборка 1" className={styles.bestItem} />
+                <img src={hots[0].photo} alt="Подборка 1" className={styles.bestItem} />
               </NavLink>
               <NavLink to={hots[1].link} style={{ gridArea: 'b' }}>
-                <img src={`http://localhost:3000/${hots[1].photo}`} alt="Подборка 2" className={styles.bestItem} />
+                <img src={hots[1].photo} alt="Подборка 2" className={styles.bestItem} />
               </NavLink>
               <NavLink to={hots[2].link} style={{ gridArea: 'c' }}>
-                <img src={`http://localhost:3000/${hots[2].photo}`} alt="Подборка 3" className={styles.bestItem} />
+                <img src={hots[2].photo} alt="Подборка 3" className={styles.bestItem} />
               </NavLink>
               <NavLink to={hots[3].link} style={{ gridArea: 'd' }}>
-                <img src={`http://localhost:3000/${hots[3].photo}`} alt="Подборка 4" className={styles.bestItem} />
+                <img src={hots[3].photo} alt="Подборка 4" className={styles.bestItem} />
               </NavLink>
             </div>
           )}
@@ -131,15 +126,15 @@ const Homepage = () => {
                   <span className={styles.aboutName}>HellaKickz</span> – это не только о лимитированных кросcовках, но и о стритвир-культуре в целом.
                 </p>
                 <p className={styles.aboutTextParagraph}>
-                  С каждым днем все больше людей желает заполучить редкую модель, часто имея дело с подделками или сомнительными продавцами.
+                  С каждым днем все больше людей желает заполучить редкую модель, часто сталкиваясь с подделками или сомнительными продавцами.
                 </p>
                 <p className={styles.aboutTextParagraph}>
-                  Однажды столкнувшись с этой проблемой сами, испытав серьезные трудности, мы решили открыть свой онлайн-стор, который будет помогать Вам в выборе и покупке действительно крутых и оригинальных кроссовок, одежды и аксессуаров, ведь мы не только продаем наши товары, но и сами сходим по ним с ума и с удовольствием носим.
+                  В свое время осознав эту проблему и испытав серьезные трудности при поиске и покупке лимитированной обуви, мы решили открыть свой онлайн-стор, который будет помогать в выборе и приобретении крутых и оригинальных кроссовок, одежды и аксессуаров, ведь мы не только продаем наши товары, но и сами сходим по ним с ума и с удовольствием носим.
                 </p>
                 <p className={styles.aboutTextParagraph}>
-                  Наш большой опыт и работа в кратчайшие сроки помогут Вам быть стильными и необычными в этом бурно меняющемся мире
+                  Наш большой опыт и работа в кратчайшие сроки помогут Вам быть стильными и необычными в этом бурно меняющемся мире.
                 </p>
-                Ваши Артём и Борис.
+                Ваши Борис и Артем.
               </div>
               <div className={styles.aboutPhotoWrapper}>
                 <img src={aboutPhoto} className={styles.aboutPhoto} />
@@ -181,7 +176,9 @@ const Homepage = () => {
                   return (
                     <div key={index} className={styles.feedback}>
                       <div className={styles.feedbackBorder}></div>
-                      <img src={`http://localhost:3000/${photo}`} alt={`${name} аватар`} className={styles.feedbackImage} />
+                      <a href="https://www.instagram.com/stories/highlights/17845431986031638/" target="_blank">
+                        <img src={photo} alt={`${name} аватар`} className={styles.feedbackImage} />
+                      </a>
                       <h3 className={styles.feedbackName}>{name}</h3>
                       <p className={styles.feedbackSubs}>{subs}</p>
                       <p className={styles.feedbackComment}>{feedback}</p>

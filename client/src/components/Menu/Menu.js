@@ -30,7 +30,7 @@ const Menu = () => {
             <NavLink to="/catalog" className={styles.menuLink}>Каталог</NavLink>
           </li>
           <li className={styles.menuItem} onMouseEnter={onShoeLinkMouseEnter} onMouseLeave={onShoeLinkMouseLeave}>
-            <NavLink to="/catalog/?categories=sneakers" className={styles.menuLink}>Обувь</NavLink>
+            <NavLink to="/catalog/?categories=sneakers" id="sneakerLink" className={styles.menuLink} style={{ borderBottom: isSubMenuOpen && '2px solid #ec7f62' }}>Обувь</NavLink>
             <SubMenu isOpen={isSubMenuOpen} onCategoryMenuLinkClick={onCategoryMenuLinkClick} />
           </li>
           <li className={styles.menuItem}>

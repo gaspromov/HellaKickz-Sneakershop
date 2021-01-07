@@ -3,10 +3,7 @@ import { useHistory } from 'react-router-dom'
 import classNames from 'classnames'
 import queryString from 'query-string'
 import useDebounce from '../../hooks/useDebounce'
-import Select from 'react-select'
-import SelectOption from '../SelectOption/SelectOption'
-import SelectMenu from '../SelectMenu/SelectMenu'
-import SelectControl from '../SelectControl/SelectControl'
+import Select from 'react-dropdown-select'
 
 import styles from './FilterPanel.module.scss'
 import usSizes from '../../assets/sizes/us'
@@ -14,9 +11,8 @@ import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
 
 const CATEGORIES = { sneakers: 'Обувь', clothes: 'Одежда', accessory: 'Аксессуары', childish: 'Для детей' }
-const BRANDS = ['Yeezy', 'Nike', 'Stussy', 'Supreme', 'Off-White', 'CPFM', 'Fear of God', 'CDG', 'ACG']
+const BRANDS = ['Yeezy', 'Jordan', 'Stussy', 'Supreme', 'Off-White', 'Nike', 'CPFM', 'Fear of God', 'CDG', 'ACG']
 const options = [
-  { value: '', label: 'По умолчанию', className: styles.option },
   { value: '-createdAt', label: 'Новинки' },
   { value: 'price', label: 'Цена: по возрастанию' },
   { value: '-price', label: 'Цена: по убыванию' }
@@ -46,7 +42,6 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
   }, [])
 
   const renderQuery = (search, category, brands, sizes, sort) => {
-    console.log(category)
     const query = {
       search,
       categories: category,
@@ -167,8 +162,8 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
   }, [search])
 
   const onSortChange = (e) => {
-    setSearch(e.value)
-    renderQuery(search, category, brands, sizes, e.value)
+    setSort(e[0].value)
+    renderQuery(search, category, brands, sizes, e[0].value)
   }
 
   const onTagRemoveClick = (tag, type) => {
@@ -191,6 +186,8 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
           return newSizes
         })
         break
+      case 'search':
+        setSearch('')
     }
 
   }
@@ -199,7 +196,8 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
     setCategory('')
     setBrands({})
     setSizes({})
-    renderQuery(search, '', {}, {}, sort)
+    setSearch('')
+    renderQuery('', '', {}, {}, sort)
   }
 
   return (
@@ -267,16 +265,18 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
             className={styles.searchBar}
           />
           <Select
+            values={sort ? [{ value: sort, label: options.find(({ value }) => value === sort).label }] : [{ value: '', label: 'Сортировать' }]}
             options={options}
-            placeholder="Сортировать"
             onChange={onSortChange}
-            isSearchable={false}
+            searchable={false}
+            placeholder="Сортировать"
+            color="#000000"
+            dropdownGap={-3}
             className={styles.sortBar}
-            components={{ Option: SelectOption, Menu: SelectMenu, Control: SelectControl }}
           />
         </div>
       </div>
-      {(category || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0) && (
+      {(category || Object.keys(brands).length > 0 || Object.keys(sizes).length > 0 || (search && searchValue)) && (
         <div className={styles.tags}>
           {category && <button type="button" onClick={() => onTagRemoveClick(category, 'category')} className={styles.tag}>{CATEGORIES[category]}</button>}
           {Object.keys(brands).map((brand) => {
@@ -285,6 +285,7 @@ const FilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSize
           {Object.keys(sizes).map((size) => {
             return <button key={size} type="button" onClick={() => onTagRemoveClick(size, 'size')} className={styles.tag}>{size}</button>
           })}
+          {searchValue && search && <button type="button" onClick={() => onTagRemoveClick(search, 'search')} className={styles.tag}>{search}</button>}
           <button type="button" onClick={onEraseAllTagsButtonClick} className={styles.eraseAllTagsButton}>Очистить всё</button>
         </div>
       )}

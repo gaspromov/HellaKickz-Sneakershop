@@ -27,6 +27,7 @@ export const addProductReducer = (state = addProductInitialState, action) => {
     case ADD_PRODUCT_REQUEST:
       return {
         ...state,
+        loaded: false,
         loading: true,
         error: null
       }

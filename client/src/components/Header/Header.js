@@ -11,6 +11,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const width = useWindowWidth()
   const headerRef = useRef()
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     if (width >= 870 && isMobileMenuOpen) {
@@ -26,6 +27,7 @@ const Header = () => {
 
   useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick)
+    setIsLoaded(true)
 
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick)
@@ -33,16 +35,22 @@ const Header = () => {
   }, [])
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
-      document.querySelector('body').style.height = '100%'
-      document.querySelector('body').style.overflow = 'hidden'
-    } else {
-      document.querySelector('header').style.boxShadow = 'none'
-      document.querySelector('body').style.height = 'unset'
-      document.querySelector('body').style.overflow = 'unset'
+    if (isLoaded) {
+      if (isMobileMenuOpen) {
+        document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+        document.querySelector('header').style.zIndex = '3'
+        document.querySelector('body').style.height = '100%'
+        document.querySelector('body').style.overflow = 'hidden'
+        document.querySelector('main').style.pointerEvents = 'none'
+      } else {
+        document.querySelector('header').style.boxShadow = 'none'
+        document.querySelector('header').style.zIndex = 'unset'
+        document.querySelector('body').style.height = 'unset'
+        document.querySelector('body').style.overflow = 'unset'
+        document.querySelector('main').style.pointerEvents = 'unset'
+      }
     }
-  }, [isMobileMenuOpen])
+  }, [isMobileMenuOpen, isLoaded])
 
   const onLogoClick = () => {
     setIsMobileMenuOpen(false)

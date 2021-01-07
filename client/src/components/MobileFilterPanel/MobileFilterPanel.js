@@ -11,6 +11,7 @@ import styles from './MobileFilterPanel.module.scss'
 import usSizes from '../../assets/sizes/us'
 import euSizes from '../../assets/sizes/eu'
 import clothesSizes from '../../assets/sizes/clothes'
+const BRANDS = ['Yeezy', 'Jordan', 'Stussy', 'Supreme', 'Off-White', 'Nike', 'CPFM', 'Fear of God', 'CDG', 'ACG']
 
 const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initialSizes }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -19,6 +20,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
   const [brands, setBrands] = useState({})
   const [sizes, setSizes] = useState({})
   const [search, setSearch] = useState('')
+  const [isShowButtonClicked, setIsShowButtonClicked] = useState(false)
   const filterRef = useRef()
   const searchRef = useRef()
   const history = useHistory()
@@ -33,9 +35,17 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
 
   useEffect(() => {
     if (isFilterOpen || isSearchOpen) {
+      document.querySelector('header').style.zIndex = '2'
       document.querySelector('header').style.boxShadow = '0 0 0 9999px rgba(0, 0, 0, 0.2)'
+      if (document.getElementById('products')) {
+        document.getElementById('products').style.pointerEvents = 'none'
+      }
     } else {
       document.querySelector('header').style.boxShadow = 'none'
+      document.querySelector('header').style.zIndex = 'unset'
+      if (document.getElementById('products')) {
+        document.getElementById('products').style.pointerEvents = 'unset'
+      }
     }
   }, [isFilterOpen, isSearchOpen])
 
@@ -142,29 +152,33 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
   const onShowButtonClick = () => {
     renderQuery(search, category, brands, sizes)
     setIsFilterOpen(false)
+    setIsShowButtonClicked(true)
   }
 
   const onSearchButtonClick = () => {
     renderQuery(search, category, brands, sizes)
     setIsSearchOpen(false)
+    setIsShowButtonClicked(true)
   }
 
   const onEraseFiltersButtonClick = () => {
     setCategory('')
     setBrands({})
     setSizes({})
-    renderQuery(search, '', {}, {})
+    setSearch('')
+    renderQuery('', '', {}, {})
     setIsFilterOpen(false)
+    setIsShowButtonClicked(false)
   }
 
   return (
     <div className={styles.mobileFilterPanel}>
       <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterOpenButtonClick}></button>
       <button type="button" className={classNames(styles.filterPanelButton, styles.searchOpenButton)} onClick={onSearchOpenButtonClick}></button>
-      <div style={{ display: isFilterOpen ? 'block' : 'none' }} ref={filterRef} className={styles.filter}>
+      <div style={{ transform: isFilterOpen ? 'scale(1,1)' : 'scale(1, 0)' }} ref={filterRef} className={styles.filter}>
         <div className={styles.filterButtons}>
           <button type="button" className={classNames(styles.filterPanelButton, styles.filterOpenButton)} onClick={onFilterCloseButtonClick}></button>
-          <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>
+          {(category || Object.values(brands).length > 0 || Object.values(sizes).length > 0 || search) && isShowButtonClicked && <button type="button" onClick={onEraseFiltersButtonClick} className={styles.eraseFilterButton}>Сбросить</button>}
         </div>
         <Menu multiple mode="inline" className={styles.menu} expandIcon={ExpandIcon}>
           <SubMenu title="Категория" key="category" className={styles.submenu}>
@@ -174,10 +188,11 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
             <MenuItem key="childish" onClick={onCategoryItemClick} className={classNames(styles.menuItem, category === 'childish' && styles.menuItemSelected)}>Для детей</MenuItem>
           </SubMenu>
           <SubMenu title="Бренд" key="brands" className={styles.submenu}>
-            <MenuItem key="yeezy" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['yeezy'] && styles.menuItemSelected)}>Yeezy</MenuItem>
-            <MenuItem key="nike" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['nike'] && styles.menuItemSelected)}>Nike</MenuItem>
-            <MenuItem key="off-white" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['off-white'] && styles.menuItemSelected)}>Off-white</MenuItem>
-            <MenuItem key="supreme" onClick={onBrandItemClick} className={classNames(styles.menuItem, brands['supreme'] && styles.menuItemSelected)}>Supreme</MenuItem>
+            {BRANDS.map(brand => {
+              return (
+                <MenuItem key={brand} onClick={onBrandItemClick} className={classNames(styles.menuItem, brands[brand] && styles.menuItemSelected)}>{brand}</MenuItem>
+              )
+            })}
           </SubMenu>
           <SubMenu title="Размер" key="sizes" className={styles.submenu}>
             {(category === 'childish' ? euSizes : usSizes).map((size) => {
@@ -194,7 +209,7 @@ const MobileFilterPanel = ({ initialSearch, initialCategory, initialBrand, initi
         </Menu>
         <Button type="button" style="regular" text="Показать" onClick={onShowButtonClick} className={styles.showButton} />
       </div>
-      <div style={{ display: isSearchOpen ? 'block' : 'none' }} ref={searchRef} className={styles.search}>
+      <div style={{ transform: isSearchOpen ? 'scale(1,1)' : 'scale(1,0)' }} ref={searchRef} className={styles.search}>
         <button type="button" onClick={onCloseSearchButtonClick} className={styles.closeSearchButton}></button>
         <input type="text" placeholder="Поиск" value={search} onChange={onSearchChange} className={styles.searchBar} />
         <Button type="button" style="regular" text="Найти" onClick={onSearchButtonClick} className={styles.searchButton} />

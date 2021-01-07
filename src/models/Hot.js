@@ -10,10 +10,7 @@ const schema = new mongoose.Schema(
       type: String,
       required: true
     },
-    link: {
-      type: String,
-      required: true
-    }
+    link: String
   },
   {
     versionKey: false,

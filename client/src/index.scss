@@ -11,8 +11,8 @@
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -92,8 +92,12 @@ li {
 .modalTitle {
   margin-bottom: 10px;
 
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 600;
+
+  @media (min-width: $tablet-size) {
+    font-size: 48px;
+  }
 }
 
 .modalText {
@@ -109,6 +113,14 @@ li {
     font-size: 24px;
     line-height: 22px;
   }
+}
+
+.slide {
+  background: #ffffff !important;
+}
+
+.rec-item-wrapper {
+  height: 100%;
 }
 
 .rc-menu-item-active,
@@ -135,26 +147,10 @@ li {
   background-color: transparent !important;
 }
 
-.css-yk16xz-control {
-  border: none !important;
-  outline: none !important;
-}
-
-.css-1okebmr-indicatorSeparator {
-  display: none;
-}
-
-.css-yk16xz-control {
-  border: none !important;
+.react-dropdown-select-dropdown {
+  border: 1px solid #d5d5d5 !important;
+  border-radius: unset !important;
   box-shadow: none !important;
-}
-
-.css-1hb7zxy-IndicatorsContainer {
-  display: none !important;
-}
-
-.infinite-scroll-component__outerdiv {
-  height: 100%;
 }
 
 @keyframes spin {
@@ -199,4 +195,38 @@ li {
   height: 1px !important;
   width: 1px !important;
   overflow: hidden;
+}
+
+.WordSection1 {
+  max-width: 625px;
+  margin: 0 auto;
+}
+
+p.MsoNormal,
+li.MsoNormal,
+div.MsoNormal {
+  margin-top: 0in;
+  margin-right: 0in;
+  margin-bottom: 8pt;
+  margin-left: 0in;
+  line-height: 107%;
+  font-size: 11pt;
+  font-family: 'Calibri', sans-serif;
+}
+
+a.wordLink:link span {
+  color: #0563c1 !important;
+}
+
+a.wordLink:link,
+span.MsoHyperlink {
+  color: #0563c1;
+  text-decoration: underline;
+}
+.MsoChpDefault {
+  font-family: 'Calibri', sans-serif;
+}
+.MsoPapDefault {
+  margin-bottom: 8pt;
+  line-height: 107%;
 }

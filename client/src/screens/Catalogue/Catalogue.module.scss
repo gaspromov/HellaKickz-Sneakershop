@@ -8,6 +8,7 @@
 .infiniteScroll {
   position: relative !important;
   height: 100% !important;
+  min-height: 626px;
 }
 
 .container {
@@ -15,7 +16,7 @@
   margin: 0 auto;
 
   @media (min-width: $tablet-size) {
-    min-height: 810px;
+    min-height: 626px;
   }
 }
 
@@ -23,12 +24,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
   row-gap: 20px;
+  column-gap: 20px;
   align-items: flex-start;
 
   margin-top: 40px;
   margin-bottom: 50px;
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 975px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 43px;
   }
@@ -39,25 +41,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  justify-self: center;
 
   max-width: 158px;
 
   color: #000000;
-  word-break: break-all;
+  text-align: center;
+  word-break: break-word;
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 975px) {
     max-width: 288px;
   }
 }
 
-.imageWrapper {
+.image {
   width: 156px;
   height: 93px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   border: 2px solid transparent;
 
-  overflow: hidden;
+  object-fit: contain;
   transition: 0.4s all;
 
   &:hover {
@@ -65,24 +67,11 @@
     transition: 0.4s all;
   }
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 975px) {
     width: 242px;
     height: 155px;
-    margin-bottom: 36px;
+    margin-bottom: 10px;
   }
-
-  &:hover img {
-    transform: scale(1.2);
-    transition: 0.4s all;
-  }
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-  transition: 0.4s all;
 }
 
 .title {
@@ -90,10 +79,11 @@
   font-size: 18px;
   font-weight: 600;
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 975px) {
     margin-bottom: 10px;
 
     font-size: 30px;
+    line-height: 21px;
   }
 }
 
@@ -103,10 +93,11 @@
   font-family: 'SourceSansPro', sans-serif;
   font-size: 13px;
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 975px) {
     margin-bottom: 15px;
 
     font-size: 24px;
+    line-height: 24px;
   }
 }
 
@@ -115,7 +106,8 @@
   font-size: 14px;
   font-weight: 600;
 
-  @media (min-width: $tablet-size) {
+  @media (min-width: 975px) {
     font-size: 22px;
+    line-height: 28px;
   }
 }

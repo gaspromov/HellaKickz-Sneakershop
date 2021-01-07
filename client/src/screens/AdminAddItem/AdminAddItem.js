@@ -6,7 +6,7 @@ import useInput from '../../hooks/useInput'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
 import Button from '../../components/Button/Button'
-import ContentEditable from 'react-contenteditable'
+import AutosizeInput from 'react-input-autosize'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import CarouselArrow from '../../components/CarouselArrow/CarouselArrow'
@@ -29,6 +29,12 @@ const AdminAddItem = ({ history }) => {
   const { loading, loaded, error } = useSelector(({ addProduct }) => addProduct)
   const [isCreateButtonClicked, setIsCreateButtonClicked] = useState(false)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(deletePhotos())
+    }
+  }, [])
 
   useEffect(() => {
     if (loaded && !error && isCreateButtonClicked) {
@@ -143,8 +149,8 @@ const AdminAddItem = ({ history }) => {
             renderThumbs={() => []}
             emulateTouch
             showStatus={false}
-            renderArrowPrev={(onClickHandler, hasPrev, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
-            renderArrowNext={(onClickHandler, hasNext, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
+            renderArrowPrev={(onClickHandler, label) => <CarouselArrow title={label} onClick={onClickHandler} position="left" style="gray" className={styles.leftArrow} />}
+            renderArrowNext={(onClickHandler, label) => <CarouselArrow title={label} onClick={onClickHandler} position="right" style="gray" className={styles.rightArrow} />}
             renderIndicator={(onClickHandler, isSelected) => {
               if (isSelected) {
                 return <CarouselIndicator style="gray" isSelected onClick={onClickHandler} />
@@ -154,17 +160,17 @@ const AdminAddItem = ({ history }) => {
             }}
             className={styles.carouselWrapper}>
             {photos.map((photo, id) => {
-              return <img src={URL.createObjectURL(photo)} alt={`Фото ${id + 1}`} />
+              return <img src={URL.createObjectURL(photo)} alt={`Фото ${id + 1}`} className={styles.photo} />
             })}
           </Carousel>
         )}
       </div>
       <div className={styles.addPanel}>
         <NavLink to="/admin/dashboard#section=items" className={styles.exitButton}></NavLink>
-        <ContentEditable placeholder="Бренд" html={brand.bind.value} onChange={brand.bind.onChange} tagName='brand' className={styles.grayInput} />
-        <ContentEditable placeholder="Модель" html={model.bind.value} onChange={model.bind.onChange} tagName='model' className={styles.grayInput} />
-        <ContentEditable placeholder="Цвет" html={color.bind.value} onChange={color.bind.onChange} tagName='color' className={styles.grayInput} />
-        <ContentEditable placeholder="Цена" html={price.bind.value} onChange={price.bind.onChange} tagName='price' className={styles.grayInput} />
+        <AutosizeInput name="brand" value={brand.bind.value} onChange={brand.bind.onChange} placeholder="Бренд" className={styles.grayInput} />
+        <AutosizeInput name="model" value={model.bind.value} onChange={model.bind.onChange} placeholder="Модель" className={styles.grayInput} />
+        <AutosizeInput name="color" value={color.bind.value} onChange={color.bind.onChange} placeholder="Цвет" className={styles.grayInput} />
+        <AutosizeInput name="price" value={price.bind.value} onChange={price.bind.onChange} placeholder="Цена" className={styles.grayInput} />
         <div className={styles.codeWrapper}>
           <p className={styles.title}>Артикул:</p>
           <input type="text" {...code.bind} className={styles.codeInput} />
