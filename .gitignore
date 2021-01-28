@@ -1,5 +1,6 @@
 .idea
 .DS_Store
 node_modules
-uploads
+uploads/hots
+uploads/slides
 client/build
