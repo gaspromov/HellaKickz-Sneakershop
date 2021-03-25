@@ -49,7 +49,7 @@ const SubMenu = ({ isOpen, onCategoryMenuLinkClick }) => {
             </ul>
           </div>
           <div data-category="jordan" onMouseEnter={onCategoryMouseEnter} className={styles.category}>
-            <NavLink to='/catalog?brands=Air jordan' onClick={onMenuLinkClick} className={styles.title}>Air Jordan</NavLink>
+            <NavLink to='/catalog?brands=jordan' onClick={onMenuLinkClick} className={styles.title}>Air Jordan</NavLink>
             <ul data-category="jordan">
               <li className={styles.menuItem}>
                 <NavLink to='/catalog?search=jordan 1 high' onClick={onMenuLinkClick} className={styles.menuLink}>Jordan 1 High</NavLink>
