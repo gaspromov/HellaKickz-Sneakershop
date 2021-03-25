@@ -83,7 +83,7 @@ const Footer = () => {
         </ul>
         <div className={styles.wrapper}>
           <div className={styles.contacts}>
-            <p className={styles.phone}><span className={styles.phoneCode}>+7 </span>(985) 492-04-60</p>
+            <a href="tel:+79854920460" className={styles.phone}><span className={styles.phoneCode}>+7 </span>(985) 492-04-60</a>
             <button type="button" onClick={onOrderCallbackButtonClick} className={styles.callback}>Заказать обратный звонок</button>
             <ul className={styles.desktopSocialMenu}>
               <li className={styles.socialIcon}><a href="https://www.instagram.com/hellakickz_/" target="_blank"></a></li>
