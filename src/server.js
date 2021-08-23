@@ -37,6 +37,9 @@ server.use(
   })
 )
 
+server.use('/db/products', (req, res) => {
+  return res.sendFile(path.resolve(__dirname, 'products.xml'))
+})
 server.use('/api/v1/auth', authRoutes)
 server.use('/api/v1/products', productsRoutes)
 server.use('/api/v1/landing', landingRoutes)
