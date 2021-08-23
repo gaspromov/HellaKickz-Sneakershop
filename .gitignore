@@ -4,3 +4,4 @@ node_modules
 uploads/hots
 uploads/slides
 client/build
+src/products.xml
